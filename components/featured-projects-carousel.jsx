@@ -88,18 +88,18 @@ export function FeaturedProjectsCarousel({
         <button
           type="button"
           onClick={scrollPrev}
-          className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
+          className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/12 bg-white/95 text-foreground shadow-[0_2px_14px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-colors hover:border-brand hover:text-brand-ink dark:border-white/18 dark:bg-neutral-950/92 dark:text-white dark:shadow-[0_2px_20px_rgba(0,0,0,0.5)] dark:hover:border-brand dark:hover:text-white"
           aria-label="Previous project"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ChevronLeft className="h-5 w-5" strokeWidth={2} />
         </button>
         <button
           type="button"
           onClick={scrollNext}
-          className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
+          className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/12 bg-white/95 text-foreground shadow-[0_2px_14px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-colors hover:border-brand hover:text-brand-ink dark:border-white/18 dark:bg-neutral-950/92 dark:text-white dark:shadow-[0_2px_20px_rgba(0,0,0,0.5)] dark:hover:border-brand dark:hover:text-white"
           aria-label="Next project"
         >
-          <ChevronRight className="h-5 w-5" />
+          <ChevronRight className="h-5 w-5" strokeWidth={2} />
         </button>
       </div>
     </div>
