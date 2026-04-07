@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { PageHero } from "@/components/page-hero"
+import { getInquiryMailtoHref } from "@/lib/site"
 import { SocialFeedGrid } from "@/components/social-feed-grid"
 
 export const metadata = {
@@ -28,12 +29,12 @@ export default function SocialFeedPage() {
             for real-time updates from venues and stages worldwide.
           </p>
           <p className="mt-6 text-center">
-            <Link
-              href="/contact"
-              className="font-display inline-flex rounded-full border-2 border-gold px-8 py-3.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-gold/15"
+            <a
+              href={getInquiryMailtoHref()}
+              className="font-display inline-flex rounded-full border-2 border-brand px-8 py-3.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
             >
-              Contact us
-            </Link>
+              Email us
+            </a>
           </p>
         </div>
       </section>

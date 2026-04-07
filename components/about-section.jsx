@@ -27,7 +27,7 @@ export function AboutSection() {
       <div className="pointer-events-none absolute inset-0 bg-topo-lines opacity-90" />
       <div
         className="pointer-events-none absolute -right-32 top-1/4 h-[420px] w-[420px] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(46,49,146,0.28) 0%, transparent 65%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(41,42,117,0.28) 0%, transparent 65%)' }}
       />
 
       <div className="container relative mx-auto w-full min-w-0 max-w-full">
@@ -36,7 +36,7 @@ export function AboutSection() {
             visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
           }`}
         >
-          <span className="font-display shrink-0 text-xs font-normal uppercase tracking-[0.35em] text-gold">
+          <span className="font-display shrink-0 text-xs font-normal uppercase tracking-[0.35em] text-brand-ink">
             About us
           </span>
           <div className="h-px min-w-8 flex-1 bg-border dark:bg-white/15" />
@@ -51,32 +51,27 @@ export function AboutSection() {
             Who we are
           </h2>
           <p className="mt-10 text-base leading-relaxed text-muted-foreground md:text-lg">
-            HiTouch Enterprises delivers event production, luxury transportation, and strategic marketing—helping
-            clients build memorable experiences, grow brand awareness, and execute communications plans with
-            high-quality, high-impact results.
+            HiTouch Events has spent over a decade building experiences that move communities, elevate brands, and
+            deliver measurable results.
           </p>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-            From festivals and galas to executive forums and premier black car service in the region, we listen to
-            your goals and design solutions that fit—whether you need full production, charter, or integrated
-            marketing support.
+            HiTouch has produced more than 300 events for audiences ranging from 100 to over 25,000 attendees.
+          </p>
+          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+            The firm has helped nonprofit partners raise more than $11 million, strengthening missions centered on
+            education equity, small business, violence reduction, economic access, and community advancement.
+          </p>
+          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+            From high-profile corporate engagements and VIP experiences to large-scale festivals and civic
+            celebrations, HiTouch has built a reputation for delivering hi-quality, hi-impact hospitality and
+            seamless execution.
           </p>
           <Link
             href="/about-us"
-            className="font-display mt-12 inline-flex rounded-full border-2 border-gold px-10 py-3.5 text-[10px] font-normal uppercase tracking-[0.3em] text-foreground transition-colors hover:bg-gold/15"
+            className="font-display mt-12 inline-flex rounded-full border-2 border-brand px-10 py-3.5 text-[10px] font-normal uppercase tracking-[0.3em] text-foreground transition-colors hover:bg-brand/15"
           >
             About us
           </Link>
-        </div>
-
-        <div
-          className={`mt-20 flex items-center gap-4 transition-all duration-700 delay-200 ${
-            visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
-          <div className="h-px min-w-8 flex-1 bg-border dark:bg-white/15" />
-          <span className="font-display shrink-0 text-right text-xs font-normal uppercase tracking-[0.3em] text-muted-foreground">
-            One company, four divisions
-          </span>
         </div>
       </div>
     </section>

@@ -1,19 +1,20 @@
 import { PageHero } from "@/components/page-hero"
-import { InquiryForm } from "@/components/inquiry-form"
-import { contact } from "@/lib/site"
+import { contact, getInquiryMailtoHref } from "@/lib/site"
 
 export const metadata = {
   title: "Contact | HiTouch Enterprises Inc.",
-  description: "Reach HiTouch for events, marketing, and luxury charter—Philadelphia and the region.",
+  description: "Email HiTouch for events, marketing, and partnerships—based, serving clients near and far.",
 }
 
 export default function ContactPage() {
+  const eventsMailto = getInquiryMailtoHref()
+
   return (
     <>
       <PageHero
         eyebrow="Contact"
         title="Let's talk"
-        subtitle="Let's work together on something great—events, marketing, or luxury charter."
+        subtitle="Email us—let's work together on something great."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Contact", href: "/contact" },
@@ -21,73 +22,27 @@ export default function ContactPage() {
         variant="cinematic"
       />
       <section className="border-t border-border py-12 page-px sm:py-16">
-        <div className="container mx-auto grid w-full min-w-0 max-w-full gap-10 sm:gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4 space-y-10">
-            <div>
-              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
-                Events &amp; marketing
-              </p>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <a href={contact.emailHref} className="block break-words text-foreground hover:text-gold">
-                    {contact.email}
-                  </a>
-                </li>
-                <li>
-                  <a href={contact.phoneHref} className="block text-foreground hover:text-gold">
-                    {contact.phone}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={contact.mainWeb}
-                    className="text-foreground hover:text-gold"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    hitouchinc.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
-                Luxury charter
-              </p>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                <li>
-                  <a href={contact.charterEmailHref} className="block break-words text-foreground hover:text-gold">
-                    {contact.charterEmail}
-                  </a>
-                </li>
-                <li>
-                  <a href={contact.charterPhoneHref} className="block text-foreground hover:text-gold">
-                    {contact.charterPhone}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={contact.charterWeb}
-                    className="text-foreground hover:text-gold"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    hitouchluxurycharter.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <p className="text-sm leading-relaxed text-muted-foreground">
+        <div className="container mx-auto w-full min-w-0 max-w-full">
+          <div className="mx-auto max-w-2xl">
+            <a
+              href={eventsMailto}
+              className="font-display flex w-full items-center justify-center rounded-full border-2 border-brand bg-brand/10 px-8 py-5 text-center text-[11px] font-semibold uppercase tracking-[0.25em] text-foreground transition-colors hover:bg-brand/20 sm:text-xs"
+            >
+              Email {contact.email}
+            </a>
+            <p className="mt-6 text-center text-sm leading-relaxed text-muted-foreground">
+              Opens your email app with a starter message—no form. Luxury charter quotes: use the link on our homepage.
+            </p>
+          </div>
+          {contact.addressLines.length > 0 ? (
+            <p className="mx-auto mt-12 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
               {contact.addressLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </p>
-          </div>
-          <div className="lg:col-span-8">
-            <InquiryForm embedded />
-          </div>
+          ) : null}
         </div>
       </section>
     </>

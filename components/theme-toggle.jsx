@@ -18,10 +18,16 @@ export function ThemeToggle({ className }) {
       type="button"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className={cn(
-        "flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-gold hover:text-gold",
+        "flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink",
         className
       )}
-      aria-label={resolvedTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={
+        mounted
+          ? resolvedTheme === "dark"
+            ? "Switch to light mode"
+            : "Switch to dark mode"
+          : "Toggle color theme"
+      }
     >
       {mounted ? (
         resolvedTheme === "dark" ? <Sun className="h-5 w-5" strokeWidth={1.25} /> : <Moon className="h-5 w-5" strokeWidth={1.25} />

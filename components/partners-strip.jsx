@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const partners = [
   'Fortune 500 summits',
-  'Global product launches',
+  'Product launches & premieres',
   'Music & festival partners',
   'Broadcast & streaming',
   'Luxury hospitality',
@@ -35,12 +35,12 @@ export function PartnersStrip() {
           }`}
         >
           <p className="font-display text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
-            Trusted by
+            What we deliver
           </p>
-          <h2 className="font-display mt-3 text-[clamp(1.5rem,4vw,2.25rem)] font-bold uppercase tracking-tight text-balance text-foreground md:text-4xl">
-            Teams who ship at scale
+          <h2 className="font-display mx-auto mt-6 max-w-3xl text-[clamp(1.75rem,4.5vw,2.75rem)] font-normal uppercase leading-[1.05] tracking-tight text-foreground">
+            Hi-Quality, Hi-Impact events
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
             Yes—that was us behind the curtain.
           </p>
         </div>
@@ -48,7 +48,7 @@ export function PartnersStrip() {
           {partners.map((name, i) => (
             <div
               key={name}
-              className={`flex min-h-[80px] items-center justify-center border border-border bg-muted/40 px-3 py-3 text-center text-[10px] font-medium uppercase leading-snug tracking-wider text-muted-foreground transition-all duration-500 hover:border-gold/45 hover:text-foreground sm:min-h-[88px] sm:px-4 sm:text-xs dark:bg-white/[0.03] ${
+              className={`flex min-h-[80px] items-center justify-center border border-border bg-muted/40 px-3 py-3 text-center text-[10px] font-medium uppercase leading-snug tracking-wider text-muted-foreground transition-all duration-500 hover:border-brand/45 hover:text-foreground sm:min-h-[88px] sm:px-4 sm:text-xs dark:bg-white/[0.03] ${
                 visible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
               }`}
               style={{ transitionDelay: `${80 * i}ms` }}

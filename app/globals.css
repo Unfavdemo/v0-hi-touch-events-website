@@ -3,20 +3,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* HiTouch — light default + .dark cinematic; brand navy + gold */
+/* HiTouch — light default + .dark cinematic; primary Pantone 534 C (screen R41 G42 B117) */
 :root {
-  --brand: #2e3192;
-  --brand-muted: #6c76ac;
-  --gold: #d4af37;
-  --gold-muted: #b8962e;
-  --gold-foreground: #141428;
-  --gradient-line: linear-gradient(90deg, #d4af37, #4b0082);
-  --hero-radial-a: rgba(46, 49, 146, 0.14);
-  --hero-radial-b: rgba(46, 49, 146, 0.08);
-  --hero-fade-mid: rgba(255, 255, 255, 0.92);
+  /* Brand screen: RGB 41, 42, 117 — Styleguide HiTouch 07.13.15 (Pantone 534 C; print C100 M99 Y22 K9) */
+  --brand: #292a75;
+  --brand-rgb: 41, 42, 117;
+  --brand-muted: #5c5ea3;
+  /* Same hue as brand; lighter in .dark for readable accents on near-black backgrounds */
+  --brand-ink: #292a75;
+  --gradient-line: linear-gradient(90deg, var(--brand-muted), var(--brand));
+  --hero-radial-a: rgba(41, 42, 117, 0.08);
+  --hero-radial-b: rgba(41, 42, 117, 0.04);
+  /* Light scrims — keep photo bright; edge still lifts for body text contrast */
+  --hero-fade-mid: rgba(255, 255, 255, 0.22);
   --hero-fade-edge: oklch(0.99 0.006 278);
-  --hero-photo-opacity: 0.06;
-  --page-cinematic-radial: rgba(46, 49, 146, 0.11);
+  --page-cinematic-radial: rgba(41, 42, 117, 0.11);
   --page-cinematic-fade: linear-gradient(180deg, oklch(0.96 0.02 278) 0%, oklch(0.99 0.006 278) 100%);
   --background: oklch(0.99 0.006 278);
   --foreground: oklch(0.22 0.05 278);
@@ -54,12 +55,12 @@
 }
 
 .dark {
-  --hero-radial-a: rgba(46, 49, 146, 0.4);
-  --hero-radial-b: rgba(46, 49, 146, 0.15);
-  --hero-fade-mid: rgba(0, 0, 0, 0.35);
+  --brand-ink: #c4c6ec;
+  --hero-radial-a: rgba(41, 42, 117, 0.22);
+  --hero-radial-b: rgba(41, 42, 117, 0.1);
+  --hero-fade-mid: rgba(0, 0, 0, 0.18);
   --hero-fade-edge: #000000;
-  --hero-photo-opacity: 0.12;
-  --page-cinematic-radial: rgba(46, 49, 146, 0.3);
+  --page-cinematic-radial: rgba(41, 42, 117, 0.3);
   --page-cinematic-fade: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
   --background: oklch(0 0 0);
   --foreground: oklch(0.99 0 0);
@@ -96,14 +97,14 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Styleguide primary: Georgia; auxiliary: Helvetica / Gotham — display lockup stays Bebas in layout */
+  --font-sans: var(--font-inter), Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", Times, ui-serif, serif;
   --font-display: var(--font-display-bebas), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, monospace;
   --color-brand: var(--brand);
   --color-brand-muted: var(--brand-muted);
-  --color-gold: var(--gold);
-  --color-gold-muted: var(--gold-muted);
-  --color-gold-foreground: var(--gold-foreground);
+  --color-brand-ink: var(--brand-ink);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -154,7 +155,7 @@
     color-scheme: dark;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-serif text-foreground;
     overflow-x: clip;
   }
 }
@@ -199,7 +200,7 @@
 }
 
 .bg-topo-lines {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M0 60 Q 30 40 60 60 T 120 60' fill='none' stroke='%232e3192' stroke-opacity='0.07' stroke-width='0.75'/%3E%3Cpath d='M0 80 Q 30 100 60 80 T 120 80' fill='none' stroke='%232e3192' stroke-opacity='0.05' stroke-width='0.75'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M0 60 Q 30 40 60 60 T 120 60' fill='none' stroke='%23292a75' stroke-opacity='0.07' stroke-width='0.75'/%3E%3Cpath d='M0 80 Q 30 100 60 80 T 120 80' fill='none' stroke='%23292a75' stroke-opacity='0.05' stroke-width='0.75'/%3E%3C/svg%3E");
   background-size: 120px 120px;
 }
 

@@ -15,7 +15,7 @@ const display = Bebas_Neue({
 })
 
 export const viewport = {
-  themeColor: '#2e3192',
+  themeColor: '#292a75',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -24,7 +24,7 @@ export const viewport = {
 export const metadata = {
   title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
   description:
-    'Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing from Philadelphia.',
+    'Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based, serving clients near and far.',
   icons: {
     icon: [
       {
@@ -47,7 +47,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${display.variable}`}>
-      <body className="font-sans antialiased bg-background text-foreground">
+      <body className="font-serif antialiased bg-background text-foreground">
         <Providers>{children}</Providers>
         <Analytics />
       </body>

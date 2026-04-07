@@ -2,7 +2,8 @@ import { PageHero, Prose } from "@/components/page-hero"
 
 export const metadata = {
   title: "Founders' Story | HiTouch Enterprises Inc.",
-  description: "How HiTouch Enterprises began—and how we lead with high-impact results.",
+  description:
+    "Felicia D. Williams and the story of HiTouch Enterprises—nonprofit impact, event production, and leadership. Based, serving near and far.",
 }
 
 export default function FoundersStoryPage() {
@@ -11,7 +12,7 @@ export default function FoundersStoryPage() {
       <PageHero
         eyebrow="About"
         title="Founders' story"
-        subtitle="Built in Philadelphia—event production, charter, and marketing with a high-impact mindset."
+        subtitle="Built on event production, charter, and marketing—with a Hi-Quality, Hi-Impact mindset."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "About us", href: "/about-us" },
@@ -21,19 +22,39 @@ export default function FoundersStoryPage() {
       />
       <Prose>
         <p>
-          HiTouch Enterprises grew from real work on the ground—late-night load-ins, fast-turn
-          programs, and clients who needed one accountable team for events, communications, and
-          executive transportation—not a patchwork of vendors.
+          Felicia D. Williams is an innovative marketing and event strategist with over 15 years of experience
+          advancing nonprofit and community impact through event production, brand strategy, and fundraising. A
+          graduate of Howard University, Felicia has lived and worked across New York City, Washington, D.C., and
+          Philadelphia, partnering with nonprofit organizations to strengthen their reach, visibility, and
+          sustainability.
         </p>
         <p>
-          We built the company to listen first: understanding what you are trying to accomplish, then
-          designing production, marketing, and charter solutions that fit—whether that is a citywide
-          festival, a fundraising gala, or a road show with black car service you can trust.
+          In 2016, Felicia founded HiTouch Enterprises—today spanning event production, HiTouch Luxury Charter
+          Services, and HiTouch Solutions. Under her leadership, the firm has raised more than $11 million for nonprofit
+          organizations, produced over 300 events, programs, festivals, and strategic campaigns, and supported
+          organizations through innovative marketing, branding, and experiential engagement strategies.
         </p>
         <p>
-          Today that same ethos runs through every engagement. You get leadership that has led shows,
-          shaped campaigns, and earned trust across Philadelphia and the region—with the standards you
-          expect when the lights go up and the cameras roll.
+          Beyond her professional work, Felicia is a dedicated community advocate committed to education equity,
+          violence reduction, women&apos;s equality, and economic access for marginalized communities. She is the
+          Founder of the Influencing Action Movement, a past Chair of the Philadelphia Commission on Women, where
+          she served for eight years, and currently serves on the Boards of Directors for iChoose to Win and SCH
+          Creative and Performing Arts.
+        </p>
+        <p>
+          Felicia&apos;s leadership and service have been widely recognized. She is an Entrepreneur of the Year Award
+          recipient from the African-American Chamber of Commerce and VestedIn, and has been named one of
+          Philadelphia&apos;s Most Influential African-Americans: 10 Under 40 to Watch by The Philadelphia Tribune.
+          She was also selected as a Connector and Keeper by Leadership Philadelphia, honored by Billy Penn as a
+          Community Leader Award Recipient, and has received numerous accolades including the Black Women in
+          Leadership Community Service Award and Woman of Essence by the Metropolitan Philadelphia Chapter of
+          Continental Societies, Inc. Felicia also serves as a Deacon at Salem Baptist Church, where she is committed
+          to faith-driven leadership and community service.
+        </p>
+        <p>
+          Felicia holds a Bachelor of Business Administration in Marketing from Howard University, a Certification in
+          Content Strategy from Northwestern University, and a Master&apos;s degree in Adult and Organizational
+          Development from Temple University.
         </p>
       </Prose>
     </>

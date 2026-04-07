@@ -29,7 +29,7 @@ export function PageHero({ eyebrow, title, subtitle, breadcrumbs, variant = "def
                   {i === breadcrumbs.length - 1 ? (
                     <span className="text-foreground">{crumb.label}</span>
                   ) : (
-                    <Link href={crumb.href} className="transition-colors hover:text-gold">
+                    <Link href={crumb.href} className="transition-colors hover:text-brand-ink">
                       {crumb.label}
                     </Link>
                   )}
@@ -39,7 +39,7 @@ export function PageHero({ eyebrow, title, subtitle, breadcrumbs, variant = "def
           </nav>
         ) : null}
         {eyebrow ? (
-          <p className="font-display text-xs font-normal uppercase tracking-[0.35em] text-gold">{eyebrow}</p>
+          <p className="font-display text-xs font-normal uppercase tracking-[0.35em] text-brand-ink">{eyebrow}</p>
         ) : null}
         <h1 className="font-display mt-4 text-[clamp(2rem,5.5vw,4.5rem)] font-normal uppercase leading-[0.95] tracking-tight text-balance text-foreground">
           {title}

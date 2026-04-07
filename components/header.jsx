@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ChevronDown, X, MapPin, Phone, Mail, Instagram, Linkedin } from "lucide-react"
+import { ChevronDown, X, MapPin, Mail, Instagram, Linkedin, Youtube } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { aboutDropdown, contact, divisions, whatsNewLinks } from "@/lib/site"
+import { aboutDropdown, contact, getInquiryMailtoHref, whatsNewLinks } from "@/lib/site"
 
 function TwoLineMenuIcon() {
   return (
@@ -28,7 +28,6 @@ const menuCol2 = [
   { label: "About us", href: "/about-us" },
   { label: "Founders' story", href: "/founders-story" },
   { label: "Featured work", href: "/featured-work" },
-  { label: "Blog", href: "/blog" },
 ]
 
 export function Header() {
@@ -64,7 +63,7 @@ export function Header() {
   const closeMenu = () => setIsMenuOpen(false)
 
   const megaLink =
-    "block w-full max-w-full font-display text-[clamp(1.75rem,min(7vw,11vmin),3.75rem)] uppercase leading-[0.95] tracking-tight text-foreground transition-colors hover:text-gold break-words [hyphens:auto] py-0.5"
+    "block w-full max-w-full font-display text-[clamp(1.75rem,min(7vw,11vmin),3.75rem)] uppercase leading-[0.95] tracking-tight text-foreground transition-colors hover:text-brand-ink break-words [hyphens:auto] py-0.5"
 
   return (
     <header
@@ -84,14 +83,9 @@ export function Header() {
       <div className="hidden border-b border-border md:block">
         <div className="container mx-auto flex w-full min-w-0 max-w-full flex-wrap items-center justify-between gap-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground page-px">
           <span>{contact.citiesLine}</span>
-          <div className="flex flex-wrap gap-x-8 gap-y-1">
-            <a href={contact.phoneHref} className="transition-colors hover:text-foreground">
-              {contact.phone}
-            </a>
-            <a href={contact.emailHref} className="transition-colors hover:text-foreground">
-              {contact.email}
-            </a>
-          </div>
+          <a href={contact.emailHref} className="transition-colors hover:text-foreground">
+            {contact.email}
+          </a>
         </div>
       </div>
 
@@ -102,21 +96,21 @@ export function Header() {
             className="font-display min-w-0 shrink text-xl uppercase leading-tight tracking-[0.02em] text-foreground sm:text-2xl md:text-3xl"
             onClick={closeMenu}
           >
-            <span className="text-gold">HiTouch</span>
+            <span className="text-brand-ink">HiTouch</span>
             <span className="text-foreground"> Enterprises</span>
           </Link>
 
           <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
             <ThemeToggle className="hidden sm:flex" />
-            <Link
-              href="/contact"
-              className="font-display hidden rounded-full border border-gold px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-gold/15 sm:inline-block md:px-6"
+            <a
+              href={getInquiryMailtoHref()}
+              className="font-display hidden rounded-full border border-brand px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15 sm:inline-block md:px-6"
             >
-              Start an inquiry
-            </Link>
+              Email us
+            </a>
             <button
               type="button"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-gold hover:text-gold"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
               onClick={() => setIsMenuOpen((o) => (o ? false : true))}
               aria-expanded={isMenuOpen}
               aria-controls="site-menu-panel"
@@ -149,7 +143,7 @@ export function Header() {
               <button
                 type="button"
                 onClick={closeMenu}
-                className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-gold hover:text-gold sm:ml-auto"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink sm:ml-auto"
                 aria-label="Close menu"
               >
                 <X className="h-6 w-6" strokeWidth={1.25} />
@@ -192,7 +186,7 @@ export function Header() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block py-2 text-sm text-foreground/90 hover:text-gold"
+                        className="block py-2 text-sm text-foreground/90 hover:text-brand-ink"
                         onClick={closeMenu}
                       >
                         {item.label}
@@ -216,7 +210,7 @@ export function Header() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block py-2 text-sm text-foreground/90 hover:text-gold"
+                        className="block py-2 text-sm text-foreground/90 hover:text-brand-ink"
                         onClick={closeMenu}
                       >
                         {item.label}
@@ -224,54 +218,19 @@ export function Header() {
                     ))}
                   </div>
                 ) : null}
-
-                <p className="mt-10 font-display text-[10px] uppercase tracking-[0.35em] text-gold">What we do</p>
-                <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
-                  {divisions.map((d) => (
-                    <Link
-                      key={d.path}
-                      href={d.path}
-                      className="font-display text-sm uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground"
-                      onClick={closeMenu}
-                    >
-                      {d.shortTitle}
-                    </Link>
-                  ))}
-                </div>
               </div>
 
               <div className="mt-auto border-t border-border pt-8">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                   <div className="space-y-3 text-sm text-muted-foreground">
                     <div className="flex items-start gap-3">
-                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-ink" aria-hidden />
                       <span className="leading-relaxed">{contact.citiesLine}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                      <a href={contact.phoneHref} className="min-w-0 break-words hover:text-foreground">
-                        {contact.phone}
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
+                      <Mail className="h-4 w-4 shrink-0 text-brand-ink" aria-hidden />
                       <a href={contact.emailHref} className="min-w-0 break-words hover:text-foreground">
                         {contact.email}
-                      </a>
-                    </div>
-                    <p className="pt-2 text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground/80">
-                      Luxury charter
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                      <a href={contact.charterPhoneHref} className="min-w-0 break-words hover:text-foreground">
-                        {contact.charterPhone}
-                      </a>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                      <a href={contact.charterEmailHref} className="min-w-0 break-words hover:text-foreground">
-                        {contact.charterEmail}
                       </a>
                     </div>
                   </div>
@@ -279,31 +238,44 @@ export function Header() {
                     <p className="font-display text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
                       Follow us
                     </p>
-                    <div className="mt-3 flex gap-3">
+                    <div className="mt-3 flex flex-wrap gap-3">
                       <a
-                        href="#"
-                        className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-gold hover:text-gold"
+                        href={contact.instagramUrl}
+                        className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         aria-label="Instagram"
                       >
                         <Instagram className="h-5 w-5" />
                       </a>
                       <a
-                        href="#"
-                        className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-gold hover:text-gold"
+                        href={contact.linkedinUrl}
+                        className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         aria-label="LinkedIn"
                       >
                         <Linkedin className="h-5 w-5" />
                       </a>
+                      <a
+                        href={contact.youtubeChannelUrl}
+                        className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube"
+                      >
+                        <Youtube className="h-5 w-5" />
+                      </a>
                     </div>
                   </div>
                 </div>
-                <Link
-                  href="/contact"
-                  className="font-display mt-8 block rounded-full border-2 border-gold py-4 text-center text-[11px] uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-gold/15"
+                <a
+                  href={getInquiryMailtoHref()}
+                  className="font-display mt-8 block rounded-full border-2 border-brand py-4 text-center text-[11px] uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
                   onClick={closeMenu}
                 >
-                  Start an inquiry
-                </Link>
+                  Email us
+                </a>
               </div>
             </nav>
           </div>

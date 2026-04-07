@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { PageHero, Prose } from "@/components/page-hero"
-import { featuredProjects, getProjectBySlug } from "@/lib/site"
+import { featuredProjects, getProjectBySlug, getInquiryMailtoHref } from "@/lib/site"
 
 export function generateStaticParams() {
   return featuredProjects.map((p) => ({ slug: p.slug }))
@@ -51,16 +51,16 @@ export default async function FeaturedWorkCasePage({ params }) {
         <p className="!mt-12 flex flex-wrap gap-4">
           <Link
             href="/featured-work"
-            className="font-display text-[10px] font-normal uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-gold"
+            className="font-display text-[10px] font-normal uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-brand-ink"
           >
             ← All featured work
           </Link>
-          <Link
-            href="/contact"
-            className="font-display text-[10px] font-normal uppercase tracking-[0.22em] text-gold transition-colors hover:text-foreground"
+          <a
+            href={getInquiryMailtoHref()}
+            className="font-display text-[10px] font-normal uppercase tracking-[0.22em] text-brand-ink transition-colors hover:text-foreground"
           >
             Plan something similar
-          </Link>
+          </a>
         </p>
       </Prose>
     </>
