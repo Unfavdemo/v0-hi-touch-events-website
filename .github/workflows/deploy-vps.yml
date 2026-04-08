@@ -1,0 +1,52 @@
+# Deploy on every push to `main` (Option B: Bluehost VPS / any Linux host with Node + PM2).
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   SSH_HOST        — server hostname or IP
+#   SSH_USER        — SSH login (e.g. deploy or your cPanel/VPS user)
+#   SSH_PRIVATE_KEY — full private key (PEM) that can SSH as SSH_USER; pubkey must be in ~/.ssh/authorized_keys on the server
+#   DEPLOY_PATH     — absolute path to the app repo on the server (e.g. /home/user/apps/v0-hi-touch-events-website)
+#
+# One-time on the server:
+#   - Clone this repo into DEPLOY_PATH (use this value for the DEPLOY_PATH secret).
+#   - Install Node 20+ (see .nvmrc), npm, PM2: `npm i -g pm2`
+#   - From DEPLOY_PATH: `pm2 start ecosystem.config.cjs` then `pm2 save` and `pm2 startup`
+#   - Put Nginx/Apache in front of PORT 3000 for HTTPS/domain.
+#   - Repo must be able to `git pull` (deploy key or HTTPS).
+
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull, build, and restart on server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd '${{ secrets.DEPLOY_PATH }}'
+            if [ -s "$HOME/.nvm/nvm.sh" ]; then
+              . "$HOME/.nvm/nvm.sh"
+              nvm install
+              nvm use
+            fi
+            git fetch origin main
+            git checkout main
+            git reset --hard origin/main
+            if [ -f package-lock.json ]; then npm ci; else npm install; fi
+            npm run build
+            pm2 reload ecosystem.config.cjs --update-env || pm2 start ecosystem.config.cjs
