@@ -13,7 +13,7 @@ export function TeamGrid() {
             {member.image ? (
               <>
                 <Image
-                  src={member.image}
+                  src={encodeURI(member.image)}
                   alt={member.name}
                   fill
                   loading="lazy"

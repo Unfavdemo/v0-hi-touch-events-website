@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ChevronDown, X, MapPin, Mail, Instagram, Linkedin, Youtube } from "lucide-react"
@@ -93,11 +94,22 @@ export function Header() {
         <div className="container mx-auto flex w-full min-w-0 max-w-full items-center justify-between gap-3 py-5 page-px sm:gap-4">
           <Link
             href="/"
-            className="font-display min-w-0 shrink text-xl uppercase leading-tight tracking-[0.02em] text-foreground sm:text-2xl md:text-3xl"
+            className="flex min-w-0 shrink items-center gap-2 sm:gap-3"
             onClick={closeMenu}
           >
-            <span className="text-brand-ink">HiTouch</span>
-            <span className="text-foreground"> Enterprises</span>
+            <span className="relative h-9 w-[52px] shrink-0 sm:h-10 sm:w-[58px] md:h-11 md:w-[64px]">
+              <Image
+                src="/HiTouch_final.png"
+                alt="HiTouch Enterprises"
+                fill
+                className="object-contain object-left dark:brightness-0 dark:invert"
+                sizes="(max-width: 640px) 52px, (max-width: 768px) 58px, 64px"
+                priority
+              />
+            </span>
+            <span className="font-display hidden text-[clamp(0.875rem,2.5vw,1.125rem)] font-normal uppercase leading-tight tracking-[0.12em] text-foreground min-[380px]:inline">
+              Enterprises
+            </span>
           </Link>
 
           <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
