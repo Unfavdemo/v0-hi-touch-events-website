@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Instagram, Twitter, Linkedin, Youtube, MapPin, Mail } from "lucide-react"
 import { contact, whatsNewLinks } from "@/lib/site"
@@ -28,19 +27,9 @@ export function Footer() {
       <div className="container mx-auto w-full min-w-0 max-w-full">
         <div className="grid grid-cols-1 gap-14 border-b border-border pb-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <Link href="/" className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <span className="relative h-11 w-[64px] shrink-0 sm:h-12 sm:w-[72px]">
-                <Image
-                  src="/HiTouch_final.png"
-                  alt="HiTouch Enterprises"
-                  fill
-                  className="object-contain object-left dark:brightness-0 dark:invert"
-                  sizes="72px"
-                />
-              </span>
-              <span className="font-display text-xl uppercase tracking-tight text-foreground sm:text-2xl">
-                Enterprises
-              </span>
+            <Link href="/" className="font-display text-2xl uppercase tracking-tight text-foreground sm:text-3xl">
+              <span className="text-brand-ink">HiTouch</span>{" "}
+              <span className="text-foreground">Enterprises</span>
             </Link>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Event production, luxury charter, and strategic marketing—high-quality, high-impact results for clients

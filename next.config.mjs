@@ -11,6 +11,7 @@ const nextConfig = {
       { source: "/icon-light-32x32.png", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/icon-dark-32x32.png", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/apple-icon.png", headers: [{ key: "Cache-Control", value: immutable }] },
+      { source: "/HiTouch_final.png", headers: [{ key: "Cache-Control", value: immutable }] },
     ]
   },
   async redirects() {
