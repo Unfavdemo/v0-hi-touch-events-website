@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { PageHero, Prose } from "@/components/page-hero"
@@ -36,13 +37,17 @@ export default async function FeaturedWorkCasePage({ params }) {
         variant="cinematic"
       />
       <div className="border-b border-border">
-        <div
-          className="mx-auto aspect-[21/9] max-h-[420px] w-full bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${project.image})`,
-            backgroundColor: "oklch(0.14 0.04 278)",
-          }}
-        />
+        <div className="relative mx-auto aspect-[21/9] max-h-[420px] w-full overflow-hidden bg-[oklch(0.14_0.04_278)]">
+          <Image
+            src={project.image}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            className="object-cover object-center"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+          />
+        </div>
       </div>
       <Prose>
         {project.body.map((para, i) => (

@@ -16,6 +16,7 @@ export function TeamGrid() {
                   src={member.image}
                   alt={member.name}
                   fill
+                  loading="lazy"
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />

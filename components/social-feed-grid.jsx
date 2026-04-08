@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Instagram } from "lucide-react"
 const tiles = [
   { type: "image", image: "/images/project-1.jpg" },
@@ -30,13 +31,15 @@ export function SocialFeedGrid() {
             </div>
           ) : (
             <>
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{
-                  backgroundImage: `url(${tile.image})`,
-                  backgroundColor: "#1a0a0a",
-                }}
-              />
+              <div className="absolute inset-0 bg-[#1a0a0a]">
+                <Image
+                  src={tile.image}
+                  alt=""
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+              </div>
               <div className="absolute inset-0 bg-transparent transition-colors group-hover:bg-foreground/40 dark:group-hover:bg-black/55" />
               <div className="absolute right-3 top-3 rounded-full bg-foreground/35 p-1.5 backdrop-blur-sm dark:bg-black/50">
                 <Instagram className="h-4 w-4 text-background dark:text-white" aria-hidden />

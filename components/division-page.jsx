@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Prose } from "@/components/page-hero"
 import { divisions, getInquiryMailtoHref } from "@/lib/site"
 
@@ -8,13 +9,17 @@ export function DivisionPage({ slug }) {
   return (
     <>
       <section className="relative min-h-[min(70vh,520px)] w-full min-w-0 overflow-hidden border-b border-border pt-32 sm:min-h-[min(70vh,560px)] sm:pt-36 md:pt-44">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${d.heroImage})`,
-            backgroundColor: "#1a0a0a",
-          }}
-        />
+        <div className="absolute inset-0 bg-[#1a0a0a]">
+          <Image
+            src={d.heroImage}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/35" />
         <div className="relative z-10 flex min-h-[min(70vh,520px)] flex-col items-center justify-center pb-12 pt-16 text-center page-px sm:min-h-[min(70vh,560px)] sm:pb-16 sm:pt-24">
           <p className="font-display text-xs font-normal uppercase tracking-[0.35em] text-brand-ink">What we do</p>
