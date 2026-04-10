@@ -1,16 +1,17 @@
 /**
- * Paste into Elfsight Instagram Feed → Style → Custom CSS
- * Matches HiTouch site tokens (app/globals.css :root light theme).
+ * Paste into: Elfsight Instagram Feed → Style → Custom CSS → Save
  *
- * Google Fonts load inside the widget iframe so Inter + Bebas match the main site.
+ * Load More: larger type, balanced padding, matches HiTouch CTAs.
+ * Attribution: common selectors for the free “Free Instagram Feed Widget” strip.
+ *   Elfsight can change DOM/classes; if the badge returns, re-inspect the widget iframe
+ *   or remove branding via a paid plan (official option).
+ *
  * @see https://help.elfsight.com/article/1011-how-to-customize-instagram-feed-with-the-help-of-css
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap");
 
 /* --- Core tokens (HiTouch) --- */
-/* Brand Pantone 534 C screen; body ~ --foreground; muted ~ --muted-foreground */
-/* --radius site default 0.25rem; buttons/Ctas use pill + uppercase on site */
 
 .es-widget {
   font-family: Inter, ui-sans-serif, system-ui, Helvetica, Arial, sans-serif !important;
@@ -43,33 +44,61 @@
   color: #6b6780 !important;
 }
 
-/* “Load more” / primary actions — brand pill like site CTAs */
+/* --- Load more: stronger type scale (text was tiny vs pill) --- */
 .es-load-more-button {
   background-color: #292a75 !important;
   color: #ffffff !important;
   border: 2px solid #292a75 !important;
   border-radius: 9999px !important;
+  box-sizing: border-box !important;
   font-family: "Bebas Neue", Inter, sans-serif !important;
-  font-size: 10px !important;
-  letter-spacing: 0.28em !important;
+  font-size: clamp(0.9375rem, 2.4vw, 1.125rem) !important; /* ~15–18px */
+  font-weight: 400 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.15 !important;
   text-transform: uppercase !important;
-  padding: 0.625rem 1.5rem !important;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  padding: 0.9rem 2.75rem !important;
+  min-width: min(100%, 15rem) !important;
+  min-height: 3rem !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease !important;
 }
 
 .es-load-more-button:hover {
   background-color: rgba(41, 42, 117, 0.12) !important;
   color: #292a75 !important;
   border-color: #292a75 !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Carousel arrows — brand tint */
+.es-load-more-button:active {
+  transform: translateY(0) !important;
+}
+
+/* Carousel arrows */
 .es-layout-carousel-arrow {
   color: #292a75 !important;
 }
 
-/* Post cards: subtle border like site --border */
 .es-post {
   border-radius: 0.25rem !important;
   box-shadow: 0 0 0 1px rgba(41, 42, 117, 0.14) !important;
+}
+
+/* --- Free-plan attribution / “Free Instagram Feed Widget” pill --- */
+/* If a gray pill remains, add a rule for its wrapper in DevTools. Paid Elfsight removes branding in-app. */
+.eapps-link,
+a.eapps-link,
+[class*="eapps-link"] {
+  display: none !important;
+}
+
+a[href*="elfsight.com/instagram-feed-instashow"],
+a[href*="elfsight.com/widgets/instagram-feed"] {
+  display: none !important;
+}
+
+/* Collapse wrapper that only contains the Elfsight promo link (drops empty gray strip in many layouts) */
+.es-widget div:has(> a[href*="elfsight.com/instagram-feed-instashow"]:only-child),
+.es-widget div:has(> a[href*="elfsight.com/widgets/instagram-feed"]:only-child) {
+  display: none !important;
 }
