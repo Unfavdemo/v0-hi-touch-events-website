@@ -1,7 +1,7 @@
-import Link from "next/link"
 import { PageHero } from "@/components/page-hero"
-import { getInquiryMailtoHref } from "@/lib/site"
+import { SocialFeedEmbed } from "@/components/social-feed-embed"
 import { SocialFeedGrid } from "@/components/social-feed-grid"
+import { contact, getInquiryMailtoHref, socialFeedElfsightWidgetId } from "@/lib/site"
 
 export const metadata = {
   title: "Social Feed | HiTouch Enterprises Inc.",
@@ -9,6 +9,8 @@ export const metadata = {
 }
 
 export default function SocialFeedPage() {
+  const useLiveFeed = socialFeedElfsightWidgetId.length > 0
+
   return (
     <>
       <PageHero
@@ -23,10 +25,54 @@ export default function SocialFeedPage() {
       />
       <section className="bg-background pb-24 dark:bg-black page-px">
         <div className="container mx-auto w-full min-w-0 max-w-5xl">
-          <SocialFeedGrid />
+          {useLiveFeed ? (
+            <SocialFeedEmbed />
+          ) : (
+            <SocialFeedGrid />
+          )}
           <p className="mx-auto mt-14 max-w-2xl text-center text-muted-foreground">
-            We are wiring this page to your live social channels. Until then, follow HiTouch on your preferred platform
-            for real-time updates from venues and stages worldwide.
+            {useLiveFeed ? (
+              <>
+                Feed updates automatically from Instagram. You can also open{" "}
+                <a
+                  href={contact.instagramUrl}
+                  className="font-medium text-brand-ink underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @hitouchinc
+                </a>{" "}
+                in the app.
+              </>
+            ) : (
+              <>
+                For a live grid like{" "}
+                <a
+                  href="https://redrockentertainment.com/social-feed/"
+                  className="font-medium text-brand-ink underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Redrock&rsquo;s social feed
+                </a>
+                , add an Instagram widget (they use{" "}
+                <a
+                  href="https://elfsight.com/instagram-feed-instashow/"
+                  className="font-medium text-brand-ink underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Elfsight
+                </a>
+                ) and set{" "}
+                <code className="rounded bg-muted px-1 py-0.5 text-xs text-foreground">
+                  NEXT_PUBLIC_ELFSIGHT_INSTAGRAM_FEED_CLASS
+                </code>{" "}
+                in{" "}
+                <code className="rounded bg-muted px-1 py-0.5 text-xs text-foreground">.env.local</code>. Until then,
+                follow HiTouch on your preferred platform for updates from the field.
+              </>
+            )}
           </p>
           <p className="mt-6 text-center">
             <a

@@ -1,0 +1,75 @@
+/**
+ * Paste into Elfsight Instagram Feed → Style → Custom CSS
+ * Matches HiTouch site tokens (app/globals.css :root light theme).
+ *
+ * Google Fonts load inside the widget iframe so Inter + Bebas match the main site.
+ * @see https://help.elfsight.com/article/1011-how-to-customize-instagram-feed-with-the-help-of-css
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap");
+
+/* --- Core tokens (HiTouch) --- */
+/* Brand Pantone 534 C screen; body ~ --foreground; muted ~ --muted-foreground */
+/* --radius site default 0.25rem; buttons/Ctas use pill + uppercase on site */
+
+.es-widget {
+  font-family: Inter, ui-sans-serif, system-ui, Helvetica, Arial, sans-serif !important;
+  color: #2b2840 !important;
+  background-color: transparent !important;
+}
+
+.es-widget-title {
+  font-family: "Bebas Neue", Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #292a75 !important;
+}
+
+.es-post-user-name {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-weight: 600 !important;
+  color: #292a75 !important;
+}
+
+.es-post-text,
+.es-post-date,
+.es-post-location {
+  color: #5c5a6b !important;
+}
+
+.es-post-likes-count,
+.es-post-comments-count {
+  color: #6b6780 !important;
+}
+
+/* “Load more” / primary actions — brand pill like site CTAs */
+.es-load-more-button {
+  background-color: #292a75 !important;
+  color: #ffffff !important;
+  border: 2px solid #292a75 !important;
+  border-radius: 9999px !important;
+  font-family: "Bebas Neue", Inter, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 0.28em !important;
+  text-transform: uppercase !important;
+  padding: 0.625rem 1.5rem !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.es-load-more-button:hover {
+  background-color: rgba(41, 42, 117, 0.12) !important;
+  color: #292a75 !important;
+  border-color: #292a75 !important;
+}
+
+/* Carousel arrows — brand tint */
+.es-layout-carousel-arrow {
+  color: #292a75 !important;
+}
+
+/* Post cards: subtle border like site --border */
+.es-post {
+  border-radius: 0.25rem !important;
+  box-shadow: 0 0 0 1px rgba(41, 42, 117, 0.14) !important;
+}

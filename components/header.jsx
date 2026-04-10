@@ -38,8 +38,16 @@ export function Header() {
   const [whatsNewOpen, setWhatsNewOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 12)
-    window.addEventListener("scroll", handleScroll)
+    let ticking = false
+    const handleScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 12)
+        ticking = false
+      })
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 

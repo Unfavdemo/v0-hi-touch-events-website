@@ -1,26 +1,59 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
+import { cn } from "@/lib/utils"
 import { teamMembers } from "@/lib/site"
+
+function TeamMemberPhoto({ imageSrc, alt, index }) {
+  const [loaded, setLoaded] = useState(false)
+  const isFirstRow = index < 3
+
+  return (
+    <>
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 z-[1] transition-opacity duration-500 ease-out",
+          loaded ? "opacity-0" : "opacity-100",
+        )}
+      >
+        <div className="team-photo-shimmer absolute inset-0" />
+      </div>
+      <Image
+        src={encodeURI(imageSrc)}
+        alt={alt}
+        fill
+        priority={isFirstRow}
+        loading={isFirstRow ? "eager" : "lazy"}
+        fetchPriority={isFirstRow ? "high" : "auto"}
+        onLoad={() => setLoaded(true)}
+        className={cn(
+          "z-[2] object-cover object-top transition-[opacity,transform] duration-500 ease-out group-hover:scale-[1.02]",
+          loaded ? "opacity-100" : "opacity-0",
+        )}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      />
+    </>
+  )
+}
 
 export function TeamGrid() {
   return (
     <div className="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {teamMembers.map((member) => (
+      {teamMembers.map((member, index) => (
         <article
           key={member.name}
           className="group relative min-w-0 overflow-hidden border border-border bg-background dark:bg-black"
         >
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-900">
+          <div
+            className="relative w-full overflow-hidden bg-neutral-900"
+            style={{ aspectRatio: "4 / 5" }}
+          >
             {member.image ? (
               <>
-                <Image
-                  src={encodeURI(member.image)}
-                  alt={member.name}
-                  fill
-                  loading="lazy"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <TeamMemberPhoto imageSrc={member.image} alt={member.name} index={index} />
+                <div className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               </>
             ) : (
               <>

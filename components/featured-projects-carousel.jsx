@@ -67,6 +67,7 @@ export function FeaturedProjectsCarousel({
                     alt=""
                     fill
                     priority={i === 0}
+                    loading={i === 0 ? "eager" : "lazy"}
                     fetchPriority={i === 0 ? "high" : "auto"}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 88vw, 55vw"

@@ -233,3 +233,32 @@
     animation: none;
   }
 }
+
+/* Meet the team: skeleton behind headshots until images load */
+@keyframes team-photo-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.team-photo-shimmer {
+  background: linear-gradient(
+    100deg,
+    #171717 0%,
+    #2a2a2a 40%,
+    #1f1f1f 55%,
+    #171717 75%
+  );
+  background-size: 200% 100%;
+  animation: team-photo-shimmer 1.25s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-photo-shimmer {
+    animation: none;
+    background: #262626;
+  }
+}

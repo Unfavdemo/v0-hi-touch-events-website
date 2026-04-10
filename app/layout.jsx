@@ -34,9 +34,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${display.variable}`}>
-      <head>
-        <link rel="preload" as="image" href="/images/DSC_0015.jpg" fetchPriority="high" />
-      </head>
       <body className="font-serif antialiased bg-background text-foreground">
         <Providers>{children}</Providers>
         <Analytics />
