@@ -64,7 +64,7 @@ export default async function FeaturedWorkCasePage({ params }) {
             href={getInquiryMailtoHref()}
             className="font-display text-[10px] font-normal uppercase tracking-[0.22em] text-brand-ink transition-colors hover:text-foreground"
           >
-            Plan something similar
+            Connect with us
           </a>
         </p>
       </Prose>

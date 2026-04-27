@@ -3,7 +3,7 @@ import { PageHero, Prose } from "@/components/page-hero"
 export const metadata = {
   title: "Founders' Story | HiTouch Enterprises Inc.",
   description:
-    "Felicia D. Williams and the story of HiTouch Enterprises—nonprofit impact, event production, and leadership. Based, serving near and far.",
+    "Felicia D. Williams and the story of HiTouch Enterprises—nonprofit impact, event production, and leadership. Based in Philadelphia, PA, serving near and far.",
 }
 
 export default function FoundersStoryPage() {

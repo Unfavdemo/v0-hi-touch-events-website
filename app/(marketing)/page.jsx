@@ -7,7 +7,7 @@ import { LetsTalk } from "@/components/lets-talk"
 export const metadata = {
   title: "HiTouch Enterprises Inc. | Event Production & Luxury Transportation",
   description:
-    "Hi-Quality, Hi-Impact results—event production, luxury charter, and strategic marketing. YouTube: @hitouchinc. Based—serving near and far.",
+    "Hi-Quality, Hi-Impact results—event production, luxury charter, and strategic marketing. YouTube: @hitouchinc. Based in Philadelphia, PA—serving near and far.",
 }
 
 export default function HomePage() {

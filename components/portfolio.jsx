@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { contact } from "@/lib/site"
 import { FeaturedProjectsCarousel } from "@/components/featured-projects-carousel"
 
 export function Portfolio() {
@@ -26,7 +25,11 @@ export function Portfolio() {
   }, [])
 
   return (
-    <section id="work" ref={sectionRef} className="scroll-mt-28 overflow-hidden bg-background px-0 py-20 dark:bg-black sm:scroll-mt-32 sm:py-24 lg:py-32">
+    <section
+      id="work"
+      ref={sectionRef}
+      className="scroll-mt-28 overflow-hidden bg-background px-0 pb-20 pt-24 dark:bg-black sm:scroll-mt-32 sm:pb-24 sm:pt-28 md:pb-24 md:pt-28 lg:pb-28 lg:pt-32"
+    >
       <div className="container mx-auto w-full min-w-0 max-w-full page-px">
         <div
           className={`flex flex-col gap-6 md:flex-row md:items-end md:justify-between transition-all duration-700 ${
@@ -40,7 +43,7 @@ export function Portfolio() {
             </h2>
           </div>
           <p className="max-w-md text-muted-foreground">
-            Yes—that was us. A snapshot of productions where creative ambition met operational rigor.
+            An inside look of hi-quality, hi-impact results — where creativity meets disciplined execution.
           </p>
         </div>
       </div>
@@ -48,30 +51,6 @@ export function Portfolio() {
       <FeaturedProjectsCarousel
         viewportClassName="pl-[max(1rem,env(safe-area-inset-left,0px))] md:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
       />
-
-      <div className="container mx-auto mt-12 w-full min-w-0 max-w-full page-px sm:mt-16">
-        <div
-          className={`border border-border bg-muted/40 px-5 py-12 text-center transition-all duration-700 dark:bg-black/40 sm:px-8 sm:py-14 md:px-16 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
-          style={{ transitionDelay: "400ms" }}
-        >
-          <p className="font-display text-xs font-normal uppercase tracking-[0.35em] text-muted-foreground">
-            We&apos;ve got more to show
-          </p>
-          <h3 className="font-display mt-4 text-2xl font-normal uppercase tracking-tight text-foreground md:text-3xl">
-            Bring us your next impossible deadline
-          </h3>
-          <a
-            href={contact.youtubeChannelUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-display mt-8 inline-flex rounded-full border-2 border-brand px-10 py-3.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
-          >
-            See our work on YouTube
-          </a>
-        </div>
-      </div>
     </section>
   )
 }

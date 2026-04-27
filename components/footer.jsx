@@ -1,5 +1,6 @@
-import Link from "next/link"
 import { Instagram, Twitter, Linkedin, Youtube, MapPin, Mail } from "lucide-react"
+import Link from "next/link"
+import { SiteLogoLink } from "@/components/site-logo"
 import { contact, whatsNewLinks } from "@/lib/site"
 
 const socialLinks = [
@@ -23,14 +24,11 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background pt-20 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] dark:bg-black page-px">
+    <footer className="border-t border-border bg-background pt-20 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] dark:bg-black page-px md:pt-24">
       <div className="container mx-auto w-full min-w-0 max-w-full">
         <div className="grid grid-cols-1 gap-14 border-b border-border pb-16 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <Link href="/" className="font-display text-2xl uppercase tracking-tight text-foreground sm:text-3xl">
-              <span className="text-brand-ink">HiTouch</span>{" "}
-              <span className="text-foreground">Enterprises</span>
-            </Link>
+            <SiteLogoLink variant="footer" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Event production, luxury charter, and strategic marketing—high-quality, high-impact results for clients
               across the region.

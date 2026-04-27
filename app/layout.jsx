@@ -24,10 +24,14 @@ export const viewport = {
 export const metadata = {
   title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
   description:
-    'Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based, serving clients near and far.',
+    "Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based in Philadelphia, PA, serving clients near and far.",
   icons: {
-    icon: [{ url: '/HiTouch_final.png', type: 'image/png' }],
-    apple: [{ url: '/HiTouch_final.png', type: 'image/png' }],
+    icon: [
+      { url: '/hitouch-icon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/hitouch-icon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/hitouch-icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 }
 

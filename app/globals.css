@@ -162,6 +162,10 @@
 
 /* Horizontal rhythm + notched devices; use with container or full-bleed sections */
 @layer components {
+  /* Default vertical padding for page content below heroes (keep in sync across routes) */
+  .page-section-y {
+    @apply py-20 md:py-24;
+  }
   .page-px {
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
     padding-right: max(1rem, env(safe-area-inset-right, 0px));

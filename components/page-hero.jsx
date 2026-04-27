@@ -6,8 +6,8 @@ export function PageHero({ eyebrow, title, subtitle, breadcrumbs, variant = "def
     <section
       className={
         isCinematic
-          ? "relative border-b border-border pb-20 pt-32 page-px sm:pt-36 md:pb-28 md:pt-44 lg:pt-48"
-          : "relative border-b border-border bg-background pb-16 pt-32 page-px sm:pt-36 md:pb-20 md:pt-44 lg:pt-48 dark:bg-black"
+          ? "relative border-b border-border pb-20 pt-32 page-px sm:pt-36 md:pb-24 md:pt-44 lg:pt-48"
+          : "relative border-b border-border bg-background pb-20 pt-32 page-px sm:pt-36 md:pb-24 md:pt-44 lg:pt-48 dark:bg-black"
       }
     >
       {isCinematic ? (
@@ -45,7 +45,7 @@ export function PageHero({ eyebrow, title, subtitle, breadcrumbs, variant = "def
           {title}
         </h1>
         {subtitle ? (
-          <p className="mt-6 max-w-2xl text-base font-normal uppercase tracking-[0.18em] text-muted-foreground md:text-lg">
+          <p className="mt-6 max-w-2xl text-base font-normal leading-relaxed text-muted-foreground md:text-lg">
             {subtitle}
           </p>
         ) : null}
@@ -56,7 +56,7 @@ export function PageHero({ eyebrow, title, subtitle, breadcrumbs, variant = "def
 
 export function Prose({ children, className = "" }) {
   return (
-    <div className={`bg-background py-16 page-px md:py-24 dark:bg-black ${className}`}>
+    <div className={`bg-background page-section-y page-px dark:bg-black ${className}`}>
       <div className="container mx-auto w-full min-w-0 max-w-3xl space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg [&_p]:mb-6 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
         {children}
       </div>

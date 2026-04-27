@@ -22,7 +22,7 @@ export function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative scroll-mt-24 overflow-hidden bg-background py-24 dark:bg-black page-px lg:py-32"
+      className="relative scroll-mt-24 overflow-hidden bg-background page-section-y dark:bg-black page-px lg:py-28"
     >
       <div className="pointer-events-none absolute inset-0 bg-topo-lines opacity-90" />
       <div
@@ -48,23 +48,15 @@ export function AboutSection() {
           }`}
         >
           <h2 className="font-display text-[clamp(2rem,7vw,5rem)] font-normal uppercase leading-[0.95] tracking-tight text-balance text-foreground">
-            Who we are
+            Hi-Quality, Hi-Impact events
           </h2>
           <p className="mt-10 text-base leading-relaxed text-muted-foreground md:text-lg">
-            HiTouch Events has spent over a decade building experiences that move communities, elevate brands, and
-            deliver measurable results.
-          </p>
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-            HiTouch has produced more than 300 events for audiences ranging from 100 to over 25,000 attendees.
-          </p>
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-            The firm has helped nonprofit partners raise more than $11 million, strengthening missions centered on
-            education equity, small business, violence reduction, economic access, and community advancement.
-          </p>
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-            From high-profile corporate engagements and VIP experiences to large-scale festivals and civic
-            celebrations, HiTouch has built a reputation for delivering hi-quality, hi-impact hospitality and
-            seamless execution.
+            HiTouch Events creates high-impact experiences that elevate brands, engage communities, and deliver real
+            results. With 300+ events produced for audiences from 100 to 25,000+, we bring scale, strategy, and precision
+            to every experience. We&apos;ve helped nonprofit partners raise $11M+ in support of education equity, small
+            business growth, violence reduction, and economic opportunity. From corporate engagements and VIP experiences
+            to large-scale festivals and civic celebrations, HiTouch is known for seamless execution and standout
+            hospitality.
           </p>
           <Link
             href="/about-us"

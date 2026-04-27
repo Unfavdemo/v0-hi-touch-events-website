@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from 'react'
 
 const partners = [
-  'Fortune 500 summits',
-  'Product launches & premieres',
-  'Music & festival partners',
-  'Broadcast & streaming',
-  'Luxury hospitality',
-  'Cultural institutions',
+  'GALAS & FORMAL DINNERS',
+  'AWARDS & RECOGNITION EVENTS',
+  'COMMUNITY & CULTURAL FESTIVALS',
+  'CORPORATE SUMMITS & CONFERENCES',
+  'FUNDRAISERS & BENEFIT EVENTS',
+  'PUBLIC SECTOR & CIVIC PROGRAMS',
 ]
 
 export function PartnersStrip() {
@@ -27,23 +27,8 @@ export function PartnersStrip() {
   }, [])
 
   return (
-    <section ref={ref} className="border-t border-border bg-background py-20 dark:bg-black page-px">
+    <section ref={ref} className="border-t border-border bg-background page-section-y dark:bg-black page-px">
       <div className="container mx-auto w-full min-w-0 max-w-full">
-        <div
-          className={`mb-12 text-center transition-all duration-700 ${
-            visible ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-          }`}
-        >
-          <p className="font-display text-xs font-semibold uppercase tracking-[0.35em] text-muted-foreground">
-            What we deliver
-          </p>
-          <h2 className="font-display mx-auto mt-6 max-w-3xl text-[clamp(1.75rem,4.5vw,2.75rem)] font-normal uppercase leading-[1.05] tracking-tight text-foreground">
-            Hi-Quality, Hi-Impact events
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-            Yes—that was us behind the curtain.
-          </p>
-        </div>
         <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-6">
           {partners.map((name, i) => (
             <div

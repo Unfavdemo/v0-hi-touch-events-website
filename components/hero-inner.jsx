@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useEffect, useState } from "react"
 import { StatsMarquee } from "@/components/stats-marquee"
 import { contact } from "@/lib/site"
@@ -22,7 +21,7 @@ export function HeroInner() {
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/72 dark:from-black/28 dark:via-transparent dark:to-black/88" />
 
-      <div className="relative z-10 flex min-h-[calc(100svh-8.5rem)] flex-col justify-center pb-32 pt-4 page-px sm:min-h-[calc(100svh-9rem)] sm:pb-36 md:min-h-[calc(100svh-11rem)] md:pb-40 lg:pb-44">
+      <div className="relative z-10 flex min-h-[calc(100svh-8.5rem)] flex-col justify-end pb-40 pt-8 page-px max-sm:pb-44 sm:min-h-[calc(100svh-9rem)] sm:justify-center sm:pb-36 sm:pt-4 md:min-h-[calc(100svh-11rem)] md:pb-40 lg:pb-44">
         <div className="max-w-6xl">
           <p className="font-display text-xs font-normal uppercase tracking-[0.35em] text-brand-ink md:text-sm">
             HiTouch Enterprises
@@ -53,12 +52,14 @@ export function HeroInner() {
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <Link
-            href="/about-us"
+          <a
+            href={contact.youtubeChannelUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="font-display inline-flex rounded-full border-2 border-brand px-8 py-3 text-[10px] font-normal uppercase tracking-[0.3em] text-foreground transition-colors hover:bg-brand/15 hover:text-foreground"
           >
             Get to know us
-          </Link>
+          </a>
           <a
             href={contact.charterWeb}
             target="_blank"

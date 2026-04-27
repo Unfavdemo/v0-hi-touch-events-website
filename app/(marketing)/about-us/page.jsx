@@ -5,7 +5,7 @@ import { getInquiryMailtoHref } from "@/lib/site"
 export const metadata = {
   title: "About Us | HiTouch Enterprises Inc.",
   description:
-    "HiTouch Events—over a decade building experiences that move communities and elevate brands. Founded 2016. Based—serving the region. 300+ events, $11M+ raised, Juneteenth, Urban Affairs Coalition, charter, impact-driven production.",
+    "HiTouch Events—over a decade building experiences that move communities and elevate brands. Founded 2016. Based in Philadelphia, PA—serving the region. 300+ events, $11M+ raised, Juneteenth, Urban Affairs Coalition, charter, impact-driven production.",
 }
 
 export default function AboutUsPage() {
@@ -14,7 +14,7 @@ export default function AboutUsPage() {
       <PageHero
         eyebrow="About"
         title="Who we are"
-        subtitle="Event production and impact strategy—based, built for measurable results."
+        subtitle="Event production and impact strategy—based in Philadelphia, PA, built for measurable results."
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "About us", href: "/about-us" },
@@ -27,8 +27,8 @@ export default function AboutUsPage() {
           deliver measurable results.
         </p>
         <p>
-          Founded in 2016 by marketing and event strategist Felicia D. Williams, HiTouch Enterprises has grown into a
-          full-service Event Production and Impact Strategy firm—based, and built to serve clients near and far. What
+          Founded in 2016 by marketing and impact strategist Felicia D. Williams, HiTouch Enterprises has grown into a
+          full-service Event Production and Impact Strategy firm—based in Philadelphia, PA, and built to serve clients near and far. What
           began as a bold entrepreneurial vision has evolved into a team known for precision, professionalism, and
           purpose-driven growth.
         </p>
@@ -82,7 +82,7 @@ export default function AboutUsPage() {
             href={getInquiryMailtoHref()}
             className="font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-ink underline-offset-4 hover:underline"
           >
-            Email us
+            Connect with us
           </a>
         </p>
       </Prose>

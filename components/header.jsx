@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { ChevronDown, X, MapPin, Mail, Instagram, Linkedin, Youtube } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { SiteLogoLink } from "@/components/site-logo"
 import { aboutDropdown, contact, getInquiryMailtoHref, whatsNewLinks } from "@/lib/site"
 
 function TwoLineMenuIcon() {
@@ -99,14 +100,7 @@ export function Header() {
 
       <div className="border-b border-border">
         <div className="container mx-auto flex w-full min-w-0 max-w-full items-center justify-between gap-3 py-5 page-px sm:gap-4">
-          <Link
-            href="/"
-            className="font-display min-w-0 shrink text-xl uppercase leading-tight tracking-[0.02em] text-foreground sm:text-2xl md:text-3xl"
-            onClick={closeMenu}
-          >
-            <span className="text-brand-ink">HiTouch</span>
-            <span className="text-foreground"> Enterprises</span>
-          </Link>
+          <SiteLogoLink onClick={closeMenu} variant="header" />
 
           <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
             <ThemeToggle className="hidden sm:flex" />
@@ -114,7 +108,7 @@ export function Header() {
               href={getInquiryMailtoHref()}
               className="font-display hidden rounded-full border border-brand px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15 sm:inline-block md:px-6"
             >
-              Email us
+              Connect with us
             </a>
             <button
               type="button"
@@ -282,7 +276,7 @@ export function Header() {
                   className="font-display mt-8 block rounded-full border-2 border-brand py-4 text-center text-[11px] uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
                   onClick={closeMenu}
                 >
-                  Email us
+                  Connect with us
                 </a>
               </div>
             </nav>

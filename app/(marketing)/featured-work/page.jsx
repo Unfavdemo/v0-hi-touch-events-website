@@ -1,6 +1,6 @@
 import { PageHero } from "@/components/page-hero"
 import { FeaturedProjectsCarousel } from "@/components/featured-projects-carousel"
-import { featuredWorkListingIntro } from "@/lib/site"
+import { contact } from "@/lib/site"
 
 export const metadata = {
   title: "Featured Work | HiTouch Enterprises Inc.",
@@ -21,11 +21,16 @@ export default function FeaturedWorkPage() {
         ]}
         variant="cinematic"
       />
-      <section className="bg-background pb-24 dark:bg-black">
-        <div className="container mx-auto page-px">
-          <p className="mx-auto max-w-3xl pb-10 text-lg leading-relaxed text-muted-foreground md:pb-14 md:text-xl">
-            {featuredWorkListingIntro}
-          </p>
+      <section className="bg-background page-section-y dark:bg-black">
+        <div className="container mx-auto flex flex-col items-center gap-8 page-px">
+          <a
+            href={contact.youtubeChannelUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-display inline-flex rounded-full border-2 border-brand px-10 py-3.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
+          >
+            See our work on YouTube
+          </a>
         </div>
         <FeaturedProjectsCarousel
           wrapperClassName="mt-2 sm:mt-4"

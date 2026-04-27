@@ -5,7 +5,7 @@ import { teamPageExtras } from "@/lib/site"
 export const metadata = {
   title: "Meet the Team | HiTouch Enterprises Inc.",
   description:
-    "The HiTouch team—leadership, marketing, operations, and day-of staffing for Hi-Quality, Hi-Impact, inclusive events. Based—serving near and far.",
+    "The HiTouch team—leadership, marketing, operations, and day-of staffing for Hi-Quality, Hi-Impact, inclusive events. Based in Philadelphia, PA—serving near and far.",
 }
 
 export default function MeetTheTeamPage() {
@@ -21,17 +21,17 @@ export default function MeetTheTeamPage() {
         ]}
         variant="cinematic"
       />
-      <section className="pb-24 page-px">
-        <div className="container mx-auto w-full min-w-0 max-w-full space-y-20">
+      <section className="bg-background page-section-y page-px dark:bg-black">
+        <div className="container mx-auto w-full min-w-0 max-w-full space-y-16 md:space-y-20">
           <TeamGrid />
-          <div className="mx-auto max-w-3xl border-t border-border pt-16">
+          <div className="mx-auto max-w-3xl border-t border-border pt-12 md:pt-16">
             <p className="font-display text-xs font-semibold uppercase tracking-[0.35em] text-brand-ink">Our team</p>
             <p className="mt-3 font-display text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               Demographics (full-time team)
             </p>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{teamPageExtras.demographics}</p>
           </div>
-          <div className="mx-auto max-w-3xl border-t border-border pt-16">
+          <div className="mx-auto max-w-3xl border-t border-border pt-12 md:pt-16">
             <h2 className="font-display text-2xl font-normal uppercase tracking-tight text-foreground md:text-3xl">
               {teamPageExtras.staffingSectionTitle}
             </h2>

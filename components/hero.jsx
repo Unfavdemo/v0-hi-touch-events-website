@@ -13,7 +13,7 @@ export function Hero() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover object-[center_35%]"
+          className="object-cover object-top sm:object-[center_12%] md:object-[center_22%] lg:object-[center_35%]"
         />
       </div>
       <HeroInner />

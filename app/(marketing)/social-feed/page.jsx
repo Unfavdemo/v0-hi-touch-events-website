@@ -23,7 +23,7 @@ export default function SocialFeedPage() {
         ]}
         variant="cinematic"
       />
-      <section className="bg-background pb-24 dark:bg-black page-px">
+      <section className="bg-background page-section-y page-px dark:bg-black">
         <div className="container mx-auto w-full min-w-0 max-w-5xl">
           {useLiveFeed ? (
             <SocialFeedEmbed />
@@ -79,7 +79,7 @@ export default function SocialFeedPage() {
               href={getInquiryMailtoHref()}
               className="font-display inline-flex rounded-full border-2 border-brand px-8 py-3.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
             >
-              Email us
+              Connect with us
             </a>
           </p>
         </div>

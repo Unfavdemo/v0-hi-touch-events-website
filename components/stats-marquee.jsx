@@ -3,7 +3,7 @@ export const MARQUEE_STATS = [
   "50M+ Media Impressions",
   "$11M+ Dollars Raised",
   "25+ Strategic Campaigns",
-  "Based — near & far",
+  "Based in Philadelphia, PA — near & far",
   "Event production & luxury charter",
 ]
 

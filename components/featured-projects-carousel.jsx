@@ -74,10 +74,10 @@ export function FeaturedProjectsCarousel({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-                    <h3 className="font-display text-xl font-normal uppercase tracking-tight text-balance text-white sm:text-2xl md:text-4xl">
+                    <h3 className="font-display text-xl font-normal tracking-tight text-balance text-white sm:text-2xl md:text-4xl">
                       {project.title}
                     </h3>
-                    <p className="mt-3 font-display text-[10px] font-normal uppercase tracking-[0.25em] text-white/70">
+                    <p className="mt-3 font-display text-[10px] font-normal tracking-[0.08em] text-white/70">
                       {project.category}
                     </p>
                   </div>
