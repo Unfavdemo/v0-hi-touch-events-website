@@ -24,6 +24,11 @@ const nextConfig = {
     return [
       { source: "/blog", destination: "/", permanent: true },
       { source: "/social-feed", destination: "/featured-work", permanent: true },
+      {
+        source: "/featured-work/odaat-hope-for-the-holidays",
+        destination: "/featured-work/odaat-a-season-of-gratitude",
+        permanent: true,
+      },
     ]
   },
 }
