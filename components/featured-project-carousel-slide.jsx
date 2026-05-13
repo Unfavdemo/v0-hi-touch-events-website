@@ -13,7 +13,7 @@ const categoryShadow =
  * One featured-work card for the carousel (home + /featured-work).
  * Full photo visible (object-contain); no hover zoom so edges don’t flash dark.
  */
-export function FeaturedProjectCarouselSlide({ project }) {
+export function FeaturedProjectCarouselSlide({ project, imagePriority = false }) {
   return (
     <div className="min-w-0 shrink-0 grow-0 basis-[min(100%,calc(100vw-2.5rem))] sm:basis-[min(100%,88vw)] md:basis-[min(100%,55%)] lg:basis-[min(100%,48%)]">
       <Link
@@ -26,7 +26,7 @@ export function FeaturedProjectCarouselSlide({ project }) {
             alt={project.title}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 88vw, 55vw"
             className="object-contain object-center"
-            priority={false}
+            priority={imagePriority}
           />
           <div className="absolute bottom-0 left-0 right-0 z-[4] p-5 sm:p-8">
             <h3

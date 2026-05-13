@@ -2,13 +2,16 @@
 const nextConfig = {
   async headers() {
     const immutable = "public, max-age=31536000, immutable"
-    /** Team headshots are edited in place; skip `immutable` so fixes reach browsers. */
-    const teamImages = "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400, must-revalidate"
+    /** Team headshots: long cache + SWR; rename files when replacing a portrait. */
+    const teamImages =
+      "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
+    /** Event photos: avoid `must-revalidate` so repeat visits use disk cache/CDN. */
     const hitouchPhotos =
-      "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400, must-revalidate"
+      "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"
     return [
       { source: "/images/team/:path*", headers: [{ key: "Cache-Control", value: teamImages }] },
       { source: "/Hitouch Pictures/:path*", headers: [{ key: "Cache-Control", value: hitouchPhotos }] },
+      { source: "/videos/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/images/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/icon.svg", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/icon-light-32x32.png", headers: [{ key: "Cache-Control", value: immutable }] },

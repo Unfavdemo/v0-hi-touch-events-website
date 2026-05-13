@@ -51,8 +51,12 @@ export function FeaturedProjectsCarousel({
     >
       <div className={cn("overflow-hidden overscroll-x-contain", viewportClassName)} ref={emblaRef}>
         <div className={cn("flex gap-4 md:gap-5 pr-4 md:pr-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]", rowClassName)}>
-          {featuredProjects.map((project) => (
-            <FeaturedProjectCarouselSlide key={project.slug} project={project} />
+          {featuredProjects.map((project, index) => (
+            <FeaturedProjectCarouselSlide
+              key={project.slug}
+              project={project}
+              imagePriority={index < 2}
+            />
           ))}
         </div>
       </div>

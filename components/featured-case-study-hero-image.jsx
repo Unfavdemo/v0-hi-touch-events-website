@@ -11,7 +11,7 @@ export function FeaturedCaseStudyHeroImage({ src, alt }) {
           alt={alt}
           sizes="(max-width: 1400px) 100vw, 1400px"
           className="object-contain object-center"
-          priority={false}
+          priority
         />
       </div>
     </div>
