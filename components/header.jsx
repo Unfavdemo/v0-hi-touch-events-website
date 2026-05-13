@@ -21,7 +21,6 @@ function TwoLineMenuIcon() {
 const menuCol1 = [
   { label: "Home", href: "/" },
   { label: "Meet the team", href: "/meet-the-team" },
-  { label: "Social feed", href: "/social-feed" },
   { label: "Contact", href: "/contact" },
 ]
 

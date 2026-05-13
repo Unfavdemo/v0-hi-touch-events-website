@@ -37,16 +37,19 @@ export default async function FeaturedWorkCasePage({ params }) {
         variant="cinematic"
       />
       <div className="border-b border-border">
-        <div className="relative mx-auto aspect-[21/9] max-h-[420px] w-full overflow-hidden bg-[oklch(0.14_0.04_278)]">
-          <Image
-            src={project.image}
-            alt=""
-            fill
-            priority
-            fetchPriority="high"
-            className="object-cover object-center"
-            sizes="(max-width: 1280px) 100vw, 1280px"
-          />
+        {/* Tall enough box + object-contain so people aren’t cropped off (no ultra-wide crop) */}
+        <div className="relative mx-auto w-full max-w-[1400px] bg-[oklch(0.14_0.04_278)]">
+          <div className="relative mx-auto h-[clamp(260px,min(52vw,520px),600px)] w-full">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              priority
+              fetchPriority="high"
+              className="object-contain object-center"
+              sizes="(max-width: 1400px) 100vw, 1400px"
+            />
+          </div>
         </div>
       </div>
       <Prose>

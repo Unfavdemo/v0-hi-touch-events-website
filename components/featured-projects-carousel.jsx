@@ -1,11 +1,10 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
 import { useCallback, useEffect, useRef } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { featuredProjects } from "@/lib/site"
+import { FeaturedProjectCarouselSlide } from "@/components/featured-project-carousel-slide"
 import { cn } from "@/lib/utils"
 
 const AUTOPLAY_MS = 4800
@@ -53,37 +52,7 @@ export function FeaturedProjectsCarousel({
       <div className={cn("overflow-hidden overscroll-x-contain", viewportClassName)} ref={emblaRef}>
         <div className={cn("flex gap-4 md:gap-5 pr-4 md:pr-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]", rowClassName)}>
           {featuredProjects.map((project, i) => (
-            <div
-              key={project.slug}
-              className="min-w-0 shrink-0 grow-0 basis-[min(100%,calc(100vw-2.5rem))] sm:basis-[min(100%,88vw)] md:basis-[min(100%,55%)] lg:basis-[min(100%,48%)]"
-            >
-              <Link
-                href={`/featured-work/${project.slug}`}
-                className="group relative block overflow-hidden rounded-sm bg-background shadow-md dark:bg-black dark:shadow-none"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#1a0a0a]">
-                  <Image
-                    src={project.image}
-                    alt=""
-                    fill
-                    priority={i === 0}
-                    loading={i === 0 ? "eager" : "lazy"}
-                    fetchPriority={i === 0 ? "high" : "auto"}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 88vw, 55vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">
-                    <h3 className="font-display text-xl font-normal tracking-tight text-balance text-white sm:text-2xl md:text-4xl">
-                      {project.title}
-                    </h3>
-                    <p className="mt-3 font-display text-[10px] font-normal tracking-[0.08em] text-white/70">
-                      {project.category}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </div>
+            <FeaturedProjectCarouselSlide key={project.slug} project={project} index={i} />
           ))}
         </div>
       </div>
