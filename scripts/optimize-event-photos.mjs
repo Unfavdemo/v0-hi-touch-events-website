@@ -52,12 +52,13 @@ async function walk(dir) {
     if (!/\.(jpe?g)$/i.test(entry.name) || entry.name.endsWith(".tmp")) continue
 
     const before = fs.statSync(full).size
-    if (before < minBytes) continue
+    const meta = await sharp(full).metadata()
+    const isOversize = meta.width && meta.width > maxW
+    if (before < minBytes && !isOversize) continue
 
     const tmp = full + ".opt.tmp"
-    const meta = await sharp(full).metadata()
     let pipeline = sharp(full).rotate()
-    if (meta.width && meta.width > maxW) {
+    if (isOversize) {
       pipeline = pipeline.resize({ width: maxW, withoutEnlargement: true })
     }
 
