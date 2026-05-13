@@ -1,11 +1,15 @@
 import { PageHero } from "@/components/page-hero"
 import { TeamGrid } from "@/components/team-grid"
 import { teamPageExtras } from "@/lib/site"
+import { buildPageMetadata } from "@/lib/seo-metadata"
 
 export const metadata = {
-  title: "Meet the Team | HiTouch Enterprises Inc.",
-  description:
-    "The HiTouch team—leadership, marketing, operations, and day-of staffing for Hi-Quality, Hi-Impact, inclusive events. Based in Philadelphia, PA—serving near and far.",
+  ...buildPageMetadata({
+    title: "Meet the Team | HiTouch Enterprises Inc.",
+    description:
+      "The HiTouch team—leadership, marketing, operations, and day-of staffing for Hi-Quality, Hi-Impact, inclusive events. Based in Philadelphia, PA—serving near and far.",
+    path: "/meet-the-team",
+  }),
 }
 
 export default function MeetTheTeamPage() {

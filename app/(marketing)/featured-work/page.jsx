@@ -1,11 +1,15 @@
 import { PageHero } from "@/components/page-hero"
 import { FeaturedProjectsCarousel } from "@/components/featured-projects-carousel"
 import { contact } from "@/lib/site"
+import { buildPageMetadata } from "@/lib/seo-metadata"
 
 export const metadata = {
-  title: "Featured Work | HiTouch Enterprises Inc.",
-  description:
-    "Signature productions from HiTouch—Juneteenth, Urban Affairs Coalition, convenings, galas, and civic milestones across the region.",
+  ...buildPageMetadata({
+    title: "Featured Work | HiTouch Enterprises Inc.",
+    description:
+      "Signature productions from HiTouch—Juneteenth, Urban Affairs Coalition, convenings, galas, and civic milestones across the region.",
+    path: "/featured-work",
+  }),
 }
 
 export default function FeaturedWorkPage() {

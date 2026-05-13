@@ -1,11 +1,15 @@
 import Link from "next/link"
 import { PageHero, Prose } from "@/components/page-hero"
 import { getInquiryMailtoHref } from "@/lib/site"
+import { buildPageMetadata } from "@/lib/seo-metadata"
 
 export const metadata = {
-  title: "About Us | HiTouch Enterprises Inc.",
-  description:
-    "HiTouch Events—over a decade building experiences that move communities and elevate brands. Founded 2016. Based in Philadelphia, PA—serving the region. 300+ events, $11M+ raised, Juneteenth, Urban Affairs Coalition, charter, impact-driven production.",
+  ...buildPageMetadata({
+    title: "About Us | HiTouch Enterprises Inc.",
+    description:
+      "HiTouch Events—over a decade building experiences that move communities and elevate brands. Founded 2016. Based in Philadelphia, PA—serving the region. 300+ events, $11M+ raised, Juneteenth, Urban Affairs Coalition, charter, impact-driven production.",
+    path: "/about-us",
+  }),
 }
 
 export default function AboutUsPage() {

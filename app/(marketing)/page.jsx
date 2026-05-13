@@ -3,11 +3,15 @@ import { AboutSection } from "@/components/about-section"
 import { PartnersStrip } from "@/components/partners-strip"
 import { Portfolio } from "@/components/portfolio"
 import { LetsTalk } from "@/components/lets-talk"
+import { buildPageMetadata } from "@/lib/seo-metadata"
 
 export const metadata = {
-  title: "HiTouch Enterprises Inc. | Event Production & Luxury Transportation",
-  description:
-    "Hi-Quality, Hi-Impact results—event production, luxury charter, and strategic marketing. YouTube: @hitouchinc. Based in Philadelphia, PA—serving near and far.",
+  ...buildPageMetadata({
+    title: "HiTouch Enterprises Inc. | Event Production & Luxury Transportation",
+    description:
+      "Hi-Quality, Hi-Impact results—event production, luxury charter, and strategic marketing. YouTube: @hitouchinc. Based in Philadelphia, PA—serving near and far.",
+    path: "/",
+  }),
 }
 
 export default function HomePage() {

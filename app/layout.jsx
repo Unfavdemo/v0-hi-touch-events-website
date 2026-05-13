@@ -1,6 +1,8 @@
 import { Bebas_Neue, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SeoJsonLd } from '@/components/seo-json-ld'
 import { Providers } from '@/components/providers'
+import { getMetadataBase } from '@/lib/site-url'
 import './globals.css'
 
 const inter = Inter({
@@ -22,9 +24,33 @@ export const viewport = {
 }
 
 export const metadata = {
+  metadataBase: getMetadataBase(),
   title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
   description:
     "Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based in Philadelphia, PA, serving clients near and far.",
+  applicationName: 'HiTouch Enterprises',
+  referrer: 'origin-when-cross-origin',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'HiTouch Enterprises Inc.',
+    locale: 'en_US',
+    title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
+    description:
+      "Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based in Philadelphia, PA, serving clients near and far.",
+    images: [{ url: '/HiTouch_final.png', width: 1200, height: 630, alt: 'HiTouch Enterprises Inc.' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
+    description:
+      "Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based in Philadelphia, PA, serving clients near and far.",
+    images: ['/HiTouch_final.png'],
+  },
   icons: {
     icon: [
       { url: '/hitouch-icon-32.png', sizes: '32x32', type: 'image/png' },
@@ -39,6 +65,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${display.variable}`}>
       <body className="font-serif antialiased bg-background text-foreground">
+        <SeoJsonLd />
         <Providers>{children}</Providers>
         <Analytics />
       </body>

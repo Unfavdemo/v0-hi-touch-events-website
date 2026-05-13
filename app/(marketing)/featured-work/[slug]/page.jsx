@@ -4,6 +4,7 @@ import { FeaturedWorkGalleryCarousel } from "@/components/featured-work-gallery-
 import { FeaturedCaseStudyHeroImage } from "@/components/featured-case-study-hero-image"
 import { PageHero, Prose } from "@/components/page-hero"
 import { getFeaturedWorkGalleryPaths } from "@/lib/featured-gallery"
+import { buildPageMetadata } from "@/lib/seo-metadata"
 import { featuredProjects, getProjectBySlug, getInquiryMailtoHref } from "@/lib/site"
 
 export function generateStaticParams() {
@@ -13,11 +14,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params
   const project = getProjectBySlug(slug)
-  if (!project) return { title: "Project | HiTouch Enterprises Inc." }
-  return {
+  if (!project) {
+    return buildPageMetadata({
+      title: "Project | HiTouch Enterprises Inc.",
+      description: "Featured production case study from HiTouch Enterprises.",
+      path: `/featured-work/${slug}`,
+    })
+  }
+  return buildPageMetadata({
     title: `${project.title} | HiTouch Enterprises Inc.`,
     description: project.listDescription,
-  }
+    path: `/featured-work/${project.slug}`,
+    ogImage: project.image,
+  })
 }
 
 export default async function FeaturedWorkCasePage({ params }) {

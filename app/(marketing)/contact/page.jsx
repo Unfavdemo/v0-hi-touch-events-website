@@ -1,10 +1,14 @@
 import { PageHero } from "@/components/page-hero"
 import { contact, getInquiryMailtoHref } from "@/lib/site"
+import { buildPageMetadata } from "@/lib/seo-metadata"
 
 export const metadata = {
-  title: "Contact | HiTouch Enterprises Inc.",
-  description:
-    "Email HiTouch for events, marketing, and partnerships—based in Philadelphia, PA, serving clients near and far.",
+  ...buildPageMetadata({
+    title: "Contact | HiTouch Enterprises Inc.",
+    description:
+      "Email HiTouch for events, marketing, and partnerships—based in Philadelphia, PA, serving clients near and far.",
+    path: "/contact",
+  }),
 }
 
 export default function ContactPage() {
