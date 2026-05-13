@@ -129,8 +129,8 @@ export function Footer() {
           <div className="text-center text-sm text-muted-foreground md:text-left">
             <p>&copy; {new Date().getFullYear()} HiTouch Enterprises Inc. All rights reserved.</p>
             <p className="mt-2 text-xs text-muted-foreground/90">
-              Website designed by{" "}
-              <span className="text-muted-foreground">DemoTech</span>
+              Made by{" "}
+              <span className="text-muted-foreground">MainFrameCreative</span>
             </p>
           </div>
           <ul className="flex flex-wrap justify-center gap-6">
