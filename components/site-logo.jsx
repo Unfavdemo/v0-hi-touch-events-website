@@ -27,6 +27,8 @@ export function SiteLogoLink({ onClick, variant = "header" }) {
         className={`${imgClass} shrink-0`}
         sizes={variant === "footer" ? "260px" : "(max-width: 768px) 42vw, 240px"}
         priority={variant === "header"}
+        loading={variant === "header" ? "eager" : "lazy"}
+        fetchPriority={variant === "header" ? "high" : "low"}
       />
     </Link>
   )

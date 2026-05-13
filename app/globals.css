@@ -238,7 +238,7 @@
   }
 }
 
-/* Meet the team: skeleton behind headshots until images load */
+/* Shimmer skeleton behind large photos until images load (team, featured work, heroes) */
 @keyframes team-photo-shimmer {
   0% {
     background-position: 200% 0;

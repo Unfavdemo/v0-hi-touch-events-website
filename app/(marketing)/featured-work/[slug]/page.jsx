@@ -1,6 +1,6 @@
-import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { FeaturedCaseStudyHeroImage } from "@/components/featured-case-study-hero-image"
 import { PageHero, Prose } from "@/components/page-hero"
 import { featuredProjects, getProjectBySlug, getInquiryMailtoHref } from "@/lib/site"
 
@@ -37,20 +37,7 @@ export default async function FeaturedWorkCasePage({ params }) {
         variant="cinematic"
       />
       <div className="border-b border-border">
-        {/* Tall enough box + object-contain so people aren’t cropped off (no ultra-wide crop) */}
-        <div className="relative mx-auto w-full max-w-[1400px] bg-[oklch(0.14_0.04_278)]">
-          <div className="relative mx-auto h-[clamp(260px,min(52vw,520px),600px)] w-full">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              priority
-              fetchPriority="high"
-              className="object-contain object-center"
-              sizes="(max-width: 1400px) 100vw, 1400px"
-            />
-          </div>
-        </div>
+        <FeaturedCaseStudyHeroImage src={project.image} alt={project.title} />
       </div>
       <Prose>
         {project.body.map((para, i) => (

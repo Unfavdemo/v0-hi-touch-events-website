@@ -73,6 +73,10 @@ export function Header() {
   const megaLink =
     "block w-full max-w-full font-display text-[clamp(1.75rem,min(7vw,11vmin),3.75rem)] uppercase leading-[0.95] tracking-tight text-foreground transition-colors hover:text-brand-ink break-words [hyphens:auto] py-0.5"
 
+  const isOverlay = !isMenuOpen && !isScrolled
+  const overlayTextShadow = isOverlay ? "0 1px 10px var(--hero-fade-edge)" : undefined
+  const overlayIconClass = isOverlay ? "bg-background/30 backdrop-blur-sm dark:bg-black/35" : ""
+
   return (
     <header
       className={cn(
@@ -81,6 +85,16 @@ export function Header() {
         isMenuOpen ? "bg-transparent" : isScrolled ? "bg-background/85 backdrop-blur-md dark:bg-black/80" : "bg-transparent"
       )}
     >
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-0 transition-opacity duration-300",
+          isOverlay ? "opacity-100" : "opacity-0",
+        )}
+        style={{
+          background: `linear-gradient(180deg, color-mix(in oklab, var(--hero-fade-edge) 85%, transparent) 0%, color-mix(in oklab, var(--hero-fade-edge) 55%, transparent) 55%, transparent 100%)`,
+        }}
+      />
       <a
         href="#main"
         className="sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:block focus:h-auto focus:w-auto focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:text-background focus:outline-none"
@@ -88,8 +102,11 @@ export function Header() {
         Skip to main content
       </a>
 
-      <div className="hidden border-b border-border md:block">
-        <div className="container mx-auto flex w-full min-w-0 max-w-full flex-wrap items-center justify-between gap-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground page-px">
+      <div className="relative hidden border-b border-border md:block">
+        <div
+          className="container mx-auto flex w-full min-w-0 max-w-full flex-wrap items-center justify-between gap-4 py-2.5 text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground page-px"
+          style={{ textShadow: overlayTextShadow }}
+        >
           <span>{contact.citiesLine}</span>
           <a href={contact.emailHref} className="transition-colors hover:text-foreground">
             {contact.email}
@@ -97,21 +114,28 @@ export function Header() {
         </div>
       </div>
 
-      <div className="border-b border-border">
+      <div className="relative border-b border-border">
         <div className="container mx-auto flex w-full min-w-0 max-w-full items-center justify-between gap-3 py-5 page-px sm:gap-4">
           <SiteLogoLink onClick={closeMenu} variant="header" />
 
           <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
-            <ThemeToggle className="hidden sm:flex" />
+            <ThemeToggle className={cn("hidden sm:flex", overlayIconClass)} />
             <a
               href={getInquiryMailtoHref()}
-              className="font-display hidden rounded-full border border-brand px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15 sm:inline-block md:px-6"
+              className={cn(
+                "font-display hidden rounded-full border border-brand px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15 sm:inline-block md:px-6",
+                isOverlay && "bg-background/30 backdrop-blur-sm dark:bg-black/35",
+              )}
+              style={{ textShadow: overlayTextShadow }}
             >
               Connect with us
             </a>
             <button
               type="button"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink"
+              className={cn(
+                "flex h-12 w-12 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-brand hover:text-brand-ink",
+                overlayIconClass,
+              )}
               onClick={() => setIsMenuOpen((o) => (o ? false : true))}
               aria-expanded={isMenuOpen}
               aria-controls="site-menu-panel"
