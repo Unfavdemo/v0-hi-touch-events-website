@@ -5,6 +5,30 @@ const nextConfig = {
     // Omitting `search` allows any (or no) query string, so `?v=YYYYMMDD` cache-busts work when a source file is replaced in place.
     localPatterns: [{ pathname: "/**" }],
   },
+  // `lib/featured-gallery.js` reads from `public/` at request time. Without
+  // explicit excludes, Next's file tracer would bundle huge static assets
+  // (event photos, videos, PDFs) into every serverless function for the
+  // `/featured-work/[slug]` route and blow past Vercel's 300MB lambda limit.
+  // These files are already served as static assets by the CDN, so nothing
+  // inside the function needs them.
+  outputFileTracingExcludes: {
+    "/featured-work/**": [
+      "public/Hitouch Pictures/**",
+      "public/images/featured-work/**",
+      "public/videos/**",
+      "public/drive-download-*/**",
+      "public/*.pdf",
+      "public/*.mov",
+    ],
+    "*": [
+      "public/Hitouch Pictures/**",
+      "public/images/featured-work/**",
+      "public/videos/**",
+      "public/drive-download-*/**",
+      "public/*.pdf",
+      "public/*.mov",
+    ],
+  },
   async headers() {
     const immutable = "public, max-age=31536000, immutable"
     /** Team headshots: long cache + SWR; rename files when replacing a portrait. */
