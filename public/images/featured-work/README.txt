@@ -25,7 +25,7 @@ Folder names (one folder per project)
   black-brain-green-tie-gala
   uplift-hardship-to-hope-gala-2025
   transforming-justice-2025
-  frankford-cdc-holiday-festival-2025
+  community-heros-brunch-2025
   fathers-day-rally-fatherhood-ceremony-2025
   welcome-america-grove-mayors-vip
   tree-lighting-mayors-vip

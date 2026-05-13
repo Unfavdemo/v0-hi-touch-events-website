@@ -63,6 +63,11 @@ const nextConfig = {
         destination: "/featured-work/odaat-community-events",
         permanent: true,
       },
+      {
+        source: "/featured-work/frankford-cdc-holiday-festival-2025",
+        destination: "/featured-work/community-heros-brunch-2025",
+        permanent: true,
+      },
     ]
   },
 }
