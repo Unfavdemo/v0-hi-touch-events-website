@@ -13,6 +13,8 @@
     "images:optimize-team": "node scripts/optimize-team-headshots.mjs",
     "images:optimize-events": "node scripts/optimize-event-photos.mjs",
     "convert:heic-featured": "node scripts/convert-heic-featured.cjs",
+    "galleries:check": "node scripts/check-featured-galleries.mjs",
+    "galleries:rename": "node scripts/rename-featured-galleries.mjs",
     "pm2:start": "pm2 start ecosystem.config.cjs",
     "pm2:reload": "pm2 reload ecosystem.config.cjs"
   },

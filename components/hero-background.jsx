@@ -7,8 +7,9 @@ const POSTER_SRC = "/images/DSC_0015.jpg"
 
 /**
  * Home hero background video — autoplay muted loop with poster fallback.
- * Avoids `filter` on the `<video>` (expensive during decode) and defers download
- * until the hero is on-screen so it does not compete with LCP images.
+ * Mobile Safari needs `defaultMuted` on the media element (set in effect),
+ * explicit `playsinline` attrs, and retried `play()` after `canplay`; we still
+ * defer `load()` until the hero intersects the viewport so we do not compete with LCP images.
  */
 export function HeroBackground() {
   const containerRef = useRef(null)
@@ -21,17 +22,37 @@ export function HeroBackground() {
     const root = containerRef.current
     if (!v || !root) return
 
+    /** iOS / WebKit autoplay policy: muted + playsinline must be set before play(). */
+    v.defaultMuted = true
     v.muted = true
     v.volume = 0
+    v.playsInline = true
+    v.setAttribute("playsinline", "")
+    v.setAttribute("webkit-playsinline", "true")
 
     const play = () => {
-      const p = v.play()
-      if (p && typeof p.catch === "function") p.catch(() => {})
+      try {
+        v.muted = true
+        v.volume = 0
+        const p = v.play()
+        /** `play()` can reject with no message (policy / interrupt); must not surface as unhandledRejection. */
+        void Promise.resolve(p).catch(() => {})
+      } catch {
+        /* sync throw from play() on some browsers */
+      }
     }
 
     const onLoaded = () => {
       setReady(true)
       play()
+    }
+
+    /** Mobile often fires `canplay` when `loadeddata` is flaky — retry play. */
+    const onCanPlay = () => {
+      if (v.readyState >= 2) {
+        setReady(true)
+        play()
+      }
     }
 
     if (v.readyState >= 2) {
@@ -45,14 +66,22 @@ export function HeroBackground() {
     }
 
     v.addEventListener("loadeddata", onLoaded)
+    v.addEventListener("canplay", onCanPlay)
     v.addEventListener("volumechange", onVolumeChange)
+
+    /** Resume after bfcache restore (common on iOS). */
+    const onPageShow = (ev) => {
+      if (ev.persisted && v.readyState >= 2) play()
+    }
+    window.addEventListener("pageshow", onPageShow)
 
     const io = new IntersectionObserver(
       (entries) => {
         const e = entries[0]
         if (!videoRef.current) return
         const el = videoRef.current
-        if (e.isIntersecting && e.intersectionRatio > 0.08) {
+        /** Any visible intersection starts load — avoids ratio thresholds that miss on mobile. */
+        if (e.isIntersecting) {
           if (!loadStartedRef.current) {
             loadStartedRef.current = true
             el.preload = "auto"
@@ -60,17 +89,19 @@ export function HeroBackground() {
           } else if (el.readyState >= 2) {
             play()
           }
-        } else if (!e.isIntersecting || e.intersectionRatio < 0.03) {
-          if (el.readyState >= 2) el.pause()
+        } else if (el.readyState >= 2) {
+          el.pause()
         }
       },
-      { threshold: [0, 0.03, 0.08, 0.15, 0.25, 0.5] },
+      { threshold: [0, 0.01, 0.1, 0.25] },
     )
     io.observe(root)
 
     return () => {
       v.removeEventListener("loadeddata", onLoaded)
+      v.removeEventListener("canplay", onCanPlay)
       v.removeEventListener("volumechange", onVolumeChange)
+      window.removeEventListener("pageshow", onPageShow)
       io.disconnect()
     }
   }, [])

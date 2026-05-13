@@ -1,7 +1,9 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { FeaturedWorkGalleryCarousel } from "@/components/featured-work-gallery-carousel"
 import { FeaturedCaseStudyHeroImage } from "@/components/featured-case-study-hero-image"
 import { PageHero, Prose } from "@/components/page-hero"
+import { getFeaturedWorkGalleryPaths } from "@/lib/featured-gallery"
 import { featuredProjects, getProjectBySlug, getInquiryMailtoHref } from "@/lib/site"
 
 export function generateStaticParams() {
@@ -23,6 +25,8 @@ export default async function FeaturedWorkCasePage({ params }) {
   const project = getProjectBySlug(slug)
   if (!project) notFound()
 
+  const galleryPaths = getFeaturedWorkGalleryPaths(project.slug)
+
   return (
     <>
       <PageHero
@@ -36,9 +40,17 @@ export default async function FeaturedWorkCasePage({ params }) {
         ]}
         variant="cinematic"
       />
-      <div className="border-b border-border">
-        <FeaturedCaseStudyHeroImage src={project.image} alt={project.title} />
-      </div>
+      {galleryPaths ? (
+        <FeaturedWorkGalleryCarousel
+          coverImage={project.image}
+          coverAlt={project.title}
+          galleryImages={galleryPaths}
+        />
+      ) : (
+        <div className="border-b border-border">
+          <FeaturedCaseStudyHeroImage src={project.image} alt={project.title} />
+        </div>
+      )}
       <Prose>
         {project.body.map((para, i) => (
           <p key={i}>{para}</p>

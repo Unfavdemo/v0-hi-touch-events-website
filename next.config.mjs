@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    // Next 16 requires every local `next/image` src to match `localPatterns`.
+    // Omitting `search` allows any (or no) query string, so `?v=YYYYMMDD` cache-busts work when a source file is replaced in place.
+    localPatterns: [{ pathname: "/**" }],
+  },
   async headers() {
     const immutable = "public, max-age=31536000, immutable"
     /** Team headshots: long cache + SWR; rename files when replacing a portrait. */

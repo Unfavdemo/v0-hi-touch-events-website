@@ -84,7 +84,7 @@ export function HeroInner() {
             className="font-display inline-flex rounded-full border-2 border-brand bg-background/30 px-8 py-3 text-[10px] font-normal uppercase tracking-[0.3em] text-foreground backdrop-blur-sm transition-colors hover:bg-brand/20 hover:text-foreground dark:bg-black/35 dark:hover:bg-brand/30"
             style={{ textShadow: "0 1px 10px var(--hero-fade-edge)" }}
           >
-            Get to know us
+            Video portfolio
           </a>
           <a
             href={contact.charterWeb}
