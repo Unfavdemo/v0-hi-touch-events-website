@@ -3,18 +3,18 @@ import path from "node:path"
 import sharp from "sharp"
 
 /**
- * Resize/compress large event photos:
- *  - cover photos in `public/Hitouch Pictures/*.jpg`
- *  - per-project gallery photos in `public/images/featured-work/{slug}/*.jpg`
- *
- * The carousel never renders these wider than ~1400px, so 1920px at q82
- * progressive mozjpeg is a comfortable ceiling for retina screens.
+ * Resize/compress event JPEGs with Sharp:
+ *  - `public/Hitouch Pictures/*.jpg` — large files / wide originals (carousel & case heroes).
+ *  - `public/images/featured-work/{slug}/01.jpg` … `06.jpg` — stricter ceiling (grids + lightbox).
  *
  * Run: npm run images:optimize-events
  */
-const maxW = 1920
+const maxWHitouch = 1920
+const maxWGallery = 1600
 const quality = 82
-const minBytes = 600_000
+const minBytesHitouch = 600_000
+/** Gallery slots: re-encode when this small or wider than maxWGallery (updated batches are often heavy). */
+const minBytesGallery = 40_000
 
 const targets = [
   path.join(process.cwd(), "public", "Hitouch Pictures"),
@@ -41,6 +41,10 @@ console.log(
   }%)`,
 )
 
+function isGallerySlot(relPosix) {
+  return /featured-work\/[^/]+\/0[1-6]\.jpe?g$/i.test(relPosix)
+}
+
 async function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name)
@@ -50,6 +54,11 @@ async function walk(dir) {
     }
     if (!entry.isFile()) continue
     if (!/\.(jpe?g)$/i.test(entry.name) || entry.name.endsWith(".tmp")) continue
+
+    const rel = path.relative(process.cwd(), full).replace(/\\/g, "/")
+    const gallerySlot = isGallerySlot(rel)
+    const maxW = gallerySlot ? maxWGallery : maxWHitouch
+    const minBytes = gallerySlot ? minBytesGallery : minBytesHitouch
 
     const before = fs.statSync(full).size
     const meta = await sharp(full).metadata()
@@ -73,10 +82,9 @@ async function walk(dir) {
     totalBefore += before
     totalAfter += after
     optimizedCount += 1
-    const rel = path.relative(process.cwd(), full).replace(/\\/g, "/")
     const pct = ((1 - after / before) * 100).toFixed(1)
     console.log(
-      `optimized ${rel}  ${(before / 1e6).toFixed(2)}MB -> ${(after / 1e6).toFixed(2)}MB  (-${pct}%)`,
+      `optimized ${rel}  ${(before / 1e6).toFixed(2)}MB -> ${(after / 1e6).toFixed(2)}MB  (-${pct}%)${gallerySlot ? "  [gallery]" : ""}`,
     )
   }
 }

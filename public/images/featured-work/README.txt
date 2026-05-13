@@ -19,7 +19,7 @@ Folder names (one folder per project)
   urban-affairs-coalition-56th-anniversary
   wadsworth-day
   vow-renewal-hughes-ralph
-  odaat-a-season-of-gratitude
+  odaat-community-events
   vestedin-symposium-breakfast
   national-convening-black-mayors
   black-brain-green-tie-gala

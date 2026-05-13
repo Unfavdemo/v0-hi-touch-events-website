@@ -55,7 +55,12 @@ const nextConfig = {
       { source: "/social-feed", destination: "/featured-work", permanent: true },
       {
         source: "/featured-work/odaat-hope-for-the-holidays",
-        destination: "/featured-work/odaat-a-season-of-gratitude",
+        destination: "/featured-work/odaat-community-events",
+        permanent: true,
+      },
+      {
+        source: "/featured-work/odaat-a-season-of-gratitude",
+        destination: "/featured-work/odaat-community-events",
         permanent: true,
       },
     ]
