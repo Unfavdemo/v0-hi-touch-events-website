@@ -15,7 +15,7 @@ const categoryShadow =
  */
 export function FeaturedProjectCarouselSlide({ project, imagePriority = false }) {
   return (
-    <div className="min-w-0 shrink-0 grow-0 basis-[min(100%,calc(100vw-2.5rem))] sm:basis-[min(100%,88vw)] md:basis-[min(100%,55%)] lg:basis-[min(100%,48%)]">
+    <div className="min-w-0 shrink-0 grow-0 basis-[min(100%,calc(100vw-2rem))] sm:basis-[min(100%,calc(100vw-3rem))] md:basis-[min(100%,55vw)] lg:basis-[min(100%,48vw)]">
       <Link
         href={`/featured-work/${project.slug}`}
         className="relative block overflow-hidden rounded-sm bg-background ring-1 ring-black/10 dark:bg-black dark:ring-white/10"

@@ -10,6 +10,14 @@ import { cn } from "@/lib/utils"
 const AUTOPLAY_MS = 4800
 
 /**
+ * Safe area + modest gutter. Avoid mirroring the centered `container` inset
+ * `(100vw-72rem)/2` on the track — that leaves a wide empty band beside the first slide.
+ */
+const VIEWPORT_GUTTER =
+  "pl-[max(1rem,env(safe-area-inset-left,0px))] sm:pl-6"
+const ROW_END_GUTTER = "pr-[max(1rem,env(safe-area-inset-right,0px))] sm:pr-6"
+
+/**
  * Horizontal featured-project slides with gentle autoplay (pauses on hover/focus).
  * No card borders — spacing uses gap only.
  */
@@ -55,8 +63,11 @@ export function FeaturedProjectsCarousel({
         if (!e.currentTarget.contains(e.relatedTarget)) pausedRef.current = false
       }}
     >
-      <div className={cn("overflow-hidden overscroll-x-contain", viewportClassName)} ref={emblaRef}>
-        <div className={cn("flex gap-4 md:gap-5 pr-4 md:pr-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]", rowClassName)}>
+      <div
+        className={cn("overflow-hidden overscroll-x-contain", VIEWPORT_GUTTER, viewportClassName)}
+        ref={emblaRef}
+      >
+        <div className={cn("flex gap-4 md:gap-5", ROW_END_GUTTER, rowClassName)}>
           {featuredProjects.map((project, index) => (
             <FeaturedProjectCarouselSlide
               key={project.slug}
@@ -67,7 +78,7 @@ export function FeaturedProjectsCarousel({
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-4 right-[max(1rem,env(safe-area-inset-right,0px))] z-10 flex gap-2 sm:bottom-8 sm:right-6 sm:gap-3 md:right-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]">
+      <div className="pointer-events-none absolute bottom-4 right-[max(1rem,env(safe-area-inset-right,0px))] z-10 flex gap-2 sm:bottom-8 sm:right-6 sm:gap-3">
         <button
           type="button"
           onClick={scrollPrev}

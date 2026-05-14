@@ -49,9 +49,7 @@ export function Portfolio() {
         </div>
       </div>
 
-      <FeaturedProjectsCarousel
-        viewportClassName="pl-[max(1rem,env(safe-area-inset-left,0px))] md:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]"
-      />
+      <FeaturedProjectsCarousel />
 
       <div className="container mx-auto w-full min-w-0 max-w-full page-px pb-16 pt-4 sm:pb-20 sm:pt-6 md:pb-24 md:pt-8">
         <div className="relative flex flex-col items-center text-center">

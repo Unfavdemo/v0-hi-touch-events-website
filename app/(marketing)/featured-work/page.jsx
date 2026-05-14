@@ -36,10 +36,7 @@ export default function FeaturedWorkPage() {
             See our work on YouTube
           </a>
         </div>
-        <FeaturedProjectsCarousel
-          wrapperClassName="mt-2 sm:mt-4"
-          viewportClassName="pl-[max(1rem,env(safe-area-inset-left,0px))] sm:pl-[max(1.5rem,env(safe-area-inset-left,0px))]"
-        />
+        <FeaturedProjectsCarousel wrapperClassName="mt-2 sm:mt-4" />
       </section>
     </>
   )
