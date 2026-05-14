@@ -18,7 +18,13 @@ export function FeaturedProjectsCarousel({
   viewportClassName,
   rowClassName,
 } = {}) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "center", loop: true, skipSnaps: false })
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    loop: true,
+    skipSnaps: false,
+    /** Lets the track loop cleanly instead of trimming scroll when slide widths vary. */
+    containScroll: false,
+  })
   const pausedRef = useRef(false)
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
@@ -35,7 +41,7 @@ export function FeaturedProjectsCarousel({
 
   return (
     <div
-      className={cn("relative pb-16 md:pb-0", wrapperClassName ?? "mt-10 sm:mt-12")}
+      className={cn("relative pb-20 md:pb-24", wrapperClassName ?? "mt-10 sm:mt-12")}
       onPointerEnter={() => {
         pausedRef.current = true
       }}
