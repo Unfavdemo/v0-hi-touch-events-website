@@ -7,21 +7,12 @@ import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 import { FEATURED_WORK_GALLERY_SLOT_COUNT } from "../lib/featured-gallery-constants.js"
+import { resolveSlotFilename } from "../lib/featured-gallery.js"
 import { featuredProjects } from "../lib/site.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, "..")
 const BASE = path.join(ROOT, "public", "images", "featured-work")
-const SLOT_EXTENSIONS = [".webp", ".jpg", ".jpeg", ".png"]
-
-function slotFile(dir, i) {
-  const b = String(i).padStart(2, "0")
-  for (const ext of SLOT_EXTENSIONS) {
-    const fp = path.join(dir, b + ext)
-    if (fs.existsSync(fp) && fs.statSync(fp).isFile()) return `${b}${ext}`
-  }
-  return null
-}
 
 const complete = []
 const incomplete = []
@@ -46,7 +37,7 @@ for (const p of featuredProjects) {
   }
 
   for (let i = 1; i <= FEATURED_WORK_GALLERY_SLOT_COUNT; i++) {
-    if (!slotFile(dir, i)) missing.push(String(i).padStart(2, "0"))
+    if (!resolveSlotFilename(dir, i)) missing.push(String(i).padStart(2, "0"))
   }
 
   if (missing.length) {

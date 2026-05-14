@@ -39,6 +39,7 @@ const nextConfig = {
       "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"
     return [
       { source: "/images/team/:path*", headers: [{ key: "Cache-Control", value: teamImages }] },
+      { source: "/images/featured-work/:path*", headers: [{ key: "Cache-Control", value: hitouchPhotos }] },
       { source: "/Hitouch Pictures/:path*", headers: [{ key: "Cache-Control", value: hitouchPhotos }] },
       { source: "/videos/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/images/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
