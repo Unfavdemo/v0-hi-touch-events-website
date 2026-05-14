@@ -7,9 +7,8 @@ const POSTER_SRC = "/images/DSC_0015.jpg"
 
 /**
  * Home hero background video — autoplay muted loop with poster fallback.
- * Mobile Safari needs `defaultMuted` on the media element (set in effect),
- * explicit `playsinline` attrs, and retried `play()` after `canplay`; we still
- * defer `load()` until the hero intersects the viewport so we do not compete with LCP images.
+ * Mobile Safari needs `defaultMuted`, explicit `playsinline` attrs, and retried `play()` after `canplay`.
+ * `load()` is deferred until the hero is in view; a sync viewport check plus rAF covers IO timing gaps on mobile.
  */
 export function HeroBackground() {
   const containerRef = useRef(null)
@@ -40,6 +39,28 @@ export function HeroBackground() {
       } catch {
         /* sync throw from play() on some browsers */
       }
+    }
+
+    const beginLoadOrPlay = () => {
+      const el = videoRef.current
+      if (!el) return
+      if (!loadStartedRef.current) {
+        loadStartedRef.current = true
+        el.preload = "auto"
+        el.load()
+      } else if (el.readyState >= 2) {
+        play()
+      }
+    }
+
+    /** IO often runs after the first paint; if the hero is already on-screen (typical on mobile), start immediately. */
+    const startLoadOrPlayIfVisible = () => {
+      const r = root.getBoundingClientRect()
+      const h = window.innerHeight || document.documentElement.clientHeight
+      const w = window.innerWidth || document.documentElement.clientWidth
+      const visible = r.bottom > 0 && r.top < h && r.right > 0 && r.left < w
+      if (!visible) return
+      beginLoadOrPlay()
     }
 
     const onLoaded = () => {
@@ -82,20 +103,16 @@ export function HeroBackground() {
         const el = videoRef.current
         /** Any visible intersection starts load — avoids ratio thresholds that miss on mobile. */
         if (e.isIntersecting) {
-          if (!loadStartedRef.current) {
-            loadStartedRef.current = true
-            el.preload = "auto"
-            el.load()
-          } else if (el.readyState >= 2) {
-            play()
-          }
+          beginLoadOrPlay()
         } else if (el.readyState >= 2) {
           el.pause()
         }
       },
-      { threshold: [0, 0.01, 0.1, 0.25] },
+      { threshold: [0, 0.01, 0.1, 0.25], rootMargin: "80px 0px 80px 0px" },
     )
     io.observe(root)
+    startLoadOrPlayIfVisible()
+    requestAnimationFrame(() => startLoadOrPlayIfVisible())
 
     return () => {
       v.removeEventListener("loadeddata", onLoaded)
@@ -122,6 +139,7 @@ export function HeroBackground() {
         poster={POSTER_SRC}
         autoPlay
         muted
+        defaultMuted
         loop
         playsInline
         preload="none"
@@ -132,8 +150,8 @@ export function HeroBackground() {
           ready ? "opacity-100" : "opacity-0",
         )}
       >
-        <source src="/videos/ht-sizzle.webm" type="video/webm" />
         <source src="/videos/ht-sizzle.mp4" type="video/mp4" />
+        <source src="/videos/ht-sizzle.webm" type="video/webm" />
       </video>
       {/* Tint replaces CSS `filter` on the video element (much cheaper while playing). */}
       <div

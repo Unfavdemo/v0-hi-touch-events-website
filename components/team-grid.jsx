@@ -6,7 +6,7 @@ import { teamMembers } from "@/lib/site"
 export function TeamGrid() {
   return (
     <div className="grid min-w-0 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {teamMembers.map((member) => (
+      {teamMembers.map((member, index) => (
         <article
           key={member.name}
           className="group relative min-w-0 overflow-hidden border border-border bg-background dark:bg-black"
@@ -22,7 +22,7 @@ export function TeamGrid() {
                   alt={member.imageAlt ?? member.name}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover object-top transition-[opacity,transform] duration-500 ease-out group-hover:scale-[1.02]"
-                  priority
+                  priority={index < 3}
                   unoptimized
                 />
                 <div className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
