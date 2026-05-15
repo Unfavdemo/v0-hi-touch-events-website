@@ -16,7 +16,6 @@ const nextConfig = {
       "public/Hitouch Pictures/**",
       "public/images/featured-work/**",
       "public/videos/**",
-      "public/drive-download-*/**",
       "public/*.pdf",
       "public/*.mov",
     ],
@@ -24,7 +23,6 @@ const nextConfig = {
       "public/Hitouch Pictures/**",
       "public/images/featured-work/**",
       "public/videos/**",
-      "public/drive-download-*/**",
       "public/*.pdf",
       "public/*.mov",
     ],
@@ -44,14 +42,16 @@ const nextConfig = {
       { source: "/videos/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/images/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
       { source: "/icon.svg", headers: [{ key: "Cache-Control", value: immutable }] },
-      { source: "/icon-light-32x32.png", headers: [{ key: "Cache-Control", value: immutable }] },
-      { source: "/icon-dark-32x32.png", headers: [{ key: "Cache-Control", value: immutable }] },
-      { source: "/apple-icon.png", headers: [{ key: "Cache-Control", value: immutable }] },
-      { source: "/HiTouch_final.png", headers: [{ key: "Cache-Control", value: immutable }] },
+      { source: "/Logos/:path*", headers: [{ key: "Cache-Control", value: immutable }] },
     ]
   },
   async redirects() {
     return [
+      { source: "/HiTouch_final.png", destination: "/Logos/HiTouch_final.png", permanent: true },
+      { source: "/hitouch-icon-32.png", destination: "/Logos/hitouch-icon-32.png", permanent: true },
+      { source: "/hitouch-icon-48.png", destination: "/Logos/hitouch-icon-48.png", permanent: true },
+      { source: "/hitouch-icon-192.png", destination: "/Logos/hitouch-icon-192.png", permanent: true },
+      { source: "/apple-touch-icon.png", destination: "/Logos/apple-touch-icon.png", permanent: true },
       { source: "/blog", destination: "/", permanent: true },
       { source: "/social-feed", destination: "/featured-work", permanent: true },
       {

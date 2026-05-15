@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 /**
- * Brand mark from HiTouch_final.png (1188×1906). Uses object-contain + width caps
+ * Brand mark from `public/Logos/HiTouch_final.png` (1188×1906). Uses object-contain + width caps
  * so the portrait asset is never squashed in the header or footer.
  */
 export function SiteLogoLink({ onClick, variant = "header" }) {
@@ -20,7 +20,7 @@ export function SiteLogoLink({ onClick, variant = "header" }) {
       className="inline-flex shrink-0 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     >
       <Image
-        src="/HiTouch_final.png"
+        src="/Logos/HiTouch_final.png"
         alt="HiTouch Enterprises"
         width={1188}
         height={1906}

@@ -36,7 +36,7 @@ export default function FeaturedWorkPage() {
             See our work on YouTube
           </a>
         </div>
-        <FeaturedProjectsCarousel wrapperClassName="mt-2 sm:mt-4" />
+        <FeaturedProjectsCarousel layout="grid" wrapperClassName="mt-2 sm:mt-4" />
       </section>
     </>
   )

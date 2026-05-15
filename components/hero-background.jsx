@@ -7,7 +7,7 @@ const POSTER_SRC = "/images/DSC_0015.jpg"
 
 /**
  * Home hero background video — autoplay muted loop with poster fallback.
- * Mobile Safari needs `defaultMuted`, explicit `playsinline` attrs, and retried `play()` after `canplay`.
+ * Mobile Safari: set `defaultMuted` / `muted` on the element in `useEffect` (not JSX — avoids React `defaultMuted` warning).
  * `load()` is deferred until the hero is in view; a sync viewport check plus rAF covers IO timing gaps on mobile.
  */
 export function HeroBackground() {
@@ -139,7 +139,6 @@ export function HeroBackground() {
         poster={POSTER_SRC}
         autoPlay
         muted
-        defaultMuted
         loop
         playsInline
         preload="none"

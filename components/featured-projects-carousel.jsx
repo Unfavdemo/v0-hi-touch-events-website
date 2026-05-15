@@ -7,7 +7,7 @@ import { featuredProjects } from "@/lib/site"
 import { FeaturedProjectCarouselSlide } from "@/components/featured-project-carousel-slide"
 import { cn } from "@/lib/utils"
 
-const AUTOPLAY_MS = 4800
+const AUTOPLAY_MS = 3200
 
 /**
  * Safe area + modest gutter. Avoid mirroring the centered `container` inset
@@ -18,10 +18,11 @@ const VIEWPORT_GUTTER =
 const ROW_END_GUTTER = "pr-[max(1rem,env(safe-area-inset-right,0px))] sm:pr-6"
 
 /**
- * Horizontal featured-project slides with gentle autoplay (pauses on hover/focus).
- * No card borders — spacing uses gap only.
+ * Horizontal featured-project slides with gentle autoplay (pauses on hover/focus),
+ * or a static grid gallery (`layout="grid"`) for `/featured-work`.
  */
 export function FeaturedProjectsCarousel({
+  layout = "carousel",
   wrapperClassName,
   viewportClassName,
   rowClassName,
@@ -39,13 +40,34 @@ export function FeaturedProjectsCarousel({
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
   useEffect(() => {
+    if (layout === "grid") return
     if (!emblaApi || typeof window === "undefined") return
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const id = window.setInterval(() => {
       if (!pausedRef.current) emblaApi.scrollNext()
     }, AUTOPLAY_MS)
     return () => window.clearInterval(id)
-  }, [emblaApi])
+  }, [emblaApi, layout])
+
+  if (layout === "grid") {
+    return (
+      <div className={cn("pb-16 md:pb-20", wrapperClassName ?? "mt-10 sm:mt-12")}>
+        <div className="container mx-auto page-px">
+          <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3 xl:gap-8">
+            {featuredProjects.map((project, index) => (
+              <li key={project.slug} className="min-w-0">
+                <FeaturedProjectCarouselSlide
+                  project={project}
+                  variant="grid"
+                  imagePriority={index < 6}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div

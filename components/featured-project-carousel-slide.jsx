@@ -10,21 +10,31 @@ const categoryShadow =
   "[text-shadow:0_0_1px_rgba(0,0,0,1),0_1px_3px_rgba(0,0,0,0.95),0_4px_16px_rgba(0,0,0,0.8)]"
 
 /**
- * One featured-work card for the carousel (home + /featured-work).
+ * One featured-work card for the carousel or the /featured-work grid gallery.
  * Full photo visible (object-contain); no hover zoom so edges don’t flash dark.
  */
-export function FeaturedProjectCarouselSlide({ project, imagePriority = false }) {
+export function FeaturedProjectCarouselSlide({ project, imagePriority = false, variant = "carousel" }) {
+  const frameClass =
+    variant === "grid"
+      ? "w-full"
+      : "min-w-0 shrink-0 grow-0 basis-[min(100%,calc(100vw-2rem))] sm:basis-[min(100%,calc(100vw-3rem))] md:basis-[min(100%,55vw)] lg:basis-[min(100%,48vw)]"
+
+  const imageSizes =
+    variant === "grid"
+      ? "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      : "(max-width: 640px) 100vw, (max-width: 1024px) 88vw, 55vw"
+
   return (
-    <div className="min-w-0 shrink-0 grow-0 basis-[min(100%,calc(100vw-2rem))] sm:basis-[min(100%,calc(100vw-3rem))] md:basis-[min(100%,55vw)] lg:basis-[min(100%,48vw)]">
+    <div className={frameClass}>
       <Link
         href={`/featured-work/${project.slug}`}
-        className="relative block overflow-hidden rounded-sm bg-background ring-1 ring-black/10 dark:bg-black dark:ring-white/10"
+        className="relative block overflow-hidden rounded-sm bg-background ring-1 ring-black/10 transition-shadow hover:ring-black/20 dark:bg-black dark:ring-white/10 dark:hover:ring-white/20"
       >
         <div className="relative aspect-[16/10] overflow-hidden bg-[#1a0a0a]">
           <ImageWithShimmer
             src={project.image}
             alt={project.title}
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 88vw, 55vw"
+            sizes={imageSizes}
             className="object-contain object-center"
             priority={imagePriority}
           />

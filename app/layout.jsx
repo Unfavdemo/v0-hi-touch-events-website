@@ -42,22 +42,22 @@ export const metadata = {
     title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
     description:
       "Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based in Philadelphia, PA, serving clients near and far.",
-    images: [{ url: '/HiTouch_final.png', width: 1200, height: 630, alt: 'HiTouch Enterprises Inc.' }],
+    images: [{ url: '/Logos/HiTouch_final.png', width: 1200, height: 630, alt: 'HiTouch Enterprises Inc.' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HiTouch Enterprises Inc. | Event Production & Luxury Transportation',
     description:
       "Hi-Quality, Hi-Impact results—expert event production, luxury transportation, and strategic marketing. Based in Philadelphia, PA, serving clients near and far.",
-    images: ['/HiTouch_final.png'],
+    images: ['/Logos/HiTouch_final.png'],
   },
   icons: {
     icon: [
-      { url: '/hitouch-icon-32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/hitouch-icon-48.png', sizes: '48x48', type: 'image/png' },
-      { url: '/hitouch-icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/Logos/hitouch-icon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/Logos/hitouch-icon-48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/Logos/hitouch-icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: '/Logos/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 }
 

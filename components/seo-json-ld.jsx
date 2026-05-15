@@ -4,7 +4,7 @@ import { absoluteUrl } from "@/lib/seo-metadata"
 /** Organization + WebSite structured data for rich results. */
 export function SeoJsonLd() {
   const url = absoluteUrl("/")
-  const logo = absoluteUrl("/HiTouch_final.png")
+  const logo = absoluteUrl("/Logos/HiTouch_final.png")
 
   const organization = {
     "@context": "https://schema.org",
