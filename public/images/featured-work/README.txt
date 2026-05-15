@@ -28,6 +28,7 @@ Folder names (one folder per project)
   community-heros-brunch-2025
   fathers-day-rally-fatherhood-ceremony-2025
   welcome-america-grove-mayors-vip
+  celebration-of-freedom-2025
   tree-lighting-mayors-vip
   philadelphia-award-103
 
