@@ -2,7 +2,7 @@ Featured work — event photo galleries
 =====================================
 
 For each case study, put EXACTLY six files in the folder named after the URL slug
-(same name as in lib/site.js). The site only shows a gallery when all six exist.
+(same slug as in lib/site/featured-projects.js). The site only shows a gallery when all six exist.
 
 Naming (required)
 -----------------

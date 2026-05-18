@@ -59,7 +59,7 @@ export function FeaturedProjectsCarousel({
                 <FeaturedProjectCarouselSlide
                   project={project}
                   variant="grid"
-                  imagePriority={index < 6}
+                  imagePriority={index === 0}
                 />
               </li>
             ))}
@@ -94,7 +94,7 @@ export function FeaturedProjectsCarousel({
             <FeaturedProjectCarouselSlide
               key={project.slug}
               project={project}
-              imagePriority={index < 2}
+              imagePriority={false}
             />
           ))}
         </div>

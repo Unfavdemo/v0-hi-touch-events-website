@@ -2,7 +2,7 @@
 
 import { ImageWithShimmer } from "@/components/image-with-shimmer"
 
-export function FeaturedCaseStudyHeroImage({ src, alt, priority = true, expanded = false }) {
+export function FeaturedCaseStudyHeroImage({ src, alt, priority = false, expanded = false }) {
   return (
     <div key={src} className="relative mx-auto w-full max-w-[1400px] bg-[oklch(0.14_0.04_278)]">
       <div

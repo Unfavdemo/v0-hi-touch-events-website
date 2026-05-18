@@ -149,7 +149,7 @@ export function HeroBackground() {
           ready ? "opacity-100" : "opacity-0",
         )}
       >
-        <source src="/videos/ht-sizzle.mp4" type="video/mp4" />
+        {/* WebM only — add `<source src="/videos/ht-sizzle.mp4" type="video/mp4" />` first when mp4 is in `public/videos/`. */}
         <source src="/videos/ht-sizzle.webm" type="video/webm" />
       </video>
       {/* Tint replaces CSS `filter` on the video element (much cheaper while playing). */}

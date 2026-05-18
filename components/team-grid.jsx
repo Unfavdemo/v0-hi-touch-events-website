@@ -22,7 +22,7 @@ export function TeamGrid() {
                   alt={member.imageAlt ?? member.name}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover object-top transition-[opacity,transform] duration-500 ease-out group-hover:scale-[1.02]"
-                  priority={index < 3}
+                  priority={false}
                   unoptimized
                 />
                 <div className="pointer-events-none absolute inset-0 z-[3] bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
