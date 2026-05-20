@@ -31,8 +31,13 @@ Folder names (one folder per project)
   celebration-of-freedom-2025
   tree-lighting-mayors-vip
   philadelphia-award-103
+  free-library-community-impact-week
+  frankford-cdc-fall-fest
 
 After you add 01–06, run `npm run build` (or refresh dev) so Next picks up new files.
+
+For new projects without a full gallery yet, add at least `01.jpg` in the slug folder
+so portfolio cards and case-study heroes display (six files enable the carousel).
 
 To see which projects still need correctly named files, run:
 

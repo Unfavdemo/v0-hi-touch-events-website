@@ -66,7 +66,7 @@ const nextConfig = {
       },
       {
         source: "/featured-work/frankford-cdc-holiday-festival-2025",
-        destination: "/featured-work/community-heros-brunch-2025",
+        destination: "/featured-work/frankford-cdc-fall-fest",
         permanent: true,
       },
     ]
