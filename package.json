@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "images:optimize-team": "node scripts/optimize-team-headshots.mjs",
     "images:optimize-events": "node scripts/optimize-event-photos.mjs",
+    "video:hero-mp4": "node scripts/video-hero-mp4.mjs",
     "convert:heic-featured": "node scripts/convert-heic-featured.cjs",
     "galleries:check": "node scripts/check-featured-galleries.mjs",
     "galleries:rename": "node scripts/rename-featured-galleries.mjs",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
+    "ffmpeg-static": "^5.3.0",
     "heic-convert": "^2.1.0",
     "postcss": "^8.5",
     "tailwindcss": "^4.2.0",

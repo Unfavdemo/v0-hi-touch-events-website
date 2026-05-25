@@ -4,11 +4,13 @@ import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
 const POSTER_SRC = "/images/DSC_0015.jpg"
+const VIDEO_MP4 = "/videos/ht-sizzle.mp4"
+const VIDEO_WEBM = "/videos/ht-sizzle.webm"
 
 /**
  * Home hero background video — autoplay muted loop with poster fallback.
- * Mobile Safari: set `defaultMuted` / `muted` on the element in `useEffect` (not JSX — avoids React `defaultMuted` warning).
- * `load()` is deferred until the hero is in view; a sync viewport check plus rAF covers IO timing gaps on mobile.
+ * MP4 first for iOS Safari (WebM alone often shows a paused poster + play affordance).
+ * Mobile: muted/playsinline on the element before load(); eager load when hero mounts.
  */
 export function HeroBackground() {
   const containerRef = useRef(null)
@@ -21,24 +23,30 @@ export function HeroBackground() {
     const root = containerRef.current
     if (!v || !root) return
 
-    /** iOS / WebKit autoplay policy: muted + playsinline must be set before play(). */
     v.defaultMuted = true
     v.muted = true
     v.volume = 0
     v.playsInline = true
     v.setAttribute("playsinline", "")
     v.setAttribute("webkit-playsinline", "true")
+    v.setAttribute("x-webkit-airplay", "deny")
 
     const play = () => {
+      const el = videoRef.current
+      if (!el) return
       try {
-        v.muted = true
-        v.volume = 0
-        const p = v.play()
-        /** `play()` can reject with no message (policy / interrupt); must not surface as unhandledRejection. */
+        el.muted = true
+        el.volume = 0
+        const p = el.play()
         void Promise.resolve(p).catch(() => {})
       } catch {
         /* sync throw from play() on some browsers */
       }
+    }
+
+    const markReadyAndPlay = () => {
+      setReady(true)
+      play()
     }
 
     const beginLoadOrPlay = () => {
@@ -49,37 +57,19 @@ export function HeroBackground() {
         el.preload = "auto"
         el.load()
       } else if (el.readyState >= 2) {
-        play()
+        markReadyAndPlay()
       }
     }
 
-    /** IO often runs after the first paint; if the hero is already on-screen (typical on mobile), start immediately. */
-    const startLoadOrPlayIfVisible = () => {
-      const r = root.getBoundingClientRect()
-      const h = window.innerHeight || document.documentElement.clientHeight
-      const w = window.innerWidth || document.documentElement.clientWidth
-      const visible = r.bottom > 0 && r.top < h && r.right > 0 && r.left < w
-      if (!visible) return
-      beginLoadOrPlay()
-    }
+    const onLoaded = () => markReadyAndPlay()
 
-    const onLoaded = () => {
-      setReady(true)
-      play()
-    }
-
-    /** Mobile often fires `canplay` when `loadeddata` is flaky — retry play. */
     const onCanPlay = () => {
-      if (v.readyState >= 2) {
-        setReady(true)
-        play()
-      }
+      if (v.readyState >= 2) markReadyAndPlay()
     }
 
-    if (v.readyState >= 2) {
-      setReady(true)
-      play()
-    }
+    const onPlaying = () => setReady(true)
+
+    if (v.readyState >= 2) markReadyAndPlay()
 
     const onVolumeChange = () => {
       if (!v.muted) v.muted = true
@@ -88,22 +78,26 @@ export function HeroBackground() {
 
     v.addEventListener("loadeddata", onLoaded)
     v.addEventListener("canplay", onCanPlay)
+    v.addEventListener("canplaythrough", onCanPlay)
+    v.addEventListener("playing", onPlaying)
     v.addEventListener("volumechange", onVolumeChange)
 
-    /** Resume after bfcache restore (common on iOS). */
     const onPageShow = (ev) => {
       if (ev.persisted && v.readyState >= 2) play()
     }
     window.addEventListener("pageshow", onPageShow)
+
+    /** Hero is full-viewport on load — start immediately; IO only pauses when scrolled away. */
+    beginLoadOrPlay()
 
     const io = new IntersectionObserver(
       (entries) => {
         const e = entries[0]
         if (!videoRef.current) return
         const el = videoRef.current
-        /** Any visible intersection starts load — avoids ratio thresholds that miss on mobile. */
         if (e.isIntersecting) {
           beginLoadOrPlay()
+          if (el.readyState >= 2) play()
         } else if (el.readyState >= 2) {
           el.pause()
         }
@@ -111,15 +105,27 @@ export function HeroBackground() {
       { threshold: [0, 0.01, 0.1, 0.25], rootMargin: "80px 0px 80px 0px" },
     )
     io.observe(root)
-    startLoadOrPlayIfVisible()
-    requestAnimationFrame(() => startLoadOrPlayIfVisible())
+
+    /** iOS often needs a delayed retry after first paint / Low Power Mode edge cases. */
+    const retryDelays = [0, 150, 400, 900, 1800]
+    const retryTimers = retryDelays.map((ms) =>
+      window.setTimeout(() => {
+        const el = videoRef.current
+        if (!el || el.paused === false) return
+        if (el.readyState >= 2) markReadyAndPlay()
+        else beginLoadOrPlay()
+      }, ms),
+    )
 
     return () => {
       v.removeEventListener("loadeddata", onLoaded)
       v.removeEventListener("canplay", onCanPlay)
+      v.removeEventListener("canplaythrough", onCanPlay)
+      v.removeEventListener("playing", onPlaying)
       v.removeEventListener("volumechange", onVolumeChange)
       window.removeEventListener("pageshow", onPageShow)
       io.disconnect()
+      retryTimers.forEach((id) => window.clearTimeout(id))
     }
   }, [])
 
@@ -141,7 +147,10 @@ export function HeroBackground() {
         muted
         loop
         playsInline
-        preload="none"
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
+        controls={false}
         aria-hidden
         className={cn(
           "absolute inset-0 z-[2] h-full w-full object-cover object-top transition-opacity duration-500 ease-out",
@@ -149,10 +158,9 @@ export function HeroBackground() {
           ready ? "opacity-100" : "opacity-0",
         )}
       >
-        {/* WebM only — add `<source src="/videos/ht-sizzle.mp4" type="video/mp4" />` first when mp4 is in `public/videos/`. */}
-        <source src="/videos/ht-sizzle.webm" type="video/webm" />
+        <source src={VIDEO_MP4} type="video/mp4" />
+        <source src={VIDEO_WEBM} type="video/webm" />
       </video>
-      {/* Tint replaces CSS `filter` on the video element (much cheaper while playing). */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-[3] bg-black/[0.05] dark:bg-black/40"
