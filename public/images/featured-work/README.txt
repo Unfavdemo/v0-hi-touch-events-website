@@ -31,7 +31,7 @@ Folder names (one folder per project)
   celebration-of-freedom-2025
   tree-lighting-mayors-vip
   philadelphia-award-103
-  free-library-community-impact-week
+  free-library-community-impact-week-2025
   frankford-cdc-fall-fest
 
 After you add 01–06, run `npm run build` (or refresh dev) so Next picks up new files.

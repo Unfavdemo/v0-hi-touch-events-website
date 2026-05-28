@@ -15,6 +15,7 @@ const quality = 82
 const minBytesHitouch = 600_000
 /** Gallery slots: re-encode when this small or wider than maxWGallery (updated batches are often heavy). */
 const minBytesGallery = 40_000
+const webpQuality = 80
 
 const targets = [
   path.join(process.cwd(), "public", "Hitouch Pictures"),
@@ -24,6 +25,7 @@ const targets = [
 let totalBefore = 0
 let totalAfter = 0
 let optimizedCount = 0
+let webpCount = 0
 
 for (const root of targets) {
   if (!fs.existsSync(root)) {
@@ -34,9 +36,9 @@ for (const root of targets) {
 }
 
 console.log(
-  `\nDone. Optimized ${optimizedCount} file(s)  ${(totalBefore / 1e6).toFixed(2)}MB -> ${(
-    totalAfter / 1e6
-  ).toFixed(2)}MB  (-${
+  `\nDone. Optimized ${optimizedCount} JPEG(s), wrote ${webpCount} WebP companion(s).  ${(
+    totalBefore / 1e6
+  ).toFixed(2)}MB -> ${(totalAfter / 1e6).toFixed(2)}MB  (-${
     totalBefore === 0 ? "0.0" : ((1 - totalAfter / totalBefore) * 100).toFixed(1)
   }%)`,
 )
@@ -63,7 +65,10 @@ async function walk(dir) {
     const before = fs.statSync(full).size
     const meta = await sharp(full).metadata()
     const isOversize = meta.width && meta.width > maxW
-    if (before < minBytes && !isOversize) continue
+    if (before < minBytes && !isOversize) {
+      if (gallerySlot) await writeWebpCompanion(full, rel)
+      continue
+    }
 
     const tmp = full + ".opt.tmp"
     let pipeline = sharp(full).rotate()
@@ -86,5 +91,35 @@ async function walk(dir) {
     console.log(
       `optimized ${rel}  ${(before / 1e6).toFixed(2)}MB -> ${(after / 1e6).toFixed(2)}MB  (-${pct}%)${gallerySlot ? "  [gallery]" : ""}`,
     )
+
+    if (gallerySlot) {
+      await writeWebpCompanion(full, rel)
+    }
   }
+}
+
+async function writeWebpCompanion(jpegPath, rel) {
+  const webpPath = jpegPath.replace(/\.jpe?g$/i, ".webp")
+  const jpgMtime = fs.statSync(jpegPath).mtimeMs
+  if (fs.existsSync(webpPath)) {
+    const webpMtime = fs.statSync(webpPath).mtimeMs
+    if (webpMtime >= jpgMtime) return
+  }
+
+  const tmp = webpPath + ".opt.tmp"
+  const before = fs.existsSync(webpPath) ? fs.statSync(webpPath).size : fs.statSync(jpegPath).size
+
+  await sharp(jpegPath)
+    .rotate()
+    .webp({ quality: webpQuality, effort: 4 })
+    .toFile(tmp)
+
+  if (fs.existsSync(webpPath)) fs.unlinkSync(webpPath)
+  fs.renameSync(tmp, webpPath)
+
+  const after = fs.statSync(webpPath).size
+  webpCount += 1
+  console.log(
+    `  webp ${rel.replace(/\.jpe?g$/i, ".webp")}  ${(before / 1e3).toFixed(0)}KB -> ${(after / 1e3).toFixed(0)}KB`,
+  )
 }

@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/dispatch-email-queue",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cron/stale-vendor-alerts",
+      "schedule": "0 * * * *"
+    }
+  ]
+}
