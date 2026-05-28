@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { VendorEngagementStatus } from "@/lib/generated/prisma/client"
 
+export const dynamic = "force-dynamic"
+
 function assertCronAuth(request: Request) {
   const secret = process.env.CRON_SECRET?.trim()
   if (!secret) return false

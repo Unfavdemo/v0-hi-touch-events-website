@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { dispatchEmailQueue } from "@/lib/email/dispatch-queue"
 
+export const dynamic = "force-dynamic"
+
 function assertCronAuth(request: Request) {
   const secret = process.env.CRON_SECRET?.trim()
   if (!secret) return false
