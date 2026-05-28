@@ -11,3 +11,5 @@ next.user-config.*
 node_modules
 .next/
 .DS_Store
+
+/lib/generated/prisma

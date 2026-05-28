@@ -4,6 +4,7 @@ import { PartnersStrip } from "@/components/partners-strip"
 import { Portfolio } from "@/components/portfolio"
 import { LetsTalk } from "@/components/lets-talk"
 import { buildPageMetadata } from "@/lib/seo-metadata"
+import { getRecentCaseStudies } from "@/lib/case-studies"
 
 export const metadata = {
   ...buildPageMetadata({
@@ -14,13 +15,17 @@ export const metadata = {
   }),
 }
 
-export default function HomePage() {
+export const dynamic = "force-dynamic"
+
+export default async function HomePage() {
+  const featured = await getRecentCaseStudies(10)
+
   return (
     <>
       <Hero />
       <AboutSection />
       <PartnersStrip />
-      <Portfolio />
+      <Portfolio projects={featured} />
       <LetsTalk />
     </>
   )

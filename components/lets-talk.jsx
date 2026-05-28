@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { getInquiryMailtoHref } from "@/lib/site"
 
 export function LetsTalk() {
@@ -22,12 +23,20 @@ export function LetsTalk() {
         <h2 className="font-display mt-4 max-w-4xl text-[clamp(1.5rem,4.5vw,3.25rem)] font-normal uppercase leading-tight tracking-tight text-balance text-foreground">
           Let&apos;s work together on something great.
         </h2>
-        <a
-          href={getInquiryMailtoHref()}
-          className="font-display mt-10 inline-flex rounded-full border-2 border-brand px-12 py-4 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
-        >
-          Connect with us
-        </a>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/intake"
+            className="font-display inline-flex rounded-full border-2 border-brand bg-brand/10 px-12 py-4 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/20"
+          >
+            Get on the list
+          </Link>
+          <a
+            href={getInquiryMailtoHref()}
+            className="font-display inline-flex rounded-full border-2 border-brand px-12 py-4 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15"
+          >
+            Connect with us
+          </a>
+        </div>
       </div>
     </section>
   )

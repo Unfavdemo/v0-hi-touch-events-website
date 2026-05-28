@@ -5,15 +5,14 @@ import { FeaturedCaseStudyHeroImage } from "@/components/featured-case-study-her
 import { PageHero, Prose } from "@/components/page-hero"
 import { getFeaturedWorkGalleryPaths } from "@/lib/featured-gallery"
 import { buildPageMetadata } from "@/lib/seo-metadata"
-import { featuredProjects, getProjectBySlug, getInquiryMailtoHref } from "@/lib/site"
+import { getCaseStudyBySlug } from "@/lib/case-studies"
+import { getInquiryMailtoHref } from "@/lib/site"
 
-export function generateStaticParams() {
-  return featuredProjects.map((p) => ({ slug: p.slug }))
-}
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const project = getProjectBySlug(slug)
+  const project = await getCaseStudyBySlug(slug)
   if (!project) {
     return buildPageMetadata({
       title: "Project | HiTouch Enterprises Inc.",
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }) {
 
 export default async function FeaturedWorkCasePage({ params }) {
   const { slug } = await params
-  const project = getProjectBySlug(slug)
+  const project = await getCaseStudyBySlug(slug)
   if (!project) notFound()
 
   const galleryPaths = getFeaturedWorkGalleryPaths(project.slug)

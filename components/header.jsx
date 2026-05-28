@@ -115,20 +115,41 @@ export function Header() {
       </div>
 
       <div className="relative border-b border-border">
-        <div className="container mx-auto flex w-full min-w-0 max-w-full items-center justify-between gap-3 py-5 page-px sm:gap-4">
+        <div className="container mx-auto flex w-full min-w-0 max-w-full items-center gap-3 py-5 page-px sm:gap-4">
           <SiteLogoLink onClick={closeMenu} variant="header" />
 
-          <div className="flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3 md:gap-4">
+          {/* Invisible tap target in the header gutter — links to admin sign-in (not linked elsewhere). */}
+          <div className="relative min-h-11 min-w-0 flex-1 self-stretch">
+            <Link
+              href="/admin/login"
+              prefetch={false}
+              tabIndex={-1}
+              aria-hidden
+              className="absolute inset-y-0 left-1/2 z-[1] w-[min(42vw,12rem)] -translate-x-1/2 touch-manipulation select-none bg-transparent opacity-0"
+            />
+          </div>
+
+          <div className="flex shrink-0 items-center justify-end gap-2 sm:gap-3 md:gap-4">
             <ThemeToggle className={cn("hidden sm:flex", overlayIconClass)} />
-            <a
-              href={getInquiryMailtoHref()}
+            <Link
+              href="/intake"
               className={cn(
-                "font-display hidden rounded-full border border-brand px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/15 sm:inline-block md:px-6",
+                "font-display hidden rounded-full border-2 border-brand bg-brand/10 px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-brand/20 sm:inline-block md:px-6",
                 isOverlay && "bg-background/30 backdrop-blur-sm dark:bg-black/35",
               )}
               style={{ textShadow: overlayTextShadow }}
             >
-              Connect with us
+              Get on the list
+            </Link>
+            <a
+              href={getInquiryMailtoHref()}
+              className={cn(
+                "font-display hidden rounded-full border border-border px-5 py-2.5 text-[10px] font-normal uppercase tracking-[0.28em] text-foreground transition-colors hover:bg-muted/30 lg:inline-block md:px-6",
+                isOverlay && "bg-background/30 backdrop-blur-sm dark:bg-black/35",
+              )}
+              style={{ textShadow: overlayTextShadow }}
+            >
+              Connect
             </a>
             <button
               type="button"

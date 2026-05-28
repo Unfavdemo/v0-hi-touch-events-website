@@ -1,9 +1,25 @@
+import path from "path"
+import { fileURLToPath } from "url"
+
+const projectRoot = path.dirname(fileURLToPath(import.meta.url))
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Turbopack can mis-detect the project root on Windows (paths with spaces, HMR).
+  // Pin root so `node_modules/next` resolves reliably.
+  turbopack: {
+    root: projectRoot,
+  },
+  poweredByHeader: false,
+  reactStrictMode: true,
   images: {
     // Next 16 requires every local `next/image` src to match `localPatterns`.
     // Omitting `search` allows any (or no) query string, so `?v=YYYYMMDD` cache-busts work when a source file is replaced in place.
     localPatterns: [{ pathname: "/**" }],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
   // `lib/featured-gallery.js` reads from `public/` at request time. Without
   // explicit excludes, Next's file tracer would bundle huge static assets
@@ -35,7 +51,13 @@ const nextConfig = {
     /** Event photos: avoid `must-revalidate` so repeat visits use disk cache/CDN. */
     const hitouchPhotos =
       "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"
+    const security = [
+      { key: "X-DNS-Prefetch-Control", value: "on" },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+    ]
     return [
+      { source: "/:path*", headers: security },
       { source: "/images/team/:path*", headers: [{ key: "Cache-Control", value: teamImages }] },
       { source: "/images/featured-work/:path*", headers: [{ key: "Cache-Control", value: hitouchPhotos }] },
       { source: "/Hitouch Pictures/:path*", headers: [{ key: "Cache-Control", value: hitouchPhotos }] },
@@ -67,6 +89,16 @@ const nextConfig = {
       {
         source: "/featured-work/frankford-cdc-holiday-festival-2025",
         destination: "/featured-work/frankford-cdc-fall-fest",
+        permanent: true,
+      },
+      {
+        source: "/featured-work/free-library-community-impact-week",
+        destination: "/featured-work/free-library-community-impact-week-2025",
+        permanent: true,
+      },
+      {
+        source: "/featured-work/free-library-community-impact-awards-2025",
+        destination: "/featured-work/free-library-community-impact-week-2025",
         permanent: true,
       },
     ]

@@ -1,7 +1,8 @@
 import { PageHero } from "@/components/page-hero"
-import { FeaturedProjectsCarousel } from "@/components/featured-projects-carousel"
+import { FeaturedWorkArchive } from "@/components/featured-work-archive"
 import { contact } from "@/lib/site"
 import { buildPageMetadata } from "@/lib/seo-metadata"
+import { getCaseStudiesPage } from "@/lib/case-studies"
 
 export const metadata = {
   ...buildPageMetadata({
@@ -12,7 +13,11 @@ export const metadata = {
   }),
 }
 
-export default function FeaturedWorkPage() {
+export const dynamic = "force-dynamic"
+
+export default async function FeaturedWorkPage() {
+  const { items, cursor } = await getCaseStudiesPage({ take: 12 })
+
   return (
     <>
       <PageHero
@@ -36,7 +41,7 @@ export default function FeaturedWorkPage() {
             See our work on YouTube
           </a>
         </div>
-        <FeaturedProjectsCarousel layout="grid" wrapperClassName="mt-2 sm:mt-4" />
+        <FeaturedWorkArchive initialItems={items} initialCursor={cursor} />
       </section>
     </>
   )
