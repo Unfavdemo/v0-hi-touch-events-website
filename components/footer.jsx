@@ -1,11 +1,10 @@
-import { Instagram, Twitter, Linkedin, Youtube, MapPin, Mail } from "lucide-react"
+import { Instagram, Linkedin, Youtube, MapPin, Mail } from "lucide-react"
 import Link from "next/link"
 import { SiteLogoLink } from "@/components/site-logo"
 import { contact, whatsNewLinks } from "@/lib/site"
 
 const socialLinks = [
   { name: "Instagram", icon: Instagram, href: contact.instagramUrl },
-  { name: "Twitter", icon: Twitter, href: "#" },
   { name: "LinkedIn", icon: Linkedin, href: contact.linkedinUrl },
   { name: "YouTube", icon: Youtube, href: contact.youtubeChannelUrl },
 ]
