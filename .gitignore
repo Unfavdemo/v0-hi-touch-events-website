@@ -13,3 +13,7 @@ node_modules
 .DS_Store
 
 /lib/generated/prisma
+/lib/generated/network-prisma
+/private/network/docs/
+/private/network/w9/
+!/private/network/**/.gitkeep

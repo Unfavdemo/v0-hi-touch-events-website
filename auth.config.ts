@@ -1,6 +1,7 @@
 import type { NextAuthConfig } from "next-auth"
 import Google from "next-auth/providers/google"
 import { getGoogleOAuthEnv } from "@/lib/auth/env"
+import { isNetworkTestHost } from "@/lib/network/host"
 
 const googleOAuth = getGoogleOAuthEnv()
 
@@ -62,6 +63,9 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request }) {
       const path = request.nextUrl.pathname
+
+      // Member-network test subdomain uses Solutions cookie auth, not CRM NextAuth.
+      if (isNetworkTestHost(request.headers.get("host"))) return true
 
       if (path.startsWith("/portal")) {
         if (path === "/portal/login" || path === "/portal/verify") return true

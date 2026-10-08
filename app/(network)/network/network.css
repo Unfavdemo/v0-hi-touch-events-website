@@ -1,0 +1,57 @@
+/* Scoped Solutions member-network look (does not re-import Tailwind). */
+.network-app {
+  --ht-brand: #292a75;
+  --ht-black: #f3f3f6;
+  --ht-panel: #ffffff;
+  --ht-panel-2: #eaeaef;
+  --ht-line: #d4d4de;
+  --ht-line-strong: #292a75;
+  --ht-gold: #292a75;
+  --ht-gold-bright: #3d3e8a;
+  --ht-gold-dim: #5c5d9a;
+  --ht-blue: #292a75;
+  --ht-blue-bright: #3d3e8a;
+  --ht-blue-dim: #e4e4ee;
+  --ht-cream: #16162a;
+  --ht-muted: #5c5d73;
+  --ht-danger: #cc272e;
+  --font-geist-sans: var(--font-inter), Helvetica, Arial, sans-serif;
+  background: var(--ht-black);
+  color: var(--ht-cream);
+  font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+  font-size: 1.0625rem;
+  min-height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.network-app ::selection {
+  background-color: rgb(41 42 117 / 0.28);
+  color: var(--ht-cream);
+}
+
+.network-app select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334318f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1rem;
+  cursor: pointer;
+}
+
+.network-app .ht-label {
+  font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.8125rem;
+}
+
+.network-app .ht-gold-text {
+  color: var(--ht-gold);
+}
+
+.network-app .ht-brand-bar {
+  background: var(--ht-brand);
+}

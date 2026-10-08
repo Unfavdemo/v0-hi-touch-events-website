@@ -1,0 +1,583 @@
+// HiTouch Solutions member network — separate DB from Events CRM
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/network-prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  PARTNER
+  FREELANCER
+}
+
+enum AdminScope {
+  SUPER
+  EVENT
+}
+
+enum UserStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum ProfileType {
+  INDIVIDUAL
+  BUSINESS
+}
+
+enum TaxIdType {
+  SSN
+  EIN
+}
+
+enum MembershipTier {
+  STANDARD
+  PRO
+  BETA_FREE
+}
+
+enum MembershipStatus {
+  INCOMPLETE
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
+enum JobStatus {
+  DRAFT
+  PENDING_APPROVAL
+  ACTIVE
+  FILLED
+  COMPLETED
+}
+
+enum BidStatus {
+  SUBMITTED
+  ACCEPTED
+  DECLINED
+}
+
+enum InviteStatus {
+  PENDING
+  APPLIED
+  DECLINED
+  WITHDRAWN
+}
+
+enum InviteSource {
+  ALGORITHM
+  PARTNER
+}
+
+enum ReviewerType {
+  INTERNAL_ADMIN
+  CLIENT_PARTNER
+  HIRED_VENDOR
+}
+
+enum NotificationType {
+  RATING_WARNING
+  DISMISSAL_NOTICE
+  APPLICATION_UPDATE
+  JOB_ALERT
+  EVENT_APPROVED
+  NEW_APPLICANT
+  VENDOR_WITHDREW
+  EVENT_REMINDER
+  REVIEW_NEEDED
+  ANNOUNCEMENT
+  MESSAGE
+  VENDOR_ARRIVED
+  VENDOR_WRAPPED
+  TEAM_ADDED
+  EVENT_OUTREACH
+  APPLICATION_CLOSE_REMINDER
+  EVENT_DETAILS
+}
+
+enum PartnerMemberRole {
+  OWNER
+  COORDINATOR
+}
+
+enum IncidentKind {
+  NO_SHOW
+  COMPLAINT
+  DAMAGE
+  OTHER
+}
+
+enum VendorDocumentKind {
+  W9
+  COI
+  OTHER
+  PORTFOLIO
+}
+
+enum DocumentRequirementKind {
+  W9
+  VENDOR_AGREEMENT
+  HITOUCH_COI
+  CUSTOM
+}
+
+enum VendorPayMethod {
+  CHECK
+  ACH
+  CARD
+  CASH
+  OTHER
+}
+
+enum PartnerEventOutreachAudience {
+  ALL_VENDORS
+  INVITED_ONLY
+}
+
+model User {
+  id           String     @id @default(uuid())
+  email        String     @unique
+  passwordHash String
+  role         Role
+  status       UserStatus @default(PENDING)
+  adminScope   AdminScope?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  profile         Profile?
+  membership      Membership?
+  jobsPosted      JobOpportunity[] @relation("PostedJobs")
+  jobsAssigned    JobOpportunity[] @relation("AssignedJobs")
+  bids            BidProposal[]
+  jobInvites      JobInvite[]
+  reviewsWritten  Review[]         @relation("ReviewsWritten")
+  reviewsReceived Review[]         @relation("ReviewsReceived")
+  notifications   Notification[]
+  vendorDocuments VendorDocument[]
+  eventDelegations EventDelegation[] @relation("EventAdmin")
+  delegationsGiven EventDelegation[] @relation("DelegatedBy")
+  partnerRoster    PartnerVendor[]   @relation("PartnerRoster")
+  onPartnerRosters PartnerVendor[]   @relation("OnPartnerRosters")
+  savedVenues      SavedVenue[]
+  hiddenReviews        Review[]     @relation("ReviewsHidden")
+  incidentsReported    Incident[]   @relation("IncidentsReported")
+  incidentsReceived    Incident[]   @relation("IncidentsReceived")
+  incidentsVoided      Incident[]   @relation("IncidentsVoided")
+  adminActions         AdminAction[]
+  partnerOrgMembers PartnerMember[] @relation("PartnerOrgOwner")
+  partnerOrgSeat    PartnerMember?  @relation("PartnerOrgMember")
+  partnerDocumentRequirements PartnerDocumentRequirement[] @relation("PartnerDocRequirements")
+  jobMessages       JobMessage[]
+  vendorBlackouts   VendorBlackout[]
+  vendorCrewMembers VendorCrewMember[]
+  partnerEvents     PartnerEvent[]    @relation("PartnerEvents")
+
+  @@index([role, status])
+}
+
+model Profile {
+  id                  String      @id @default(uuid())
+  userId              String      @unique
+  user                User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                String
+  phone               String?
+  mailingAddress      String?
+  bio                 String?
+  companyName         String?
+  contactPerson       String?
+  socialLinks         Json?
+  type                ProfileType @default(INDIVIDUAL)
+  headshotUrl         String?
+  logoUrl             String?
+  taxIdType                 TaxIdType?
+  taxIdLast4                String?
+  w9Url                     String?
+  vendorAgreementAcceptedAt DateTime?
+  vendorAgreementVersion    String?
+  ratingAvg           Float?
+  ratingCount         Int         @default(0)
+  flaggedForDismissal Boolean     @default(false)
+  adminNotes          String?
+  defaultRate         Decimal?    @db.Decimal(10, 2)
+  travelRadiusMiles   Int?
+  crewSize            Int?
+  equipmentNotes      String?
+  timezone            String      @default("America/New_York")
+  emergencyContact    String?
+  notificationPrefs   Json?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  categoryTags CategoryTag[]
+}
+
+model CategoryTag {
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
+  profiles Profile[]
+  jobs     JobOpportunity[]
+}
+
+model Membership {
+  id                   String           @id @default(uuid())
+  userId               String           @unique
+  user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripeCustomerId     String?          @unique
+  stripeSubscriptionId String?          @unique
+  tier                 MembershipTier
+  status               MembershipStatus @default(INCOMPLETE)
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+}
+
+model JobOpportunity {
+  id             String    @id @default(uuid())
+  title          String
+  description    String
+  categoryTagId  String
+  categoryTag    CategoryTag @relation(fields: [categoryTagId], references: [id])
+  payRate        Decimal   @db.Decimal(10, 2)
+  location       String
+  setupTime      DateTime
+  eventStartTime DateTime
+  eventEndTime   DateTime
+  breakdownTime  DateTime
+  isOpenBidding  Boolean   @default(true)
+  status         JobStatus @default(PENDING_APPROVAL)
+
+  postedById           String
+  postedBy             User    @relation("PostedJobs", fields: [postedById], references: [id])
+  partnerEventId       String?
+  partnerEvent         PartnerEvent? @relation(fields: [partnerEventId], references: [id], onDelete: SetNull)
+  assignedFreelancerId String?
+  assignedFreelancer   User?   @relation("AssignedJobs", fields: [assignedFreelancerId], references: [id])
+
+  vendorPaidAt     DateTime?
+  vendorPayMethod  VendorPayMethod?
+  vendorPaidAmount Decimal?         @db.Decimal(10, 2)
+  vendorPayNote    String?
+  vendorArrivedAt  DateTime?
+  vendorWrappedAt  DateTime?
+
+  bids         BidProposal[]
+  invites      JobInvite[]
+  reviews      Review[]
+  delegations  EventDelegation[]
+  incidents    Incident[]
+  messages     JobMessage[]
+  crewAssignments JobCrewAssignment[]
+  documentRequirements JobDocumentRequirement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, categoryTagId])
+  @@index([postedById])
+  @@index([assignedFreelancerId])
+  @@index([partnerEventId])
+}
+
+model PartnerEvent {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  location    String?
+  applicationCloseAt DateTime?
+  outreachAudience   PartnerEventOutreachAudience @default(INVITED_ONLY)
+  initialOutreachSentAt DateTime?
+  reminderTwoWeeksSentAt DateTime?
+  reminderOneWeekSentAt  DateTime?
+  partnerId   String
+  partner     User     @relation("PartnerEvents", fields: [partnerId], references: [id], onDelete: Cascade)
+  opportunities JobOpportunity[]
+  documentRequirements EventDocumentRequirement[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([partnerId])
+  @@index([applicationCloseAt])
+}
+
+model EventDocumentRequirement {
+  id                   String                  @id @default(uuid())
+  eventId              String
+  event                PartnerEvent            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  kind                 DocumentRequirementKind @default(CUSTOM)
+  customLabel          String?
+  customDescription    String?
+  partnerRequirementId String?
+  partnerRequirement   PartnerDocumentRequirement? @relation(fields: [partnerRequirementId], references: [id], onDelete: SetNull)
+
+  @@index([eventId])
+}
+
+model PartnerDocumentRequirement {
+  id          String   @id @default(uuid())
+  partnerId   String
+  partner     User     @relation("PartnerDocRequirements", fields: [partnerId], references: [id], onDelete: Cascade)
+  label       String
+  description String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  jobRequirements JobDocumentRequirement[]
+  eventRequirements EventDocumentRequirement[]
+
+  @@index([partnerId])
+}
+
+model JobDocumentRequirement {
+  id                   String                  @id @default(uuid())
+  jobId                String
+  job                  JobOpportunity          @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  kind                 DocumentRequirementKind
+  customLabel          String?
+  customDescription    String?
+  partnerRequirementId String?
+  partnerRequirement   PartnerDocumentRequirement? @relation(fields: [partnerRequirementId], references: [id], onDelete: SetNull)
+
+  @@index([jobId])
+}
+
+model BidProposal {
+  id           String    @id @default(uuid())
+  jobId        String
+  job          JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  freelancerId String
+  freelancer   User      @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
+  amount       Decimal   @db.Decimal(10, 2)
+  notes        String?
+  status       BidStatus @default(SUBMITTED)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([jobId, freelancerId])
+  @@index([freelancerId])
+}
+
+model JobInvite {
+  id           String         @id @default(uuid())
+  jobId        String
+  job          JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  freelancerId String
+  freelancer   User           @relation(fields: [freelancerId], references: [id], onDelete: Cascade)
+  status       InviteStatus   @default(PENDING)
+  source       InviteSource   @default(ALGORITHM)
+  matchScore   Float
+  matchReasons Json?
+  createdAt    DateTime       @default(now())
+  respondedAt  DateTime?
+
+  @@unique([jobId, freelancerId])
+  @@index([freelancerId, status])
+}
+
+model Review {
+  id           String       @id @default(uuid())
+  jobId        String
+  job          JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  freelancerId String
+  freelancer   User         @relation("ReviewsReceived", fields: [freelancerId], references: [id], onDelete: Cascade)
+  reviewerId   String
+  reviewer     User         @relation("ReviewsWritten", fields: [reviewerId], references: [id], onDelete: Cascade)
+  reviewerType ReviewerType
+  stars        Int
+  feedback     String
+  hiddenAt     DateTime?
+  hiddenById   String?
+  hiddenBy     User?        @relation("ReviewsHidden", fields: [hiddenById], references: [id], onDelete: SetNull)
+  createdAt    DateTime     @default(now())
+
+  @@unique([jobId, reviewerId])
+  @@index([freelancerId])
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  message   String
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId, isRead])
+}
+
+model VendorDocument {
+  id         String              @id @default(uuid())
+  vendorId   String
+  vendor     User                @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  kind       VendorDocumentKind
+  label      String
+  storedKey  String
+  expiresAt  DateTime?
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
+
+  @@index([vendorId, kind])
+}
+
+model Incident {
+  id         String       @id @default(uuid())
+  jobId      String?
+  job        JobOpportunity? @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  vendorId   String
+  vendor     User         @relation("IncidentsReceived", fields: [vendorId], references: [id], onDelete: Cascade)
+  reporterId String
+  reporter   User         @relation("IncidentsReported", fields: [reporterId], references: [id], onDelete: Restrict)
+  kind       IncidentKind
+  notes      String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  voidedAt   DateTime?
+  voidedById String?
+  voidedBy   User?        @relation("IncidentsVoided", fields: [voidedById], references: [id], onDelete: SetNull)
+
+  @@index([vendorId])
+  @@index([jobId])
+  @@index([voidedAt])
+}
+
+model AdminAction {
+  id         String   @id @default(uuid())
+  actorId    String
+  actor      User     @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  action     String
+  targetType String
+  targetId   String
+  message    String
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([actorId])
+}
+
+model PlatformSettings {
+  id                 String   @id @default("default")
+  warningThreshold   Float    @default(3.5)
+  dismissalThreshold Float    @default(3.0)
+  inviteTarget       Int      @default(5)
+  sendMoreExtra      Int      @default(3)
+  updatedAt          DateTime @updatedAt
+}
+
+model EventDelegation {
+  id            String         @id @default(uuid())
+  jobId         String
+  job           JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  adminId       String
+  admin         User           @relation("EventAdmin", fields: [adminId], references: [id], onDelete: Cascade)
+  delegatedById String
+  delegatedBy   User           @relation("DelegatedBy", fields: [delegatedById], references: [id], onDelete: Restrict)
+  createdAt     DateTime       @default(now())
+
+  @@unique([jobId, adminId])
+  @@index([adminId])
+}
+
+model PartnerVendor {
+  id        String   @id @default(uuid())
+  partnerId String
+  partner   User     @relation("PartnerRoster", fields: [partnerId], references: [id], onDelete: Cascade)
+  vendorId  String
+  vendor    User     @relation("OnPartnerRosters", fields: [vendorId], references: [id], onDelete: Cascade)
+  favorite  Boolean  @default(false)
+  blocked   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([partnerId, vendorId])
+  @@index([partnerId, blocked])
+}
+
+model PartnerMember {
+  id        String            @id @default(uuid())
+  ownerId   String
+  owner     User              @relation("PartnerOrgOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  memberId  String            @unique
+  member    User              @relation("PartnerOrgMember", fields: [memberId], references: [id], onDelete: Cascade)
+  role      PartnerMemberRole @default(COORDINATOR)
+  createdAt DateTime          @default(now())
+
+  @@index([ownerId])
+}
+
+model JobMessage {
+  id        String         @id @default(uuid())
+  jobId     String
+  job       JobOpportunity @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    User           @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  body      String
+  createdAt DateTime       @default(now())
+
+  @@index([jobId, createdAt])
+  @@index([senderId])
+}
+
+model SavedVenue {
+  id           String   @id @default(uuid())
+  partnerId    String
+  partner      User     @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  name         String
+  address      String
+  notes        String?
+  contactName  String?
+  contactPhone String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([partnerId])
+}
+
+model VendorBlackout {
+  id        String   @id @default(uuid())
+  vendorId  String
+  vendor    User     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  startAt   DateTime
+  endAt     DateTime
+  label     String?
+  createdAt DateTime @default(now())
+
+  @@index([vendorId, startAt])
+}
+
+model VendorCrewMember {
+  id        String   @id @default(uuid())
+  vendorId  String
+  vendor    User     @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  name      String
+  role      String
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  jobAssignments JobCrewAssignment[]
+
+  @@index([vendorId])
+}
+
+model JobCrewAssignment {
+  id           String           @id @default(uuid())
+  jobId        String
+  job          JobOpportunity   @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  crewMemberId String
+  crewMember   VendorCrewMember @relation(fields: [crewMemberId], references: [id], onDelete: Cascade)
+  vendorId     String
+  createdAt    DateTime         @default(now())
+
+  @@unique([jobId, crewMemberId])
+  @@index([jobId])
+  @@index([vendorId])
+}
