@@ -1,8 +1,10 @@
 /**
- * Upsert Hitouch staff as network SUPER admins and email set-password links via Resend.
+ * Upsert Hitouch staff network admins and email set-password links via Resend.
  *
  *   RESEND_API_KEY=... NETWORK_PUBLIC_URL=https://test.example.com \
  *     npx tsx scripts/provision-network-staff.ts
+ *
+ * Scopes: SUPER = overhead admin; EVENT = day-of event admin.
  */
 import "dotenv/config";
 import {
@@ -16,10 +18,10 @@ import { prisma } from "../lib/network/prisma";
 
 /** SUPER = overhead admin; EVENT = day-of event admin */
 const STAFF: { email: string; name: string; adminScope: "SUPER" | "EVENT" }[] = [
-  { email: "mianna.smith@hitouchinc.com", name: "Mianna Smith", adminScope: "SUPER" },
-  { email: "tori.henry@hitouchinc.com", name: "Tori Henry", adminScope: "SUPER" },
+  { email: "mianna.smith@hitouchinc.com", name: "Mianna Smith", adminScope: "EVENT" },
+  { email: "tori.henry@hitouchinc.com", name: "Tori Henry", adminScope: "EVENT" },
   { email: "chris.harris@hitouchinc.com", name: "Chris Harris", adminScope: "SUPER" },
-  { email: "david.harris@hitouchinc.com", name: "David Harris", adminScope: "SUPER" },
+  { email: "david.harris@hitouchinc.com", name: "David Harris", adminScope: "EVENT" },
 ];
 
 async function main() {

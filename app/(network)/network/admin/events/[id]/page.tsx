@@ -138,12 +138,11 @@ export default async function AdminEventDetailPage({
         </div>
         <div className="border-2 border-ht-line bg-ht-panel p-5">
           <h2 className="text-lg font-semibold text-ht-cream">Event details</h2>
-          {superAdmin ? (
-            <p className="mt-1 text-xs text-ht-muted">
-              Full admins can change name, schedule, outreach, and deadlines here — saves
-              immediately for partners and vendors.
-            </p>
-          ) : null}
+          <p className="mt-1 text-xs text-ht-muted">
+            {superAdmin
+              ? "Overhead admins can change name, schedule, outreach, and deadlines here — saves immediately for partners and vendors."
+              : "Update name, schedule, outreach, and deadlines — saves immediately."}
+          </p>
           <div className="mt-4">
             <PartnerEventEditForm
               eventId={event.id}

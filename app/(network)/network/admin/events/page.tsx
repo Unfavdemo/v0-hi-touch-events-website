@@ -26,8 +26,8 @@ export default async function AdminEventsPage() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <AdminHeader title={superAdmin ? "Events" : "Your events"}>
           {superAdmin
-            ? "Partner and opportunity-admin events. Post opportunities inside an event — admin posts go live without partner approval."
-            : "Group your opportunities under one show. Opportunities you post from an event go live immediately, same as a direct admin post."}
+            ? "Partner and day-of admin events. Post opportunities inside an event — admin posts go live without partner approval."
+            : "Create an event, then post opportunities under it. Roles you post go live immediately."}
         </AdminHeader>
         <Link
           href="/network/admin/events/new"
