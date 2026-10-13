@@ -22,6 +22,8 @@ const STAFF: { email: string; name: string; adminScope: "SUPER" | "EVENT" }[] = 
   { email: "tori.henry@hitouchinc.com", name: "Tori Henry", adminScope: "EVENT" },
   { email: "chris.harris@hitouchinc.com", name: "Chris Harris", adminScope: "SUPER" },
   { email: "david.harris@hitouchinc.com", name: "David Harris", adminScope: "EVENT" },
+  { email: "marlika.harris@hitouchinc.com", name: "Marlika Harris", adminScope: "SUPER" },
+  { email: "feliciawilliams@hitouchinc.com", name: "Felicia Williams", adminScope: "SUPER" },
 ];
 
 async function main() {
