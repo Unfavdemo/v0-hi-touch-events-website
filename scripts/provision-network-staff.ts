@@ -14,11 +14,12 @@ import {
 } from "../lib/network/password-reset";
 import { prisma } from "../lib/network/prisma";
 
-const STAFF: { email: string; name: string }[] = [
-  { email: "mianna.smith@hitouchinc.com", name: "Mianna Smith" },
-  { email: "tori.henry@hitouchinc.com", name: "Tori Henry" },
-  { email: "chris.harris@hitouchinc.com", name: "Chris Harris" },
-  { email: "david.harris@hitouchinc.com", name: "David Harris" },
+/** SUPER = overhead admin; EVENT = day-of event admin */
+const STAFF: { email: string; name: string; adminScope: "SUPER" | "EVENT" }[] = [
+  { email: "mianna.smith@hitouchinc.com", name: "Mianna Smith", adminScope: "SUPER" },
+  { email: "tori.henry@hitouchinc.com", name: "Tori Henry", adminScope: "SUPER" },
+  { email: "chris.harris@hitouchinc.com", name: "Chris Harris", adminScope: "SUPER" },
+  { email: "david.harris@hitouchinc.com", name: "David Harris", adminScope: "SUPER" },
 ];
 
 async function main() {
@@ -31,6 +32,8 @@ async function main() {
     const email = person.email.toLowerCase();
     let user = await prisma.user.findUnique({ where: { email }, include: { profile: true } });
 
+    const scopeLabel = person.adminScope === "SUPER" ? "overhead" : "day-of event";
+
     if (!user) {
       user = await prisma.user.create({
         data: {
@@ -38,7 +41,7 @@ async function main() {
           passwordHash: await unusablePasswordHash(),
           role: "ADMIN",
           status: "APPROVED",
-          adminScope: "SUPER",
+          adminScope: person.adminScope,
           profile: {
             create: {
               name: person.name,
@@ -48,21 +51,21 @@ async function main() {
         },
         include: { profile: true },
       });
-      console.log(`Created SUPER admin: ${email}`);
+      console.log(`Created ${scopeLabel} admin: ${email}`);
     } else {
       user = await prisma.user.update({
         where: { id: user.id },
         data: {
           role: "ADMIN",
           status: "APPROVED",
-          adminScope: "SUPER",
+          adminScope: person.adminScope,
           profile: user.profile
             ? { update: { name: person.name } }
             : { create: { name: person.name, type: "INDIVIDUAL" } },
         },
         include: { profile: true },
       });
-      console.log(`Updated existing user → SUPER admin: ${email}`);
+      console.log(`Updated → ${scopeLabel} admin: ${email}`);
     }
 
     const token = createSetPasswordToken(user.id);

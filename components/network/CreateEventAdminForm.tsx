@@ -18,7 +18,7 @@ export function CreateEventAdminForm() {
           {pending ? "Adding…" : "Add opportunity admin"}
         </Button>
         {state.error ? <p className="text-sm text-ht-danger">{state.error}</p> : null}
-        {state.ok ? <p className="text-sm text-ht-gold">Opportunity admin added.</p> : null}
+        {state.ok ? <p className="text-sm text-ht-gold">Day-of event admin added.</p> : null}
       </div>
     </form>
   );

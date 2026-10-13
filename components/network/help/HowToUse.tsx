@@ -206,7 +206,7 @@ function adminGuide(inviteTarget: number) {
 }
 
 const EVENT_ADMIN_GUIDE = {
-  title: "How to use Opportunity Admin",
+  title: "How to use Day-of Event Admin",
   body: (
     <>
       <p>

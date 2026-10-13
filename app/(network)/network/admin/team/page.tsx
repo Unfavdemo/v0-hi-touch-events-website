@@ -17,20 +17,20 @@ export default async function AdminTeamPage() {
   return (
     <div className="space-y-8">
       <AdminHeader title="Team">
-        Opportunity admins only see the opportunitys you assign. Add them here, then open an opportunity to
-        assign.
+        Day-of event admins only see the opportunities you assign. Add them here, then open an
+        opportunity to assign.
       </AdminHeader>
 
       <section className="border-2 border-ht-line bg-ht-panel p-6">
-        <h2 className="text-lg font-semibold text-ht-cream">Add an opportunity admin</h2>
+        <h2 className="text-lg font-semibold text-ht-cream">Add a day-of event admin</h2>
         <CreateEventAdminForm />
       </section>
 
       <section>
-        <h2 className="ht-label text-ht-muted">Opportunity admins ({eventAdmins.length})</h2>
+        <h2 className="ht-label text-ht-muted">Day-of event admins ({eventAdmins.length})</h2>
         {eventAdmins.length === 0 ? (
           <p className="mt-4 border-2 border-dashed border-ht-line px-5 py-8 text-center text-sm text-ht-muted">
-            No opportunity admins yet.
+            No day-of event admins yet.
           </p>
         ) : (
           <ul className="mt-4 divide-y-2 divide-ht-line border-2 border-ht-line bg-ht-panel">

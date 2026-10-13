@@ -1,8 +1,8 @@
 const LABELS: Record<string, string> = {
   // Roles
   ADMIN: "Admin",
-  SUPER: "Full admin",
-  EVENT: "Opportunity admin",
+  SUPER: "Overhead admin",
+  EVENT: "Day-of event admin",
   PARTNER: "Partner",
   FREELANCER: "Vendor",
   // Account status

@@ -22,7 +22,7 @@ export function AssignEventAdminForm({
     <form action={delegateEvent} className="flex flex-wrap items-end gap-3">
       <input type="hidden" name="jobId" value={jobId} />
       <label className="space-y-1.5">
-        <span className="ht-label block text-ht-muted">Opportunity admin</span>
+        <span className="ht-label block text-ht-muted">Day-of event admin</span>
         <select
           name="adminId"
           required

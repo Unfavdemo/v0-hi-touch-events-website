@@ -148,7 +148,7 @@ export default async function AdminJobDetailPage({
           ) : null}
           {superAdmin ? (
             <div className="border-2 border-ht-line bg-ht-panel p-4">
-              <p className="ht-label text-ht-muted">Opportunity admins</p>
+              <p className="ht-label text-ht-muted">Day-of event admins</p>
               {job.delegations.length === 0 ? (
                 <p className="mt-2 text-sm text-ht-muted">None assigned yet.</p>
               ) : (

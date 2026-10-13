@@ -11,7 +11,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     <DashboardShell
       user={user}
       navItems={superAdmin ? SUPER_NAV : EVENT_NAV}
-      roleLabel={superAdmin ? "Admin Console" : "Opportunity Admin"}
+      roleLabel={superAdmin ? "Overhead Admin" : "Day-of Event Admin"}
     >
       {children}
     </DashboardShell>
