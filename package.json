@@ -23,6 +23,7 @@
     "db:network:push": "prisma db push --config prisma-network.config.ts",
     "db:network:seed": "tsx prisma-network/seed.ts",
     "db:network:setup": "npm run db:network:generate && npm run db:network:migrate && npm run db:network:seed",
+    "network:provision-staff": "tsx scripts/provision-network-staff.ts",
     "env:check": "node scripts/check-env.mjs",
     "admin:promote-superadmin": "tsx scripts/promote-superadmin.ts",
     "images:optimize-team": "node scripts/optimize-team-headshots.mjs",

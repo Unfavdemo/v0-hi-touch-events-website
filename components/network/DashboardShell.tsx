@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { BrandMark } from "@/components/network/BrandMark";
+import { DashboardMobileNav } from "@/components/network/DashboardMobileNav";
 import { DashboardNavLink } from "@/components/network/DashboardNavLink";
 import { HelpDialog } from "@/components/network/help/HelpDialog";
 import { HowToUseButton } from "@/components/network/help/HowToUse";
@@ -36,13 +37,9 @@ export async function DashboardShell({
   const unreadCount = notifications.filter((n) => !n.isRead).length;
   const { inviteTarget } = await getPlatformSettings();
 
-  return (
-    <div className="flex min-h-screen bg-ht-black">
-      <aside className="sticky top-0 flex h-screen w-72 shrink-0 flex-col bg-ht-blue">
-        <div className="border-b border-white/15 p-5">
-          <BrandMark variant="reversed" sublabel={roleLabel} />
-        </div>
-
+  function sidebarBody() {
+    return (
+      <>
         <nav className="min-h-0 flex-1 overflow-y-auto p-3" aria-label="Dashboard">
           {groupNav(navItems).map((group) => (
             <div key={group.section ?? group.items[0]?.href} className="mb-3 last:mb-0">
@@ -96,9 +93,22 @@ export async function DashboardShell({
             </form>
           </div>
         </div>
+      </>
+    );
+  }
+
+  return (
+    <div className="flex min-h-screen flex-col bg-ht-black md:flex-row">
+      <DashboardMobileNav roleLabel={roleLabel} sidebar={sidebarBody()} />
+
+      <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col bg-ht-blue md:flex">
+        <div className="border-b border-white/15 p-5">
+          <BrandMark variant="reversed" sublabel={roleLabel} />
+        </div>
+        {sidebarBody()}
       </aside>
 
-      <main className="min-w-0 flex-1 p-6 lg:p-10">{children}</main>
+      <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-10">{children}</main>
     </div>
   );
 }

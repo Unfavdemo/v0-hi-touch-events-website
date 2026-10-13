@@ -56,6 +56,7 @@ export const config = {
     "/login",
     "/pending",
     "/membership-required",
+    "/set-password",
     "/admin/:path*",
     "/freelancer/:path*",
     "/partner/:path*",

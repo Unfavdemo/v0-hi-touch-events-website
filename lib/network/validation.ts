@@ -452,3 +452,20 @@ export const changePasswordSchema = z
     }
   });
 
+/** Invite / reset link — no current password required. */
+export const setPasswordSchema = z
+  .object({
+    token: z.string().min(1, "Reset link is missing or invalid"),
+    newPassword: passwordField,
+    confirmPassword: passwordField,
+  })
+  .superRefine((data, ctx) => {
+    if (data.newPassword !== data.confirmPassword) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["confirmPassword"],
+        message: "Passwords don't match",
+      });
+    }
+  });
+

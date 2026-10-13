@@ -22,24 +22,33 @@ export function isNetworkTestHost(hostHeader: string | null | undefined): boolea
   return false
 }
 
-/** Pretty paths on the test host → internal `/network/...` app paths. */
+/** Exact pretty paths on the test host → internal `/network/...` app paths. */
 export const NETWORK_REWRITE_MAP: Record<string, string> = {
   "/": "/network/login",
-  "/network/login": "/network/login",
-  "/network/admin/login": "/network/login",
-  "/network/pending": "/network/pending",
-  "/network/membership-required": "/network/membership-required",
+  "/login": "/network/login",
+  "/pending": "/network/pending",
+  "/membership-required": "/network/membership-required",
+  "/set-password": "/network/set-password",
 }
 
+/**
+ * Pretty paths on the test host → internal `/network/...` app paths.
+ * Leaves existing `/network/*` paths alone (no double prefix).
+ */
 export function rewriteNetworkPath(pathname: string): string | null {
   if (NETWORK_REWRITE_MAP[pathname]) return NETWORK_REWRITE_MAP[pathname]
 
+  // Already an internal network path — do not rewrite again
+  if (pathname === "/network" || pathname.startsWith("/network/")) {
+    return null
+  }
+
   const prefixes = [
-    "/network/admin",
-    "/network/freelancer",
-    "/network/partner",
-    "/network/join",
-    "/network/legal",
+    "/admin",
+    "/freelancer",
+    "/partner",
+    "/join",
+    "/legal",
   ] as const
 
   for (const prefix of prefixes) {
@@ -50,9 +59,9 @@ export function rewriteNetworkPath(pathname: string): string | null {
 
   // Network-specific APIs (avoid colliding with Events /api/*)
   if (
-    pathname.startsWith("/network/api/vendor-documents") ||
-    pathname.startsWith("/network/api/vendor-w9") ||
-    pathname.startsWith("/network/api/webhooks/stripe")
+    pathname.startsWith("/api/vendor-documents") ||
+    pathname.startsWith("/api/vendor-w9") ||
+    pathname.startsWith("/api/webhooks/stripe")
   ) {
     return `/network${pathname}`
   }
