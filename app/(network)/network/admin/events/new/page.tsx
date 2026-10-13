@@ -12,8 +12,8 @@ export default async function AdminNewEventPage() {
         ← Events
       </Link>
       <AdminHeader title="Create event">
-        Opportunity admins can create events and post roles that go live immediately — no
-        partner approval queue.
+        Day-of event admins and overhead admins can create events and post roles that go live
+        immediately — no partner approval queue.
       </AdminHeader>
       <PartnerEventCreateForm />
     </div>

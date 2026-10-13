@@ -6,6 +6,7 @@ export const SUPER_NAV: NavItem[] = [
   { href: "/network/admin/jobs", label: "Opportunities", section: "Opportunities" },
   { href: "/network/admin/jobs/new", label: "Post an Opportunity", section: "Opportunities" },
   { href: "/network/admin/events", label: "Events", section: "Opportunities" },
+  { href: "/network/admin/events/new", label: "Create Event", section: "Opportunities" },
   { href: "/network/admin/matching", label: "Matching", section: "Opportunities" },
   { href: "/network/admin/applications", label: "Applications", section: "People" },
   { href: "/network/admin/vendors", label: "Vendors", section: "People" },
@@ -26,9 +27,10 @@ export const SUPER_NAV: NavItem[] = [
 
 export const EVENT_NAV: NavItem[] = [
   { href: "/network/admin", label: "Overview" },
+  { href: "/network/admin/events", label: "Your Events" },
+  { href: "/network/admin/events/new", label: "Create Event" },
   { href: "/network/admin/jobs", label: "Your Opportunities" },
   { href: "/network/admin/jobs/new", label: "Post an Opportunity" },
-  { href: "/network/admin/events", label: "Events" },
   { href: "/network/admin/schedule", label: "Schedule", section: "Your tools" },
   { href: "/network/admin/payouts", label: "Payouts", section: "Your tools" },
   { href: "/network/admin/reviews", label: "Reviews", section: "Your tools" },

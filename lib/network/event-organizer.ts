@@ -8,8 +8,8 @@ import { prisma } from "@/lib/network/prisma";
 export type EventOrganizerContext = {
   user: SessionUser;
   organizerId: string;
-  eventsBasePath: "/partner/events" | "/admin/events";
-  jobsBasePath: "/partner/jobs" | "/admin/jobs";
+  eventsBasePath: "/network/partner/events" | "/network/admin/events";
+  jobsBasePath: "/network/partner/jobs" | "/network/admin/jobs";
   isPartner: boolean;
 };
 
@@ -22,18 +22,19 @@ export async function requireEventOrganizer(): Promise<EventOrganizerContext> {
     return {
       user,
       organizerId,
-      eventsBasePath: "/partner/events",
-      jobsBasePath: "/partner/jobs",
+      eventsBasePath: "/network/partner/events",
+      jobsBasePath: "/network/partner/jobs",
       isPartner: true,
     };
   }
 
+  // Overhead (SUPER) and day-of event (EVENT) admins can create and manage events.
   if (user.role === "ADMIN" && (isSuperAdmin(user) || isEventAdmin(user))) {
     return {
       user,
       organizerId: user.id,
-      eventsBasePath: "/admin/events",
-      jobsBasePath: "/admin/jobs",
+      eventsBasePath: "/network/admin/events",
+      jobsBasePath: "/network/admin/jobs",
       isPartner: false,
     };
   }

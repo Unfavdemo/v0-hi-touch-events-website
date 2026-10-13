@@ -210,26 +210,26 @@ const EVENT_ADMIN_GUIDE = {
   body: (
     <>
       <p>
-        A full HiTouch admin may assign you to specific opportunities. You can also post your own
-        opportunities. On those opportunities you can hire, invite, complete, review, and record pay.
+        Create events, post opportunities under them, and run day-of staffing. An overhead admin may
+        also assign you opportunities on their events.
       </p>
       <ol>
         <li>
-          <strong>Post an opportunity</strong> or open <em>Your Opportunities</em>. You will not see
-          the rest of the board.
+          <strong>Create an event</strong> under <em>Your Events</em>, then{" "}
+          <em>Post an Opportunity</em> for each vendor role. Posts go live immediately.
         </li>
         <li>
-          <strong>Work the opportunity.</strong> Approve it if it is still pending, invite or hire
-          vendors, mark it completed, and leave the HiTouch review.
+          <strong>Work the opportunity.</strong> Invite or hire vendors, mark it completed, and leave
+          the HiTouch review.
         </li>
         <li>
-          <strong>Use Your tools.</strong> <em>Schedule</em> shows your next two weeks and
-          staffing gaps. <em>Payouts</em> records vendor pay on your opportunities. <em>Reviews</em>{" "}
-          lists scores from those opportunities — hide one if it should not count.
+          <strong>Use Your tools.</strong> <em>Schedule</em> shows your next two weeks and staffing
+          gaps. <em>Payouts</em> records vendor pay. <em>Reviews</em> lists scores from your
+          opportunities.
         </li>
       </ol>
       <p className="text-sm text-ht-muted">
-        You cannot approve members, open all vendor documents, or manage the full admin console.
+        You cannot approve members, open all vendor documents, or manage the full overhead console.
       </p>
     </>
   ),

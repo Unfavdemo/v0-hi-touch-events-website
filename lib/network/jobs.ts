@@ -133,10 +133,12 @@ export async function createJob(
   revalidateAll();
   if (returnToEvent) {
     redirect(
-      user.role === "ADMIN" ? `/admin/events/${partnerEventId}` : `/partner/events/${partnerEventId}`,
+      user.role === "ADMIN"
+        ? `/network/admin/events/${partnerEventId}`
+        : `/network/partner/events/${partnerEventId}`,
     );
   }
-  redirect(user.role === "ADMIN" ? "/admin/jobs" : roleHome(user));
+  redirect(user.role === "ADMIN" ? "/network/admin/jobs" : roleHome(user));
 }
 
 export async function updateJob(
@@ -194,7 +196,9 @@ export async function updateJob(
     revalidatePath(`/network/admin/events/${existing.partnerEventId}`);
     revalidatePath(`/network/partner/events/${existing.partnerEventId}`);
   }
-  redirect(user.role === "ADMIN" ? `/admin/jobs/${jobId}` : `/partner/jobs/${jobId}`);
+  redirect(
+    user.role === "ADMIN" ? `/network/admin/jobs/${jobId}` : `/network/partner/jobs/${jobId}`,
+  );
 }
 
 export async function approveJob(jobId: string): Promise<void> {
