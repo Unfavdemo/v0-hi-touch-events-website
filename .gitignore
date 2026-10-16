@@ -17,3 +17,5 @@ node_modules
 /private/network/docs/
 /private/network/w9/
 !/private/network/**/.gitkeep
+.vercel
+.env*

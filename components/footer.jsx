@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Youtube, MapPin, Mail } from "lucide-react"
 import Link from "next/link"
+import { MbeCertificationBadge } from "@/components/mbe-certification-badge"
 import { SiteLogoLink } from "@/components/site-logo"
 import { contact, whatsNewLinks } from "@/lib/site"
 
@@ -141,6 +142,10 @@ export function Footer() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div className="mt-10 flex justify-center border-t border-border pt-10">
+          <MbeCertificationBadge />
         </div>
       </div>
     </footer>
