@@ -20,6 +20,7 @@ import { prisma } from "../lib/network/prisma";
 const STAFF: { email: string; name: string; adminScope: "SUPER" | "EVENT" }[] = [
   { email: "mianna.smith@hitouchinc.com", name: "Mianna Smith", adminScope: "EVENT" },
   { email: "tori.henry@hitouchinc.com", name: "Tori Henry", adminScope: "EVENT" },
+  { email: "taylor.nickens@hitouchinc.com", name: "Taylor Nickens", adminScope: "EVENT" },
   { email: "chris.harris@hitouchinc.com", name: "Chris Harris", adminScope: "SUPER" },
   { email: "david.harris@hitouchinc.com", name: "David Harris", adminScope: "EVENT" },
   { email: "marlika.harris@hitouchinc.com", name: "Marlika Harris", adminScope: "SUPER" },
