@@ -41,7 +41,7 @@ export function BrandMark({
           priority
           className={cn(
             "h-auto w-auto object-contain object-left",
-            size === "lg" ? "max-h-14 max-w-[14rem]" : "max-h-10 max-w-[11rem]",
+            size === "lg" ? "max-h-16 max-w-[16rem]" : "max-h-12 max-w-[13rem]",
           )}
         />
       </span>
@@ -49,7 +49,7 @@ export function BrandMark({
         Staffing
       </span>
       {sublabel ? (
-        <span className={cn("text-xs tracking-wide", onDark ? "text-white/55" : "text-ht-muted")}>
+        <span className={cn("text-sm tracking-wide", onDark ? "text-white/55" : "text-ht-muted")}>
           {sublabel}
         </span>
       ) : null}

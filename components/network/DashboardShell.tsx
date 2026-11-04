@@ -44,7 +44,7 @@ export async function DashboardShell({
           {groupNav(navItems).map((group) => (
             <div key={group.section ?? group.items[0]?.href} className="mb-3 last:mb-0">
               {group.section ? (
-                <p className="ht-label px-3 pb-1 pt-2 text-[0.65rem] text-ht-muted">
+                <p className="ht-label px-3 pb-1 pt-2 text-ht-muted">
                   {group.section}
                 </p>
               ) : null}
@@ -59,7 +59,7 @@ export async function DashboardShell({
           <p className="truncate px-1 text-base font-semibold text-ht-cream">
             {user.profile?.name ?? user.email}
           </p>
-          <p className="mt-0.5 truncate px-1 text-xs text-ht-muted">{user.email}</p>
+          <p className="mt-0.5 truncate px-1 text-sm text-ht-muted">{user.email}</p>
           <div className="mt-4 space-y-2">
             <HelpDialog
               title="Notifications"

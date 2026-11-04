@@ -24,11 +24,46 @@
     linear-gradient(180deg, oklch(0.96 0.02 278) 0%, oklch(0.99 0.006 278) 100%);
   color: var(--ht-cream);
   font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
-  font-size: 1.0625rem;
+  font-size: 1.1875rem; /* ~19px — easier to read across dashboards */
+  line-height: 1.55;
   min-height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+/* Scale common Tailwind type utilities up inside Staffing only */
+.network-app .text-xs {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.network-app .text-sm {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+.network-app .text-base {
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+.network-app .text-lg {
+  font-size: 1.3125rem;
+  line-height: 1.45;
+}
+.network-app .text-xl {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+.network-app .text-2xl {
+  font-size: 1.75rem;
+  line-height: 1.25;
+}
+.network-app .text-3xl {
+  font-size: 2.125rem;
+  line-height: 1.15;
+}
+.network-app .text-4xl {
+  font-size: 2.5rem;
+  line-height: 1.1;
 }
 
 .network-app ::selection {
@@ -49,8 +84,8 @@
 .network-app .ht-label {
   font-family: var(--font-display), Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-size: 0.8125rem;
+  letter-spacing: 0.14em;
+  font-size: 1.0625rem; /* ~17px — nav / field labels easier to scan */
   font-weight: 400;
 }
 

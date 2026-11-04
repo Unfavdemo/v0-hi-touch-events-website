@@ -22,7 +22,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           id={inputId}
           name={name}
           className={cn(
-            "w-full border-2 border-ht-line bg-ht-panel px-3 py-2.5 text-base text-ht-cream",
+            "w-full border-2 border-ht-line bg-ht-panel px-3.5 py-3 text-base text-ht-cream",
             "transition-colors focus:border-ht-gold focus:outline-none",
             "disabled:cursor-not-allowed disabled:opacity-50",
             error && "border-ht-danger",
@@ -32,7 +32,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         >
           {children}
         </select>
-        {error ? <p className="text-xs text-ht-danger">{error}</p> : null}
+        {error ? <p className="text-sm text-ht-danger">{error}</p> : null}
       </div>
     );
   },

@@ -22,7 +22,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={inputId}
           name={name}
           className={cn(
-            "w-full min-h-[120px] border-2 border-ht-line bg-ht-panel px-3 py-2.5 text-base text-ht-cream",
+            "w-full min-h-[120px] border-2 border-ht-line bg-ht-panel px-3.5 py-3 text-base text-ht-cream",
             "placeholder:text-ht-muted/60 transition-colors resize-y",
             "focus:border-ht-gold focus:outline-none",
             "disabled:cursor-not-allowed disabled:opacity-50",
@@ -31,7 +31,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
           {...props}
         />
-        {error ? <p className="text-xs text-ht-danger">{error}</p> : null}
+        {error ? <p className="text-sm text-ht-danger">{error}</p> : null}
       </div>
     );
   },
