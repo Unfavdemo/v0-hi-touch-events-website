@@ -44,7 +44,7 @@ export async function DashboardShell({
           {groupNav(navItems).map((group) => (
             <div key={group.section ?? group.items[0]?.href} className="mb-3 last:mb-0">
               {group.section ? (
-                <p className="px-3 pb-1 pt-2 text-[0.65rem] font-semibold tracking-[0.18em] text-white/40 uppercase">
+                <p className="ht-label px-3 pb-1 pt-2 text-[0.65rem] text-ht-muted">
                   {group.section}
                 </p>
               ) : null}
@@ -55,11 +55,11 @@ export async function DashboardShell({
           ))}
         </nav>
 
-        <div className="border-t border-white/15 px-3 py-4">
-          <p className="truncate px-1 text-base font-semibold text-white">
+        <div className="border-t border-ht-line px-3 py-4">
+          <p className="truncate px-1 text-base font-semibold text-ht-cream">
             {user.profile?.name ?? user.email}
           </p>
-          <p className="mt-0.5 truncate px-1 text-xs text-white/60">{user.email}</p>
+          <p className="mt-0.5 truncate px-1 text-xs text-ht-muted">{user.email}</p>
           <div className="mt-4 space-y-2">
             <HelpDialog
               title="Notifications"
@@ -68,13 +68,13 @@ export async function DashboardShell({
                 <>
                   <span className="flex-1 text-left">Notifications</span>
                   {unreadCount > 0 ? (
-                    <span className="bg-white px-1.5 py-1 text-[0.7rem] leading-none font-bold text-ht-blue">
+                    <span className="bg-ht-brand px-1.5 py-1 text-[0.7rem] leading-none font-bold text-white">
                       {unreadCount} new
                     </span>
                   ) : null}
                 </>
               }
-              triggerClassName="justify-between border-white/40 text-white hover:border-white hover:bg-white/10"
+              triggerClassName="justify-between border-ht-line text-ht-cream hover:border-ht-brand hover:bg-ht-brand/10"
             >
               <NotificationList notifications={notifications} />
             </HelpDialog>
@@ -86,7 +86,7 @@ export async function DashboardShell({
             <form action={signOut}>
               <button
                 type="submit"
-                className="ht-label w-full border-2 border-white/25 px-3 py-2.5 text-white/70 transition-colors hover:border-white hover:text-white"
+                className="ht-label w-full border border-ht-line px-3 py-2.5 text-ht-muted transition-colors hover:border-ht-brand hover:text-ht-brand"
               >
                 Sign out
               </button>
@@ -98,12 +98,12 @@ export async function DashboardShell({
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-ht-black md:flex-row">
+    <div className="flex min-h-screen flex-col md:flex-row">
       <DashboardMobileNav roleLabel={roleLabel} sidebar={sidebarBody()} />
 
-      <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col bg-ht-blue md:flex">
-        <div className="border-b border-white/15 p-5">
-          <BrandMark variant="reversed" sublabel={roleLabel} />
+      <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col border-r border-ht-line bg-ht-panel-2/80 md:flex">
+        <div className="border-b border-ht-line p-5">
+          <BrandMark sublabel={roleLabel} />
         </div>
         {sidebarBody()}
       </aside>

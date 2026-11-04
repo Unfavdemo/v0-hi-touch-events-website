@@ -1,22 +1,27 @@
-/* Scoped Solutions member-network look (does not re-import Tailwind). */
+/* HiTouch Events — Staffing (scoped; does not re-import Tailwind). */
 .network-app {
+  /* Pantone 534 C — same brand as Events marketing site */
   --ht-brand: #292a75;
-  --ht-black: #f3f3f6;
-  --ht-panel: #ffffff;
-  --ht-panel-2: #eaeaef;
-  --ht-line: #d4d4de;
+  --ht-black: oklch(0.99 0.006 278);
+  --ht-panel: oklch(1 0.004 278);
+  --ht-panel-2: oklch(0.96 0.014 278);
+  --ht-line: oklch(0.22 0.05 278 / 0.14);
   --ht-line-strong: #292a75;
   --ht-gold: #292a75;
   --ht-gold-bright: #3d3e8a;
-  --ht-gold-dim: #5c5d9a;
+  --ht-gold-dim: #5c5ea3;
   --ht-blue: #292a75;
   --ht-blue-bright: #3d3e8a;
-  --ht-blue-dim: #e4e4ee;
-  --ht-cream: #16162a;
-  --ht-muted: #5c5d73;
-  --ht-danger: #cc272e;
+  --ht-blue-dim: oklch(0.95 0.012 278);
+  --ht-cream: oklch(0.22 0.05 278);
+  --ht-muted: oklch(0.46 0.04 278);
+  --ht-danger: oklch(0.55 0.2 25);
+  --ht-sidebar: oklch(0.98 0.008 278);
   --font-geist-sans: var(--font-inter), Helvetica, Arial, sans-serif;
-  background: var(--ht-black);
+  --font-display: var(--font-display-bebas), ui-sans-serif, system-ui, sans-serif;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41, 42, 117, 0.11), transparent 55%),
+    linear-gradient(180deg, oklch(0.96 0.02 278) 0%, oklch(0.99 0.006 278) 100%);
   color: var(--ht-cream);
   font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
   font-size: 1.0625rem;
@@ -27,14 +32,14 @@
 }
 
 .network-app ::selection {
-  background-color: rgb(41 42 117 / 0.28);
+  background-color: rgb(41 42 117 / 0.22);
   color: var(--ht-cream);
 }
 
 .network-app select {
   appearance: none;
   padding-right: 2.5rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334318f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23292a75' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.85rem center;
   background-size: 1rem;
@@ -42,10 +47,11 @@
 }
 
 .network-app .ht-label {
-  font-family: var(--font-geist-sans), Helvetica, Arial, sans-serif;
+  font-family: var(--font-display), Helvetica, Arial, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   font-size: 0.8125rem;
+  font-weight: 400;
 }
 
 .network-app .ht-gold-text {

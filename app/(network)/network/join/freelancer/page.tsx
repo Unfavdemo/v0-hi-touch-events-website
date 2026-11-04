@@ -13,19 +13,19 @@ export default async function FreelancerJoinPage({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-ht-blue">
+      <header className="border-b border-ht-line bg-ht-panel/90 backdrop-blur">
         <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6">
-          <BrandMark variant="reversed" />
-          <Link href="/network/join" className="ht-label text-white/70 hover:text-white">
-            ← Back
+          <BrandMark />
+          <Link href="/network/login" className="ht-label text-ht-muted hover:text-ht-brand">
+            Already on the bench? Sign in
           </Link>
         </div>
       </header>
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16">
-        <p className="ht-label text-ht-gold">Vendor application</p>
-        <h1 className="mt-3 font-serif text-4xl tracking-tight text-ht-cream">
-          Join the HiTouch Solutions bench
+        <p className="ht-label text-ht-brand">Vendor application</p>
+        <h1 className="mt-3 font-display text-4xl tracking-[0.08em] text-ht-brand uppercase">
+          Join HiTouch Events — Staffing
         </h1>
         <p className="mt-3 text-base text-ht-muted">
           Five steps. We&apos;ll ask for a W-9 and the vendor agreement, then membership
@@ -34,7 +34,7 @@ export default async function FreelancerJoinPage({
         </p>
 
         {canceled ? (
-          <p className="mt-6 border-2 border-ht-gold/60 bg-ht-panel px-4 py-3 text-sm text-ht-gold">
+          <p className="mt-6 border border-ht-brand/40 bg-ht-panel px-4 py-3 text-sm text-ht-brand">
             Checkout canceled. Your application is saved — sign in any time to finish
             payment, or resubmit below.
           </p>

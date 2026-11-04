@@ -77,7 +77,7 @@ export function label(value: string): string {
 }
 
 const REVIEWER_TYPE_LABELS: Record<string, string> = {
-  INTERNAL_ADMIN: "HiTouch Solutions Admin",
+  INTERNAL_ADMIN: "HiTouch Events Staff",
   CLIENT_PARTNER: "Client partner",
   HIRED_VENDOR: "Hired vendor",
 };

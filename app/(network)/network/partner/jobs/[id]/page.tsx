@@ -90,7 +90,7 @@ export default async function PartnerJobDetailPage({
           />
           {job.status === "PENDING_APPROVAL" ? (
             <p className="border-2 border-ht-blue/60 bg-ht-panel px-4 py-3 text-sm text-ht-blue-bright">
-              Waiting on HiTouch Solutions verification. Invites go out to your top matches
+              Waiting on HiTouch Events — Staffing verification. Invites go out to your top matches
               as soon as it&apos;s approved.
             </p>
           ) : null}

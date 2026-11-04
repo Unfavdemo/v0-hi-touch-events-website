@@ -1,5 +1,5 @@
 /**
- * Host helpers for the Solutions member-network surface on the `test.` subdomain.
+ * Host helpers for HiTouch Events — Staffing on the `portal.` subdomain.
  */
 
 export function isNetworkTestHost(hostHeader: string | null | undefined): boolean {
@@ -12,7 +12,11 @@ export function isNetworkTestHost(hostHeader: string | null | undefined): boolea
     if (host === configuredHost) return true
   }
 
-  // Local smoke: test.localhost:3000 or Host: test.localhost
+  // Local smoke: portal.localhost:3000
+  if (host === "portal.localhost" || host.startsWith("portal.localhost.")) return true
+  if (host.startsWith("portal.")) return true
+
+  // Transitional: previous test. subdomain + local alias
   if (host === "test.localhost" || host.startsWith("test.localhost.")) return true
   if (host.startsWith("test.")) return true
 
@@ -22,17 +26,18 @@ export function isNetworkTestHost(hostHeader: string | null | undefined): boolea
   return false
 }
 
-/** Exact pretty paths on the test host → internal `/network/...` app paths. */
+/** Exact pretty paths on the portal host → internal `/network/...` app paths. */
 export const NETWORK_REWRITE_MAP: Record<string, string> = {
   "/": "/network/login",
   "/login": "/network/login",
   "/pending": "/network/pending",
   "/membership-required": "/network/membership-required",
   "/set-password": "/network/set-password",
+  "/unavailable": "/network/unavailable",
 }
 
 /**
- * Pretty paths on the test host → internal `/network/...` app paths.
+ * Pretty paths on the portal host → internal `/network/...` app paths.
  * Leaves existing `/network/*` paths alone (no double prefix).
  */
 export function rewriteNetworkPath(pathname: string): string | null {

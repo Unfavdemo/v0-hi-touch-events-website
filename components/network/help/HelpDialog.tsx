@@ -73,14 +73,16 @@ export function HelpDialog({
               onClick={(e) => {
                 if (e.target === e.currentTarget) e.currentTarget.close();
               }}
-              className="m-auto w-[min(40rem,calc(100vw-2rem))] border-2 border-ht-blue bg-ht-panel p-0 text-left text-ht-cream shadow-2xl backdrop:bg-[#16162a]/50"
+              className="m-auto w-[min(40rem,calc(100vw-2rem))] border border-ht-line bg-ht-panel p-0 text-left text-ht-cream shadow-xl backdrop:bg-black/35"
             >
-              <div className="flex items-center justify-between gap-4 bg-ht-blue px-6 py-4">
-                <p className="text-lg font-semibold text-white">{title}</p>
+              <div className="flex items-center justify-between gap-4 border-b border-ht-line bg-ht-panel-2 px-6 py-4">
+                <p className="font-display text-lg tracking-[0.12em] text-ht-brand uppercase">
+                  {title}
+                </p>
                 <button
                   type="button"
                   onClick={() => ref.current?.close()}
-                  className="ht-label border-2 border-white/40 px-2.5 py-1 text-white hover:border-white"
+                  className="ht-label border border-ht-line px-2.5 py-1 text-ht-muted hover:border-ht-brand hover:text-ht-brand"
                 >
                   Close
                 </button>

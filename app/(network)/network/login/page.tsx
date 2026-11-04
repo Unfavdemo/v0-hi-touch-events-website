@@ -14,13 +14,14 @@ export default async function LoginPage() {
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12 sm:px-6 sm:py-16">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <BrandMark className="items-center justify-center" />
+          <BrandMark className="items-center justify-center" size="lg" />
         </div>
-        <div className="border-2 border-ht-line bg-ht-panel p-5 sm:p-6">
-          <h1 className="text-2xl font-semibold text-ht-cream">Welcome back</h1>
-          <p className="mt-1 text-base text-ht-muted">
-            Sign in to your HiTouch account — partners, vendors, and the HiTouch team all
-            start here.
+        <div className="border border-ht-line bg-ht-panel p-5 shadow-sm sm:p-6">
+          <h1 className="font-display text-3xl tracking-[0.12em] text-ht-brand uppercase">
+            Welcome back
+          </h1>
+          <p className="mt-2 text-base text-ht-muted">
+            Sign in to HiTouch Events — Staffing. For HiTouch staff and vendors.
           </p>
           <div className="mt-6">
             <LoginForm />
@@ -28,7 +29,7 @@ export default async function LoginPage() {
         </div>
         {showDemoLogins ? (
           <div className="mt-6 border border-ht-line bg-ht-panel-2 p-4 text-sm text-ht-cream">
-            <p className="ht-label text-ht-gold">Demo logins (seed)</p>
+            <p className="ht-label text-ht-brand">Demo logins (seed)</p>
             <ul className="mt-3 space-y-2 text-ht-muted">
               <li>
                 <span className="font-medium text-ht-cream">Admin</span>
@@ -44,8 +45,8 @@ export default async function LoginPage() {
           </div>
         ) : null}
         <p className="mt-6 text-center text-sm text-ht-muted">
-          Not a member yet?{" "}
-          <Link href="/network/join" className="text-ht-gold hover:text-ht-gold-bright">
+          Vendor not on the bench yet?{" "}
+          <Link href="/network/join/freelancer" className="text-ht-brand hover:text-ht-gold-bright">
             Request to join
           </Link>
         </p>

@@ -10,18 +10,18 @@ import {
 export default function VendorAgreementPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-ht-blue">
+      <header className="border-b border-ht-line bg-ht-panel/90 backdrop-blur">
         <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6">
-          <BrandMark variant="reversed" />
-          <Link href="/network/join/freelancer" className="ht-label text-white/70 hover:text-white">
+          <BrandMark />
+          <Link href="/network/join/freelancer" className="ht-label text-ht-muted hover:text-ht-brand">
             Join as a vendor
           </Link>
         </div>
       </header>
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-16">
-        <p className="ht-label text-ht-gold">Legal</p>
-        <h1 className="mt-3 font-serif text-4xl tracking-tight text-ht-cream">
+        <p className="ht-label text-ht-brand">Legal</p>
+        <h1 className="mt-3 font-display text-4xl tracking-[0.08em] text-ht-brand uppercase">
           {VENDOR_AGREEMENT_TITLE}
         </h1>
         <p className="mt-3 text-sm text-ht-muted">

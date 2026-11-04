@@ -15,9 +15,9 @@ export default async function MembershipRequiredPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16">
       <BrandMark className="items-center justify-center" />
-      <div className="mt-10 w-full max-w-lg border-2 border-ht-gold/60 bg-ht-panel p-8">
-        <p className="ht-label text-ht-gold">Membership required</p>
-        <h1 className="mt-3 text-2xl font-bold text-ht-cream">
+      <div className="mt-10 w-full max-w-lg border border-ht-line bg-ht-panel p-8 shadow-sm">
+        <p className="ht-label text-ht-brand">Membership required</p>
+        <h1 className="mt-3 font-display text-2xl tracking-[0.12em] text-ht-brand uppercase">
           Your subscription isn&apos;t active
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-ht-muted">
@@ -39,7 +39,7 @@ export default async function MembershipRequiredPage() {
         ) : null}
         <p className="mt-4 text-sm text-ht-muted">
           If you just completed checkout, this updates automatically within a minute.
-          Otherwise contact the HiTouch Solutions team to restore billing.
+          Otherwise contact the HiTouch Events — Staffing team to restore billing.
         </p>
         <form action={signOut} className="mt-8">
           <button

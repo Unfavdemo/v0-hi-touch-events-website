@@ -86,7 +86,7 @@ export async function HiringPanel({
           <RecommendationPreviewTip />
         </h2>
         <p className="mt-2 text-sm text-ht-muted">
-          Once HiTouch Solutions verifies this opportunity, the top {INVITE_TARGET} matches below
+          Once HiTouch Events — Staffing verifies this opportunity, the top {INVITE_TARGET} matches below
           are invited to apply automatically. Ranked by match score
           <MatchScoreTip />.
         </p>

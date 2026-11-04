@@ -1,7 +1,7 @@
 /**
  * Upsert Hitouch staff network admins and email set-password links via Resend.
  *
- *   RESEND_API_KEY=... NETWORK_PUBLIC_URL=https://test.example.com \
+ *   RESEND_API_KEY=... NETWORK_PUBLIC_URL=https://portal.hitouchevents.com \
  *     npx tsx scripts/provision-network-staff.ts
  *
  * Scopes: SUPER = overhead admin; EVENT = day-of event admin.

@@ -19,13 +19,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - `npm run build` — production build
 - `npm run start` — run the production server
 - `npm run lint` — run ESLint
-- `npm run db:network:setup` — migrate + seed the Solutions member-network DB
+- `npm run db:network:setup` — migrate + seed HiTouch Events — Staffing DB
 
-## Member network test subdomain
+## HiTouch Events — Staffing
 
-HiTouch Solutions **admin** and **vendor** portals are mounted under `/network/*` for client testing on the `test.` subdomain.
+**Admin** and **vendor** portals live under `/network/*` (and **`portal.hitouchevents.com`**). Partner flows are not offered on this site.
 
-See **[docs/NETWORK-TEST.md](docs/NETWORK-TEST.md)** for env vars, demo logins, local `test.localhost` setup, and Vercel domain steps.
+See **[docs/NETWORK-TEST.md](docs/NETWORK-TEST.md)** for env vars, demo logins, local `portal.localhost` setup, and Vercel domain steps.
 
 ## Learn more
 

@@ -43,7 +43,7 @@ export default async function FreelancerInvitesPage() {
           <VendorInvitesTip />
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-ht-muted">
-          HiTouch Solutions matches you to opportunities based on your categories, ratings,
+          HiTouch Events — Staffing matches you to opportunities based on your categories, ratings,
           availability, and track record. An invite means you&apos;re on the shortlist — the
           partner still picks from everyone who applies.
         </p>

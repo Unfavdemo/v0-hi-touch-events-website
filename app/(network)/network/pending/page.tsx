@@ -8,15 +8,15 @@ import { label } from "@/lib/network/labels";
 const STATUS_COPY: Record<string, { title: string; body: string }> = {
   PENDING: {
     title: "Application under review",
-    body: "The HiTouch Solutions team manually reviews every application. You'll be notified as soon as a decision is made — no action needed.",
+    body: "The HiTouch Events — Staffing team manually reviews every application. You'll be notified as soon as a decision is made — no action needed.",
   },
   REJECTED: {
     title: "Application not approved",
-    body: "Your application was not approved at this time. You can reach out to the HiTouch Solutions team if you believe this was in error.",
+    body: "Your application was not approved at this time. You can reach out to the HiTouch Events — Staffing team if you believe this was in error.",
   },
   SUSPENDED: {
     title: "Membership suspended",
-    body: "Your access is suspended pending review. Contact the HiTouch Solutions team for next steps.",
+    body: "Your access is suspended pending review. Contact the HiTouch Events — Staffing team for next steps.",
   },
 };
 
@@ -30,12 +30,14 @@ export default async function PendingPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-6 py-16">
       <BrandMark className="items-center justify-center" />
-      <div className="mt-10 w-full max-w-lg border-2 border-ht-line bg-ht-panel p-8">
+      <div className="mt-10 w-full max-w-lg border border-ht-line bg-ht-panel p-8 shadow-sm">
         <div className="flex items-center justify-between gap-3">
           <p className="ht-label text-ht-muted">Application status</p>
           <Badge variant={statusBadgeVariant(user.status)}>{label(user.status)}</Badge>
         </div>
-        <h1 className="mt-4 text-2xl font-bold text-ht-cream">{copy.title}</h1>
+        <h1 className="mt-4 font-display text-2xl tracking-[0.12em] text-ht-brand uppercase">
+          {copy.title}
+        </h1>
         <p className="mt-3 text-sm leading-relaxed text-ht-muted">{copy.body}</p>
 
         <dl className="mt-6 space-y-2 border-t-2 border-ht-line pt-4 text-sm">

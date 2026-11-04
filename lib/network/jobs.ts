@@ -463,7 +463,7 @@ export async function inviteVendor(
   const job = await requireJobManager(jobId);
   if (!job) return { error: "Pick one of your opportunities." };
   if (job.status !== "ACTIVE") {
-    return { error: "Invites open once HiTouch Solutions verifies the opportunity." };
+    return { error: "Invites open once HiTouch Events — Staffing verifies the opportunity." };
   }
 
   const blocked = await prisma.partnerVendor.findUnique({

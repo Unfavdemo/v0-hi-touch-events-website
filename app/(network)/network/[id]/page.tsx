@@ -25,10 +25,10 @@ export async function generateMetadata({
     include: { profile: true },
   });
   const name = vendor?.profile?.name;
-  if (!name) return { title: "Vendor profile — HiTouch Solutions" };
+  if (!name) return { title: "Vendor profile — HiTouch Events — Staffing" };
   return {
-    title: `${name} — HiTouch Solutions talent`,
-    description: vendor.profile?.bio ?? `${name} is on the HiTouch Solutions vendor network.`,
+    title: `${name} — HiTouch Events — Staffing talent`,
+    description: vendor.profile?.bio ?? `${name} is on the HiTouch Events — Staffing vendor network.`,
   };
 }
 
@@ -103,20 +103,20 @@ export default async function VendorProfilePage({
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-ht-blue">
+      <header className="border-b border-ht-line bg-ht-panel/90 backdrop-blur">
         <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-6">
-          <BrandMark variant="reversed" sublabel="Vendor Network" />
+          <BrandMark />
           <nav className="flex items-center gap-3">
             {isOwn ? (
               <Link
                 href="/network/freelancer/profile"
-                className="ht-label border-2 border-white bg-white px-4 py-2 font-semibold text-ht-blue hover:bg-ht-gold-bright"
+                className="ht-label border border-ht-brand bg-ht-brand px-4 py-2 text-white hover:bg-ht-gold-bright"
               >
                 Edit profile
               </Link>
             ) : (
-              <Link href="/network/login" className="ht-label text-white/70 hover:text-white">
-                Member login
+              <Link href="/network/login" className="ht-label text-ht-muted hover:text-ht-brand">
+                Sign in
               </Link>
             )}
           </nav>
@@ -177,7 +177,7 @@ export default async function VendorProfilePage({
           <Stat
             label="On the bench since"
             value={formatDate(vendor.createdAt)}
-            hint="Date this vendor joined HiTouch Solutions"
+            hint="Date this vendor joined HiTouch Events — Staffing"
           />
           <Stat
             label="Network standing"
@@ -346,7 +346,7 @@ export default async function VendorProfilePage({
             <section>
               <h2 className="ht-label text-ht-gold">Reviews</h2>
               <p className="mt-2 text-sm text-ht-muted">
-                Each completed job can be rated independently by HiTouch Solutions and by
+                Each completed job can be rated independently by HiTouch Events — Staffing and by
                 the client partner.
               </p>
               {reviews.length === 0 ? (
@@ -365,7 +365,7 @@ export default async function VendorProfilePage({
                             }
                           >
                             {review.reviewerType === "INTERNAL_ADMIN"
-                              ? "HiTouch Solutions"
+                              ? "HiTouch Events — Staffing"
                               : "Client partner"}
                           </Badge>
                           <span className="text-xs text-ht-muted">{review.job.title}</span>
@@ -400,7 +400,7 @@ export default async function VendorProfilePage({
               </p>
               <dl className="mt-5 space-y-2 border-t-2 border-ht-line pt-4 text-sm">
                 <div className="flex justify-between gap-3">
-                  <dt className="text-ht-muted">HiTouch Solutions</dt>
+                  <dt className="text-ht-muted">HiTouch Events — Staffing</dt>
                   <dd className="font-semibold text-ht-cream">
                     {summary.byType.INTERNAL_ADMIN.avg?.toFixed(2) ?? "—"}
                     <span className="ml-1 font-normal text-ht-muted">
@@ -443,7 +443,7 @@ export default async function VendorProfilePage({
       <footer className="border-t-2 border-ht-line">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8">
           <p className="text-sm text-ht-muted">
-            © {new Date().getFullYear()} HiTouch Solutions. All rights reserved.
+            © {new Date().getFullYear()} HiTouch Events — Staffing. All rights reserved.
           </p>
           <Link href="/" className="ht-label text-ht-muted hover:text-ht-gold">
             Back to home

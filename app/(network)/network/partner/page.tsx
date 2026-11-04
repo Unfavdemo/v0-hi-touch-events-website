@@ -13,7 +13,7 @@ import { prisma } from "@/lib/network/prisma";
 const STEPS = [
   {
     title: "Drop in your opportunity",
-    body: "Category, schedule, location, and your rate. HiTouch Solutions verifies it.",
+    body: "Category, schedule, location, and your rate. HiTouch Events — Staffing verifies it.",
   },
   {
     title: "We invite the best matches",
@@ -127,7 +127,7 @@ export default async function PartnerOverviewPage({
         </h2>
         {allJobs.length === 0 ? (
           <p className="mt-4 text-sm text-ht-muted">
-            No opportunities yet. Post your first one — HiTouch Solutions verifies it, then invites
+            No opportunities yet. Post your first one — HiTouch Events — Staffing verifies it, then invites
             the best-matched vendors.
           </p>
         ) : (

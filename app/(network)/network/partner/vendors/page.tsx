@@ -81,7 +81,7 @@ export default async function PartnerVendorsPage({
           <VendorDirectoryTip />
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-ht-muted">
-          Every vendor here is vetted by HiTouch Solutions. Our matching invites the best
+          Every vendor here is vetted by HiTouch Events — Staffing. Our matching invites the best
           available people to each opportunity automatically — you can also hand-pick anyone
           below for one of your live opportunities.
         </p>

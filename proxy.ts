@@ -20,6 +20,23 @@ export default auth((req) => {
     return new NextResponse("Not Found", { status: 404 })
   }
 
+  // HiTouch Events — Staffing: no partner portal on this surface
+  const partnerBlocked =
+    pathname === "/partner" ||
+    pathname.startsWith("/partner/") ||
+    pathname === "/network/partner" ||
+    pathname.startsWith("/network/partner/") ||
+    pathname === "/join/partner" ||
+    pathname.startsWith("/join/partner/") ||
+    pathname === "/network/join/partner" ||
+    pathname.startsWith("/network/join/partner/")
+
+  if (partnerBlocked && (onTestHost || pathname.startsWith("/network"))) {
+    const url = req.nextUrl.clone()
+    url.pathname = onTestHost ? "/unavailable" : "/network/unavailable"
+    return NextResponse.redirect(url)
+  }
+
   if (onTestHost) {
     // Avoid sending test-host /admin through CRM NextAuth admin gate
     const rewritten = rewriteNetworkPath(pathname)
@@ -57,6 +74,7 @@ export const config = {
     "/pending",
     "/membership-required",
     "/set-password",
+    "/unavailable",
     "/admin/:path*",
     "/freelancer/:path*",
     "/partner/:path*",

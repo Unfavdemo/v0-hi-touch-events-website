@@ -76,7 +76,7 @@ async function main() {
       adminScope: "SUPER",
       status: "APPROVED",
       profile: {
-        create: { name: "HiTouch Solutions Operations", type: "BUSINESS", companyName: "HiTouch Solutions" },
+        create: { name: "HiTouch Events Operations", type: "BUSINESS", companyName: "HiTouch Events" },
       },
     },
   });

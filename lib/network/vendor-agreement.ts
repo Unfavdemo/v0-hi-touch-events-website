@@ -12,7 +12,7 @@ export interface AgreementSection {
 export const VENDOR_AGREEMENT_SECTIONS: AgreementSection[] = [
   {
     heading: "1. Independent contractor",
-    body: "You work with HiTouch Solutions as an independent contractor, not as an employee, partner, or agent. You are responsible for your own taxes, insurance, equipment, and how you complete booked work. Nothing in this agreement creates an employment relationship.",
+    body: "You work with HiTouch Events — Staffing as an independent contractor, not as an employee, partner, or agent. You are responsible for your own taxes, insurance, equipment, and how you complete booked work. Nothing in this agreement creates an employment relationship.",
   },
   {
     heading: "2. Tax forms",

@@ -34,10 +34,10 @@ export function DashboardMobileNav({
 
   return (
     <>
-      <header className="sticky top-0 z-40 flex items-center gap-3 border-b border-ht-line bg-ht-blue px-3 py-3 md:hidden">
+      <header className="sticky top-0 z-40 flex items-center gap-3 border-b border-ht-line bg-ht-panel/95 px-3 py-3 backdrop-blur md:hidden">
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center border-2 border-white/35 text-white"
+          className="inline-flex h-10 w-10 items-center justify-center border border-ht-line text-ht-brand"
           aria-expanded={open}
           aria-controls="network-mobile-nav"
           onClick={() => setOpen(true)}
@@ -46,7 +46,7 @@ export function DashboardMobileNav({
           <MenuIcon />
         </button>
         <div className="min-w-0 flex-1">
-          <BrandMark variant="reversed" sublabel={roleLabel} className="scale-90 origin-left" />
+          <BrandMark sublabel={roleLabel} className="scale-90 origin-left" />
         </div>
       </header>
 
@@ -54,19 +54,19 @@ export function DashboardMobileNav({
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true">
           <button
             type="button"
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-black/30"
             aria-label="Close menu"
             onClick={() => setOpen(false)}
           />
           <aside
             id="network-mobile-nav"
-            className="absolute inset-y-0 left-0 flex w-[min(20rem,88vw)] flex-col bg-ht-blue shadow-xl"
+            className="absolute inset-y-0 left-0 flex w-[min(20rem,88vw)] flex-col border-r border-ht-line bg-ht-panel shadow-xl"
           >
-            <div className="flex items-center justify-between border-b border-white/15 p-4">
-              <BrandMark variant="reversed" sublabel={roleLabel} />
+            <div className="flex items-center justify-between border-b border-ht-line p-4">
+              <BrandMark sublabel={roleLabel} />
               <button
                 type="button"
-                className="inline-flex h-9 w-9 items-center justify-center border-2 border-white/35 text-white"
+                className="inline-flex h-9 w-9 items-center justify-center border border-ht-line text-ht-brand"
                 onClick={() => setOpen(false)}
               >
                 <span className="sr-only">Close menu</span>

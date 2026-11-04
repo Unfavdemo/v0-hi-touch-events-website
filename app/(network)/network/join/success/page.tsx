@@ -20,7 +20,7 @@ export default async function JoinSuccessPage({
           {offline
             ? "Your membership tier is active (offline dev mode — no payment collected)."
             : "Your membership payment is set up."}{" "}
-          The HiTouch Solutions team manually reviews every application. You&apos;ll get a
+          The HiTouch Events — Staffing team manually reviews every application. You&apos;ll get a
           notification as soon as a decision is made.
         </p>
         <Link

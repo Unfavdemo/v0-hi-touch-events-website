@@ -110,7 +110,8 @@ export function roleHome(user: { role: Role; status: UserStatus }): string {
     case "ADMIN":
       return "/network/admin";
     case "PARTNER":
-      return "/network/partner";
+      // Partner portal is not part of HiTouch Events — Staffing
+      return "/network/unavailable";
     case "FREELANCER":
       return "/network/freelancer";
   }

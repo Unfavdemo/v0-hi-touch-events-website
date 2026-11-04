@@ -29,7 +29,7 @@ export function smsBody(message: string): string {
 export async function sendAnnouncementEmail(to: string, message: string): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const from =
-    process.env.ANNOUNCEMENT_FROM_EMAIL?.trim() ?? "HiTouch Solutions <announcements@hitouch.io>";
+    process.env.ANNOUNCEMENT_FROM_EMAIL?.trim() ?? "HiTouch Events — Staffing <announcements@hitouch.io>";
 
   if (!apiKey) {
     console.info(
@@ -48,7 +48,7 @@ export async function sendAnnouncementEmail(to: string, message: string): Promis
       from,
       to: [to],
       subject: "HiTouch announcement",
-      text: `${message.trim()}\n\n— HiTouch Solutions\n${APP_URL}`,
+      text: `${message.trim()}\n\n— HiTouch Events — Staffing\n${APP_URL}`,
     }),
   });
 

@@ -21,7 +21,7 @@ export async function approveUser(userId: string): Promise<void> {
     prisma,
     userId,
     "APPLICATION_UPDATE",
-    "Your HiTouch Solutions application was approved. Welcome to the network.",
+    "Your HiTouch Events — Staffing application was approved. Welcome to the network.",
   );
   await logAdminAction(prisma, {
     actorId: actor.id,
@@ -44,7 +44,7 @@ export async function rejectUser(userId: string): Promise<void> {
     prisma,
     userId,
     "APPLICATION_UPDATE",
-    "Your HiTouch Solutions application was not approved at this time.",
+    "Your HiTouch Events — Staffing application was not approved at this time.",
   );
   await logAdminAction(prisma, {
     actorId: actor.id,
@@ -67,7 +67,7 @@ export async function suspendUser(userId: string): Promise<void> {
     prisma,
     userId,
     "DISMISSAL_NOTICE",
-    "Your HiTouch Solutions membership has been suspended following review.",
+    "Your HiTouch Events — Staffing membership has been suspended following review.",
   );
   await logAdminAction(prisma, {
     actorId: actor.id,
@@ -90,7 +90,7 @@ export async function reinstateUser(userId: string): Promise<void> {
     prisma,
     userId,
     "APPLICATION_UPDATE",
-    "Your HiTouch Solutions membership has been reinstated.",
+    "Your HiTouch Events — Staffing membership has been reinstated.",
   );
   await logAdminAction(prisma, {
     actorId: actor.id,

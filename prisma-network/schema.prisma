@@ -1,4 +1,4 @@
-// HiTouch Solutions member network — separate DB from Events CRM
+// HiTouch Events — Staffing (admin + vendor) — separate DB from Events CRM
 generator client {
   provider = "prisma-client"
   output   = "../lib/generated/network-prisma"

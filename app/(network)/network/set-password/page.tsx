@@ -17,8 +17,10 @@ export default async function SetPasswordPage({
         <div className="mb-8 text-center">
           <BrandMark className="items-center justify-center" />
         </div>
-        <div className="border-2 border-ht-line bg-ht-panel p-5 sm:p-6">
-          <h1 className="text-2xl font-semibold text-ht-cream">Set your password</h1>
+        <div className="border border-ht-line bg-ht-panel p-5 shadow-sm sm:p-6">
+          <h1 className="font-display text-2xl tracking-[0.12em] text-ht-brand uppercase">
+            Set your password
+          </h1>
           {!user || !token ? (
             <>
               <p className="mt-2 text-base text-ht-muted">

@@ -44,11 +44,13 @@ export function setPasswordInviteUrl(token: string): string {
   let pretty = false;
   try {
     const host = new URL(base).hostname.toLowerCase();
-    pretty = host.startsWith("test.") && !host.includes("localhost");
+    pretty =
+      (host.startsWith("portal.") || host.startsWith("test.")) &&
+      !host.includes("localhost");
   } catch {
     /* ignore */
   }
-  // Pretty path on test. host; /network path on apex / local.
+  // Pretty path on portal. host; /network path on apex / local.
   const path = pretty ? "/set-password" : "/network/set-password";
   return `${base}${path}?token=${encodeURIComponent(token)}`;
 }
@@ -102,11 +104,11 @@ export async function sendSetPasswordEmail(params: {
 
   return sendTransactionalEmail({
     to: params.to,
-    subject: "Set your HiTouch Solutions password",
+    subject: "Set your HiTouch Events — Staffing password",
     html: `
       <div style="font-family:Helvetica,Arial,sans-serif;line-height:1.5;color:#16162a;max-width:520px">
         <p>Hi ${escapeHtml(first)},</p>
-        <p>Your HiTouch Solutions admin account is ready. Please set a password to sign in:</p>
+        <p>Your HiTouch Events — Staffing admin account is ready. Please set a password to sign in:</p>
         <p style="margin:28px 0">
           <a href="${escapeHtml(link)}"
              style="display:inline-block;background:#292a75;color:#fff;text-decoration:none;padding:12px 20px;font-weight:600">

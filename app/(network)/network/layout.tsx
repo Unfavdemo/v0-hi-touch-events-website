@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import "./network.css"
 
 export const metadata: Metadata = {
-  title: "HiTouch Solutions — Member Network (Test)",
+  title: "HiTouch Events — Staffing",
   description:
-    "Test environment for HiTouch Solutions admin and vendor portals: managed staffing, ratings, and payouts.",
+    "HiTouch Events staffing for internal admins and vendors: opportunities, schedules, ratings, and payouts.",
   robots: { index: false, follow: false },
 }
 

@@ -66,7 +66,7 @@ export default async function PartnerNewJobPage({
           ? "This posting will be linked to your event. Each opportunity can hire its own vendor."
           : source
             ? "Details are copied. Set the new setup, live, and breakdown times, then submit — HiTouch verifies each posting."
-            : "Tell us what you need and when. After HiTouch Solutions verifies it, we invite the best-matched vendors who are free for your setup-to-breakdown window. You review who applies and pick who works best."}
+            : "Tell us what you need and when. After HiTouch Events — Staffing verifies it, we invite the best-matched vendors who are free for your setup-to-breakdown window. You review who applies and pick who works best."}
       </p>
       {presetEvent ? (
         <Link
