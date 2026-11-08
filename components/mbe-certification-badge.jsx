@@ -9,12 +9,12 @@ export function MbeCertificationBadge({ className = "" }) {
       <Image
         src="/certifications/mbe-certified.png"
         alt="Minority business enterprise certified"
-        width={96}
-        height={96}
+        width={128}
+        height={128}
         unoptimized
-        className="h-20 w-20 object-contain sm:h-24 sm:w-24"
+        className="h-28 w-28 object-contain sm:h-32 sm:w-32"
       />
-      <figcaption className="mt-2 max-w-[14rem] text-xs leading-snug text-muted-foreground">
+      <figcaption className="mt-3 max-w-[18rem] text-sm font-medium leading-snug text-foreground sm:text-base dark:text-white">
         Minority certified business
       </figcaption>
     </figure>
